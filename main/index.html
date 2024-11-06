@@ -161,30 +161,23 @@
         }
 
         nav {
-            float: left;
-            text-align: center;
-            vertical-align: middle;
             position: relative;
-            background-color: var(--text-light);
+            background-color: var(--primary-color);
             padding: 8px;
             width: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 3px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
             transition: width 0.6s linear;
             margin-right: 10px;
-            margin-top: 20px;
-            max-height: 70px;
-        }
-
-        nav, .header{
-            display: flex;
+            margin-top: 30px;
+            max-height: 50px;
         }
 
         nav.active {
-            width: 240px;
+            width: 99%;
         }
 
         nav ul {
@@ -204,6 +197,7 @@
             transform: rotateY(0deg);
             opacity: 0;
             transition: transform 0.6s linear, opacity 0.6s linear;
+            padding: 15px;
         }
 
         nav.active ul li {
@@ -219,7 +213,7 @@
         }
 
         .icon {
-            background-color: #fff;
+            background-color: var(--primary-color);
             border: 0;
             cursor: pointer;
             padding: 0;
@@ -228,12 +222,16 @@
             width: 30px;
         }
 
+        .icon:hover{
+            background-color: var(--primary-color);
+        }
+
         .icon:focus {
             outline: 0;
         }
 
         .icon .line {
-            background-color: var(--primary-color);
+            background-color: var(--text-light);
             height: 2px;
             width: 20px;
             position: absolute;
@@ -269,7 +267,7 @@
             }
             
             .input-wrapper {
-                width: 100%;
+                width: 95%;
             }
             
             .button-group {
@@ -277,7 +275,11 @@
             }
             
             button {
-                width: 100%;
+                width: 99%;
+            }
+
+            nav.active{
+                width: 95%;
             }
         }
     </style>
@@ -287,10 +289,10 @@
     <div class="header">
         <nav class="active" id="nav">
             <ul>
-              <li><a href="index.html"><i class="fa-solid fa-location-dot"></i></a></li>
-              <li><a href="buy.html"><i class="fa-solid fa-ticket"></i></a></li>
-              <li><a href="menetrend.html"><i class="fa-regular fa-calendar-days"></i></a></li>
-              <li><a href="info.html"><i class="fa-solid fa-info"></i></a></li>
+              <li><a href="index.html" style="color: #FFFFFF; font-weight: bold;"><img src="placeholder.png" style="height: 30px; width: 30px;"> Főoldal</a></li>
+              <li><a href="buy.html" style="color: #FFFFFF; font-weight: bold;"><img src="tickets.png" style="height: 30px; width: 30px;"> Jegyvásárlás</a></li>
+              <li><a href="menetrend.html" style="color: #FFFFFF; font-weight: bold;"><img src="calendar.png" style="height: 30px; width: 30px;"> Menetrend</a></li>
+              <li><a href="info.html" style="color: #FFFFFF; font-weight: bold;"><img src="information-button.png" style="height: 30px; width: 30px;"> Információ</a></li>
             </ul>
             <button class="icon" id="toggle">
               <div class="line line1"></div>
@@ -323,10 +325,7 @@
                     Útvonal keresése
                 </button>
                 
-                <button id="nearestStopsBtn">
-                    <i class="fas fa-map-pin"></i>
-                    Közeli megállók
-                </button>
+                
             </div>
         </div>
 

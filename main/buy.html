@@ -20,21 +20,18 @@
             background-color: #f5f5f5;
             color: #333;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             min-height: 100vh;
         }
 
         .header {
+            position: relative;
             background-color: var(--primary-color);
             color: var(--text-light);
-            padding: 1rem;
+            padding: 16px;
             box-shadow: var(--shadow);
             text-align: center;
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 2em;
+            margin-bottom: 20px;
         }
 
         .container {
@@ -44,6 +41,12 @@
             background: white;
             border-radius: 10px;
             box-shadow: var(--shadow);
+        }
+
+        .navh1{
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
         .input-group {
@@ -56,6 +59,7 @@
         .input-wrapper {
             flex: 1;
             min-width: 200px;
+            padding-right: 30px;
         }
 
         input, select {
@@ -115,11 +119,140 @@
             border: 1px solid var(--accent-color); /* QR kód keret */
         }
 
+        nav {
+            position: relative;
+            background-color: var(--primary-color);
+            padding: 8px;
+            width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
+            transition: width 0.6s linear;
+            margin-right: 10px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            max-height: 50px;
+        }
+
+        nav.active {
+            width: 99%;
+        }
+
+        nav ul {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            width: 0;
+            transition: width 0.6s linear;
+        }
+
+        nav.active ul {
+            width: 100%;
+        }
+
+        nav ul li {
+            transform: rotateY(0deg);
+            opacity: 0;
+            transition: transform 0.6s linear, opacity 0.6s linear;
+            padding: 15px;
+        }
+
+        nav.active ul li {
+            opacity: 1;
+            transform: rotateY(360deg);
+        }
+
+        nav ul a {
+            position: relative;
+            color: #000;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        .icon {
+            background-color: var(--primary-color);
+            border: 0;
+            cursor: pointer;
+            padding: 0;
+            position: relative;
+            height: 30px;
+            width: 30px;
+        }
+
+        .icon:hover{
+            background-color: var(--primary-color);
+        }
+
+        .icon:focus {
+            outline: 0;
+        }
+
+        .icon .line {
+            background-color: var(--text-light);
+            height: 2px;
+            width: 20px;
+            position: absolute;
+            top: 10px;
+            left: 5px;
+            transition: transform 0.6s linear;
+        }
+
+        .icon .line2 {
+            top: auto;
+            bottom: 10px;
+        }
+
+        nav.active .icon .line1 {
+            transform: rotate(-765deg) translateY(5.5px);
+        }
+
+        nav.active .icon .line2 {
+            transform: rotate(765deg) translateY(-5.5px);
+        }
+
+        @media (max-width: 768px) {
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .input-wrapper {
+                width: 95%;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 99%;
+            }
+
+            nav.active{
+                width: 95%;
+            }
+        }
+
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>Számla Generátor</h1>
+        <nav class="active" id="nav">
+            <ul>
+                <li><a href="index.html" style="color: #FFFFFF; font-weight: bold;"><img src="placeholder.png" style="height: 30px; width: 30px;"><span id="home"></span></a></li>
+                <li><a href="buy.html" style="color: #FFFFFF; font-weight: bold;"><img src="tickets.png" style="height: 30px; width: 30px;"><span id="ticket"></span></a></li>
+                <li><a href="menetrend.html" style="color: #FFFFFF; font-weight: bold;"><img src="calendar.png" style="height: 30px; width: 30px;"><span id="menet"></span></a></li>
+                <li><a href="info.html" style="color: #FFFFFF; font-weight: bold;"><img src="information-button.png" style="height: 30px; width: 30px;"><span id="info"></span></a></li>
+            </ul>
+            <button class="icon" id="toggle">
+              <div class="line line1"></div>
+              <div class="line line2"></div>
+            </button>
+          </nav>
+          <div class="navh1"><h1>Jegyvásárlás</h1></div>
+        
     </div>
     <div class="container">
         <form id="invoiceForm">
@@ -136,25 +269,28 @@
                     <input type="tel" id="phone" placeholder="Telefonszám" required>
                 </div>
                 <div class="input-wrapper">
-                    <input type="date" id="date" required>
+                    <input type="date" id="todayDate" min required>
                 </div>
             </div>
-            <div class="input-wrapper">
+            <div class="input-wrapper" style="padding-bottom: 20px;">
                 <input type="text" id="address" placeholder="Cím" required>
             </div>
             <div class="input-group">
-                <div class="input-wrapper">
+                <div class="input-wrapper" style="min-width: 200px; flex: 1;">
                     <select id="paymentMethod" required>
                         <option value="" disabled selected>Fizetési Mód</option>
-                        <option value="Készpénz">Készpénz</option>
+                        <option value="PayPal">PayPal</option>
+                        <option value="SimplePay">SimplePay</option>
                         <option value="Bankkártya">Bankkártya</option>
                     </select>
                 </div>
-                <div class="input-wrapper">
+                <div class="input-wrapper" style="min-width: 200px; flex: 1;">
                     <select id="ticketType" required>
                         <option value="" disabled selected>Jegytípus</option>
-                        <option value="Felnőtt">Felnőtt</option>
-                        <option value="Gyermek">Gyermek</option>
+                        <option value="Felnőtt">Menetjegy - Felnőtt, 25-65 év között</option>
+                        <option value="Gyermek">Menetjegy - Gyermek, 14-25 év között</option>
+                        <option value="Felnőtt">Bérlet - Felnőtt, 25-65 év között</option>
+                        <option value="Gyermek">Bérlet - Gyermek, 14-25 év között</option>
                     </select>
                 </div>
             </div>
@@ -174,6 +310,37 @@
     </div>
 
    <script>
+    //navbar script
+    const toggle = document.getElementById('toggle')
+        const nav = document.getElementById('nav')
+
+        toggle.addEventListener('click', () => nav.classList.toggle('active'))
+
+    //today's date
+    const today = new Date().toISOString().split("T")[0];
+
+    document.getElementById("todayDate").value = today;
+    document.getElementById("todayDate").min = today;
+
+    //navbar text script
+    home = " Főoldal";
+    ticket = " Jegyvásárlás";
+    menet = " Menetrend";
+    info = " Információ";
+
+    if (window.screen.availWidth >= 678) {
+        document.getElementById("home").textContent = home;
+        document.getElementById("ticket").textContent = ticket;
+        document.getElementById("menet").textContent = menet;
+        document.getElementById("info").textContent = info;
+    }else{
+        document.getElementById("home").textContent = "";
+        document.getElementById("ticket").textContent = "";
+        document.getElementById("menet").textContent = "";
+        document.getElementById("info").textContent = "";
+    }
+
+
     function generateRandomId() {
         return 'ID-' + Math.random().toString(36).substr(2, 9);
     }
@@ -194,13 +361,13 @@
 
         const uniqueId = generateRandomId();
         const invoiceDetails = `Név: ${name}
-E-mail: ${email}
-Telefonszám: ${phone}
-Érvényesség: ${date}
-Cím: ${address}
-Fizetési Mód: ${paymentMethod}
-Jegytípus: ${ticketType}
-Egyedi Azonosító: ${uniqueId}`;
+        E-mail: ${email}
+        Telefonszám: ${phone}
+        Érvényesség: ${date}
+        Cím: ${address}
+        Fizetési Mód: ${paymentMethod}
+        Jegytípus: ${ticketType}
+        Egyedi Azonosító: ${uniqueId}`;
 
         document.getElementById('invoiceDetails').innerText = invoiceDetails;
         document.getElementById('invoice').style.display = 'block';
