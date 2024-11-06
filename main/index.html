@@ -380,9 +380,9 @@
         let map, directionsService, directionsRenderer;
         const kaposvarBusStops = [
             { name: "Kaposvár, Autóbusz állomás", lat: 46.3595, lng: 17.7967 },
-            { name: "Kaposvár, Városház", lat: 46.3599, lng: 17.7939 },
-            { name: "Kaposvár, Cseri út", lat: 46.3563, lng: 17.7847 },
-            // További megállók...
+            { name: "Ballakúti u.", lat: 46.341454000000000, lng: 17.800144000000000 },
+            { name: "Berzsenyi u. 30.", lat: 46.360245694362280, lng: 17.783764600753784 },
+            { name: "Berzsenyi u. felüljáró", lat: 46.356517550424560, lng: 17.785293459892273 },
         ];
 
         const popularDestinations = [
@@ -429,15 +429,20 @@
             });
         }
 
+        
         document.getElementById("routeBtn").onclick = function() {
             const start = document.getElementById("start").value;
             const end = document.getElementById("end").value;
-            const transportType = document.getElementById("transportType").value;
 
             const request = {
                 origin: start,
                 destination: end,
-                travelMode: google.maps.TravelMode[transportType]
+                travelMode: 'TRANSIT',
+                transitOptions:{
+                    modes: ['BUS'],
+                    routingPreference: 'FEWER_TRANSFERS'
+                },
+                unitSystem: google.maps.UnitSystem.IMPERIAL
             };
 
             directionsService.route(request, function(result, status) {
@@ -473,7 +478,7 @@
         window.onload = initMap;
     </script>
 
-        <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArXtWdllsylygVw5t_k-22sXUJn-jMU8k&libraries=places&callback=initMap">
+        <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArXtWdllsylygVw5t_k-22sXUJn-jMU8k&libraries=places&callback=initMap&loading=async">
     </script>
 </body>
 </html>
