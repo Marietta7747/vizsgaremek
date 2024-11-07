@@ -22,112 +22,14 @@
             min-height: 100vh;
         }
 
-/*-------------------------------------------------------------------HEADER------------------------------------------------------------------------------------------*/
-
         .header {
             position: relative;
             background-color: var(--primary-color);
             color: var(--text-light);
-            padding: 16px;
+            padding: 1rem;
             box-shadow: var(--shadow);
             text-align: center;
         }
-
-        nav {
-            position: relative;
-            background-color: var(--primary-color);
-            padding: 8px;
-            width: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 3px;
-            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
-            transition: width 0.6s linear;
-            margin-right: 10px;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            max-height: 50px;
-        }
-
-        nav.active {
-            width: 99%;
-        }
-
-        nav ul {
-            display: flex;
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            width: 0;
-            transition: width 0.6s linear;
-        }
-
-        nav.active ul {
-            width: 100%;
-        }
-
-        nav ul li {
-            transform: rotateY(0deg);
-            opacity: 0;
-            transition: transform 0.6s linear, opacity 0.6s linear;
-            padding: 15px;
-        }
-
-        nav.active ul li {
-            opacity: 1;
-            transform: rotateY(360deg);
-        }
-
-        nav ul a {
-            position: relative;
-            color: #000;
-            text-decoration: none;
-            margin: 0 5px;
-        }
-
-        .icon {
-            background-color: var(--primary-color);
-            border: 0;
-            cursor: pointer;
-            padding: 0;
-            position: relative;
-            height: 30px;
-            width: 30px;
-        }
-
-        .icon:hover{
-            background-color: var(--primary-color);
-        }
-
-        .icon:focus {
-            outline: 0;
-        }
-
-        .icon .line {
-            background-color: var(--text-light);
-            height: 2px;
-            width: 20px;
-            position: absolute;
-            top: 10px;
-            left: 5px;
-            transition: transform 0.6s linear;
-        }
-
-        .icon .line2 {
-            top: auto;
-            bottom: 10px;
-        }
-
-        nav.active .icon .line1 {
-            transform: rotate(-765deg) translateY(5.5px);
-        }
-
-        nav.active .icon .line2 {
-            transform: rotate(765deg) translateY(-5.5px);
-        }
-
-/*-------------------------------------------------------------------HEADER END------------------------------------------------------------------------------------------*/
 
         .container {
             max-width: 1200px;
@@ -258,6 +160,99 @@
             height: 25px;
         }
 
+        nav {
+            position: relative;
+            background-color: var(--primary-color);
+            padding: 8px;
+            width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
+            transition: width 0.6s linear;
+            margin-right: 10px;
+            margin-top: 30px;
+            max-height: 50px;
+        }
+
+        nav.active {
+            width: 99%;
+        }
+
+        nav ul {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            width: 0;
+            transition: width 0.6s linear;
+        }
+
+        nav.active ul {
+            width: 100%;
+        }
+
+        nav ul li {
+            transform: rotateY(0deg);
+            opacity: 0;
+            transition: transform 0.6s linear, opacity 0.6s linear;
+            padding: 15px;
+        }
+
+        nav.active ul li {
+            opacity: 1;
+            transform: rotateY(360deg);
+        }
+
+        nav ul a {
+            position: relative;
+            color: #000;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        .icon {
+            background-color: var(--primary-color);
+            border: 0;
+            cursor: pointer;
+            padding: 0;
+            position: relative;
+            height: 30px;
+            width: 30px;
+        }
+
+        .icon:hover{
+            background-color: var(--primary-color);
+        }
+
+        .icon:focus {
+            outline: 0;
+        }
+
+        .icon .line {
+            background-color: var(--text-light);
+            height: 2px;
+            width: 20px;
+            position: absolute;
+            top: 10px;
+            left: 5px;
+            transition: transform 0.6s linear;
+        }
+
+        .icon .line2 {
+            top: auto;
+            bottom: 10px;
+        }
+
+        nav.active .icon .line1 {
+            transform: rotate(-765deg) translateY(5.5px);
+        }
+
+        nav.active .icon .line2 {
+            transform: rotate(765deg) translateY(-5.5px);
+        }
+
         .info-panel {
             background: white;
             padding: 15px;
@@ -266,7 +261,6 @@
             box-shadow: var(--shadow);
         }
 
-/*-------------------------------------------------------------------@MEDIA------------------------------------------------------------------------------------------*/
         @media (max-width: 768px) {
             .input-group {
                 flex-direction: column;
@@ -284,15 +278,40 @@
                 width: 99%;
             }
 
-            nav.active{
-                width: 95%;
+            nav{
+                width: 99%;
+                padding: 10px;
+                text-align: center;
+            }
+
+            nav ul{
+                display: block;
+                width: 100%;
+            }
+
+            nav ul li{
+                padding: 10px 0;
+                opacity: 1;
+                transform: none;
+            }
+
+            nav ul a{
+                display: block;
+                padding: 10px;
+                color: #FFFFFF;
+                font-weight: bold;
+            }
+
+            .icon{
+                position: absolute;
+                top: 10px;
+                right: 10px;
             }
         }
-/*-------------------------------------------------------------------@MEDIA END------------------------------------------------------------------------------------------*/
-
     </style>
 </head>
 <body>
+    
     <div class="header">
         <nav class="active" id="nav">
             <ul>

@@ -132,9 +132,6 @@
         nav.active .icon .line2 {
             transform: rotate(765deg) translateY(-5.5px);
         }
-        
-/*-------------------------------------------------------------------HEADER END------------------------------------------------------------------------------------------*/
-
 
         .time {
             text-align: center;
@@ -148,7 +145,7 @@
 
         .search-container {
             width: 100%;
-            max-width: 600px;
+            max-width: 700px;
             position: relative;
             align-content: center;
             margin: 1rem 0;
@@ -179,6 +176,8 @@
             transform: translateY(-50%);
             color: var(--primary-color);
         }
+        
+/*-------------------------------------------------------------------HEADER END------------------------------------------------------------------------------------------*/
 
         #filterButtons {
             display: flex;
@@ -379,16 +378,16 @@
             </button>
           </nav>
           <div class="navh1">
-            <h1><i class="fas fa-bus"></i> Kaposvár Helyi Járatok</h1>
-            <div class="live-indicator">
-                <i class="fas fa-circle"></i> Élő követés
+                <h1><i class="fas fa-bus"></i> Kaposvár Helyi Járatok</h1>
+                <div class="live-indicator">
+                    <i class="fas fa-circle"></i> Élő követés
+                </div>
+                <div id="time" class="time"></div>
             </div>
-            <div id="time" class="time"></div>
             <div class="search-container">
                 <input type="text" id="searchBox" placeholder="Keress járatszám vagy útvonal alapján..." />
                 <i class="fas fa-search search-icon"></i>
             </div>
-        </div>
         </div>
     
     <div id="filterButtons">
