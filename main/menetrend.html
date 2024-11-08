@@ -223,6 +223,24 @@
             margin: 0 auto;
         }
 
+        .route-button {
+            padding: 12px 24px;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            display: flex;
+            float: right;
+        }
+
+        .route-button:hover {
+            background-color: #FFD700;
+            transform: translateY(-2px);
+        }
+
         .route-card {
             background: white;
             border-radius: 20px;
@@ -241,7 +259,7 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: bold;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
@@ -274,6 +292,7 @@
             border-radius: 10px;
             transition: var(--transition);
             text-align: center;
+            margin-top: 1rem;
         }
 
         .show-stops:hover {
@@ -524,7 +543,8 @@
                 "number": "40",
                 "name": "Koppány vezér u - 67-es út - Raktár u.",
                 "category": "industrial",
-                "stops": ["Ipari park", "Vasútállomás"],
+                "stops": ["Koppány vezér u.","Erdősor u.","Rózsa u.","67-es sz. út","Berzsenyi u. felüljáró","Helyi autóbusz-állomás","Berzsenyi u. felüljáró","Berzsenyi u. 30.","Füredi úti csomópont","Városi könyvtár"
+                ,"Vasútköz","Hajnóczy u. csp.","Jutai u. 24.","Tóth Á. u.","Jutai u. 45.","Raktár u. 2.","Raktár u."],
                 "frequency": "45 percenként",
                 "firstBus": "05:30",
                 "lastBus": "20:30"
@@ -533,7 +553,8 @@
                 "number": "41",
                 "name": "Koppány vezér u - Bartók B. u. - Raktár u.",
                 "category": "suburban",
-                "stops": ["Belváros", "Toponár"],
+                "stops": ["Koppány vezér u.","Erdősor u.","Rózsa u.","Szegfű u.","Jókai u.","Bartók B. u.","Berzsenyi u. felüljáró","Helyi autóbusz-állomás","Berzsenyi u. felüljáró","Berzsenyi u. 30.","Füredi úti csomópont","Városi könyvtár"
+                ,"Vasútköz","Hajnóczy u. csp.","Jutai u. 24.","Tóth Á. u.","Jutai u. 45.","Raktár u. 2.","Raktár u."],
                 "frequency": "30 percenként",
                 "firstBus": "05:15",
                 "lastBus": "21:00"
@@ -542,7 +563,8 @@
                 "number": "42",
                 "name": "Töröcske forduló - Kórház - Laktanya",
                 "category": "suburban",
-                "stops": ["Kaposszentjakab", "Füredi lakótelep"],
+                "stops": ["Töröcske, forduló","Fenyves u. 31.","Fenyves u. 37/A","Szőlőhegy","Kertbarát alsó","Kertbarát felső","Gyertyános","Harangvirág u.","Aranyeső u.","Zichy u.","Táncsics M. u.","Bartók B. u.","Berzsenyi u. felüljáró"
+                ,"Helyi autóbusz-állomás","Vasútállomás","Tallián Gy. u. 4.","Kórház","Tallián Gy. u. 56.","Tallián Gy. u. 82.","ÁNTSZ","Füredi úti csomópont","Toldi lakónegyed","Kinizsi ltp.","Búzavirág u.","Laktanya"],
                 "frequency": "45 percenként",
                 "firstBus": "05:30",
                 "lastBus": "22:00"
@@ -551,7 +573,8 @@
                 "number": "43",
                 "name": "Helyi autóbusz-állomás - Kórház- Laktanya - Raktár utca - Helyi autóbusz-állomás",
                 "category": "education",
-                "stops": ["Helyi autóbusz-állomás", "Egyetem"],
+                "stops": ["Helyi autóbusz-állomás", "Vasútállomás","Tallián Gy. u. 4","Kórház","Tallián Gy. u. 56","Tallián Gy. u. 82","Buzsáki u.","Losonc-köz","Brassó u.","Sopron u."
+                ,"Búzavirág u.","Laktanya","Raktár u.","Raktár u. 2.","Jutai u. 45.","Tóth Á. u.","Jutai u. 24.","Helyi autóbusz-állomás"],
                 "frequency": "20 percenként",
                 "firstBus": "06:00",
                 "lastBus": "22:30"
@@ -560,7 +583,8 @@
                 "number": "44",
                 "name": "Helyi autóbusz-állomás - Raktár utca - Laktanya -Arany János tér - Helyi autóbusz-állomás",
                 "category": "industrial",
-                "stops": ["Donner", "Ipari park"],
+                "stops": ["Helyi autóbusz-állomás", "Kapostüskevár","Jutai u. 24.","Tóth Á. u.","Jutai u. 45.","Raktár u. 2.","Raktár u.","Laktanya","Búzavirág u.","Nagyszeben u."
+                ,"Losonc-köz","Arany J. tér","Buzsáki u.","Rendőrség","Szent Imre u. 29","Szent Imre u. 13.","Széchényi tér","Rákóczi tér","Helyi autóbusz-állomás"],
                 "frequency": "35 percenként",
                 "firstBus": "05:20",
                 "lastBus": "21:00"
@@ -569,7 +593,7 @@
                 "number": "45",
                 "name": "Helyi autóbusz-állomás - 67-es út - Koppány vezér u.",
                 "category": "suburban",
-                "stops": ["Belváros", "Kaposfüred"],
+                "stops": ["Helyi autóbusz-állomás","Berzsenyi u. felüljáró","67-es sz. út","Rózsa u.","Gönczi F. u.","Koppány vezér u."],
                 "frequency": "30 percenként",
                 "firstBus": "05:15",
                 "lastBus": "21:45"
@@ -578,7 +602,8 @@
                 "number": "46",
                 "name": "Helyi autóbusz-állomás - Töröcske forduló",
                 "category": "hospital",
-                "stops": ["Füredi lakótelep", "Kórház"],
+                "stops": ["Helyi autóbusz-állomás","Berzsenyi u. felüljáró","Bartók B. u.","Táncsics M. u.","Zichy u.","Aranyeső u.","Harangvirág u."
+                ,"Gyertányos","Kertbarát felső","Kertbarát alsó","Szőlőhegy","Fenyves u. 37/A","Fenyves u. 31.","Töröcske, forduló"],
                 "frequency": "25 percenként",
                 "firstBus": "05:30",
                 "lastBus": "22:15"
@@ -587,7 +612,8 @@
                 "number": "47",
                 "name": "Koppány vezér u.- Kórház - Kaposfüred forduló",
                 "category": "education",
-                "stops": ["Egyetem", "Vasútállomás"],
+                "stops": ["Koppány vezér u.","Gönczi F. u.","Rózsa u.","67-es sz. út","Berzsenyi u. felüljáró","Helyi autóbusz-állomás","Vasútállomás","Tallián Gy. u. 4.","Kórház","Tallián Gy. u. 56."
+                ,"Tallián Gy. u. 82.","ÁNTSZ","Füredi úti csomópont","Toldi lakónegyed","Kinizsi ltp.","Búzavirág u.","Laktanya","Volán-telep","Kaposfüredi u. 12.","Kaposfüredi u. 104.","Kaposfüred, központ","Kaposfüred, forduló"],
                 "frequency": "15 percenként",
                 "firstBus": "05:50",
                 "lastBus": "23:00"
@@ -596,7 +622,7 @@
                 "number": "61",
                 "name": "Helyi- autóbuszállomás - Béla király u.",
                 "category": "suburban",
-                "stops": ["Belváros", "Zselickislak"],
+                "stops": ["Helyi autóbusz-állomás","Baross G. u.","Csalogány u.","Vikár B.u.","Béla király u."],
                 "frequency": "60 percenként",
                 "firstBus": "06:30",
                 "lastBus": "19:30"
@@ -605,7 +631,7 @@
                 "number": "62",
                 "name": "Helyi autóbusz-állomás - Városi fürdő - Béla király u.",
                 "category": "industrial",
-                "stops": ["Belváros", "Ipari park"],
+                "stops": ["Helyi aiutóbusz-állomás","Berzsenyi u. felüljáró","Városi fürdő","Csalogány u.","Vikár B. u.","Béla király u."],
                 "frequency": "30 percenként",
                 "firstBus": "05:15",
                 "lastBus": "21:00"
@@ -614,7 +640,8 @@
                 "number": "70",
                 "name": "Helyi autóbusz-állomás - Kaposfüred",
                 "category": "residential",
-                "stops": ["Belváros", "Donner"],
+                "stops": ["Helyi autóbusz-állomás","Berzsenyi u. felüljáró","Berzsenyi u. 30.","Füredi úti csomópont","Toldi lakónegyed"
+                ,"Kinizsi ltp.","Búzavirág u.","Laktanya","Zöld fűtőmű","Volán-telep","Kaposfüredi u. 12.","Kaposfüredi u. 104.","Kaposfüred, központ","Kaposfüredi u. 244.","Kaposfüred, forduló"],
                 "frequency": "15 percenként",
                 "firstBus": "05:00",
                 "lastBus": "23:00"
@@ -623,7 +650,9 @@
                 "number": "71",
                 "name": "Kaposfüred forduló - Kaposszentjakab forduló",
                 "category": "suburban",
-                "stops": ["Kaposszentjakab", "Vasútállomás"],
+                "stops": ["Kaposfüred, forduló","Kaposfüredi u. 244.","Kaposfüred, központ","Kaposfüredi u. 104.","Kaposfüredi u. 12.","Volán-telep","Zöld fűtőmű","Laktanya"
+                ,"Búzavirág u.","Kinizsi ltp.","Toldi lakónegyed","Füredi úti csomópont","Berzsenyi u. 30.","Berzsenyi u. felüljáró","Helyi autóbusz-állomás","Rákóczi tér","Fő u. 37-39."
+                ,"Hársfa u.","Hősök temploma","Gyár u.","Pécsi úti iskola","Nádasdi u.","Móricz Zs. u.","Pécsi u. 227.","Várhegy feljáró","Kaposszentjakab, forduló"],
                 "frequency": "40 percenként",
                 "firstBus": "05:10",
                 "lastBus": "21:30"
@@ -632,7 +661,9 @@
                 "number": "72",
                 "name": "Kaposfüred forduló - Hold u. - Kaposszentjakab forduló",
                 "category": "industrial",
-                "stops": ["Kaposfüred", "Ipari park"],
+                "stops": ["Kaposfüred, forduló","Kaposfüredi u. 244.","Kaposfüred, központ","Állomás u.","Kaposfüred, vá.","Állomás u.","Kaposfüred, központ","Kaposfüredi u. 104.","Kaposfüredi u. 12.","Volán-telep","Zöld fűtőmű","Laktanya"
+                ,"Búzavirág u.","Kinizsi ltp.","Toldi lakónegyed","Füredi úti csomópont","Berzsenyi u. 30.","Berzsenyi u. felüljáró","Helyi autóbusz-állomás","Vasútállomás","Fő u. 48.","Hársfa u.","Hősök temploma","Gyár u.","Pécsi úti iskola"
+                ,"Nádasdi u.","Nap u.","Hold u.","Nádasdi u.","Móricz Zs. u.","Pécsi u. 227.","Várhegy feljáró","Kaposzsentjakab, forduló"],
                 "frequency": "50 percenként",
                 "firstBus": "06:00",
                 "lastBus": "20:00"
@@ -641,16 +672,18 @@
                 "number": "73",
                 "name": "Kaposfüred forduló - KOMÉTA - Kaposszentjakab forduló",
                 "category": "residential",
-                "stops": ["Donner", "Toponár"],
+                "stops": ["Kaposfüred, forduló","Kaposfüredi u. 244.","Kaposfüred, központ","Kaposfüredi u. 104.","Kaposfüredi u. 12.","Volán-telep","Zöld fűtőmű","Laktanya"
+                ,"Búzavirág u.","Kinizsi ltp.","Toldi lakónegyed","Füredi úti csomópont","Berzsenyi u. 30.","Berzsenyi u. felüljáró","Helyi autóbusz-állomás","Rákóczi tér","Fő u. 37-39."
+                ,"Hársfa u.","Hősök temploma","Gyár u.","Pécsi úti iskola","Kométa, forduló","Nádasdi u.","Móricz Zs. u.","Pécsi u. 227.","Várhegy feljáró","Kaposszentjakab, forduló"],
                 "frequency": "45 percenként",
                 "firstBus": "06:15",
                 "lastBus": "21:00"
             },
             {
                 "number": "74",
-                "name": "Helyi autóbusz-állomás - Hold utca",
+                "name": "Hold utca - Helyi autóbusz-állomás",
                 "category": "education",
-                "stops": ["Vasútállomás", "Egyetem"],
+                "stops": ["Hold u.","Nap u.","Nádasdi u.","Pécsi úti iskola","Gyár u.","Hősök temploma","Hásrfa u.","Fő u. 37-39.","Rákóczi tér","Helyi autóbusz-állomás"],
                 "frequency": "20 percenként",
                 "firstBus": "05:45",
                 "lastBus": "22:45"
@@ -659,7 +692,7 @@
                 "number": "75",
                 "name": "Helyi autóbusz-állomás - Kaposszentjakab",
                 "category": "suburban",
-                "stops": ["Toponár", "Zselickislak"],
+                "stops": ["Helyi autóbusz-állomás","Rákóczi tér","Fő u. 37-39.","Hársfa u.","Hősök temploma","Gyár u.","Pécsi úti iskola","Nádasdi u.","Móricz Zs. u.","Pécsi u. 227.","Várhegy feljáró","Kaposszentjakab, forduló"],
                 "frequency": "60 percenként",
                 "firstBus": "06:30",
                 "lastBus": "18:30"
@@ -668,7 +701,8 @@
                 "number": "81",
                 "name": "Helyi autóbusz-állomás - Hősök temploma - Toponár forduló",
                 "category": "industrial",
-                "stops": ["Belváros", "Ipartelep"],
+                "stops": ["Helyi autóbusz-állomás","Vasútálomás","Hársfa u.","Hősök temploma","Mező u. csp.","Izzó u.","Guba S. u. 57","Guba S. u. 81.","Villamossági Gyár","Kaposvári Egyetem"
+                ,"Toponár, posta","Toponár, Orci elágazás","Toponári u. 182.","Toponári u. 238.","Toponár, forduló"],
                 "frequency": "35 percenként",
                 "firstBus": "05:45",
                 "lastBus": "21:15"
@@ -677,7 +711,8 @@
                 "number": "82",
                 "name": "Helyi autóbusz-állomás - Kórház - Toponár Szabó P. u.",
                 "category": "education",
-                "stops": ["Egyetem", "Füredi lakótelep"],
+                "stops": ["Helyi autóbusz-állomás","Vasútálomás","Tallián Gy. u. 4","Kórház","Tallián Gy. u. 56.","Tallián Gy. u. 82.","Pázmány P. u.","Kisgát","Mező u. csp."
+                ,"Izzó u.","Guba S. u. 57","Guba S. u. 81.","Villamossági Gyár","Kaposvári Egyetem","Toponár, posta","Toponár, Orci elágazás","Toponár, Orci út","Toponár, Szabó P. u."],
                 "frequency": "25 percenként",
                 "firstBus": "06:00",
                 "lastBus": "22:00"
@@ -686,7 +721,8 @@
                 "number": "83",
                 "name": "Helyi autóbusz-állomás - Szabó P. u. - Toponár forduló",
                 "category": "industrial",
-                "stops": ["Ipari park", "Toponár"],
+                "stops": ["Helyi autóbusz-állomás","Vasútálomás","Fő u. 48.","Hársfa u.","Hősök temploma","Mező u. csp.","Izzó u.","Guba S. u. 57","Guba S. u. 81.","Villamossági Gyár","Kaposvári Egyetem"
+                ,"Toponár, posta","Toponár, Orci elágazás","Toponár, Orci út","Toponár, Szabó P. u.","Toponár, Erdei F. u.","Toponár, Orci út","Toponár, Orci elágazás","Toponári u. 182.","Toponári u. 238.","Toponár, forduló"],
                 "frequency": "50 percenként",
                 "firstBus": "06:15",
                 "lastBus": "19:30"
@@ -695,7 +731,8 @@
                 "number": "84",
                 "name": "Helyi autóbusz-állomás - Toponár, forduló - Répáspuszta",
                 "category": "residential",
-                "stops": ["Donner", "Kaposszentjakab"],
+                "stops": ["Helyi autóbusz-állomás","Vasútálomás","Fő u. 48.","Hársfa u.","Hősök temploma","Mező u. csp.","Izzó u.","Guba S. u. 57","Guba S. u. 81.","Villamossági Gyár","Kaposvári Egyetem"
+                ,"Toponár, posta","Toponár, Orci elágazás","Toponári u. 182.","Toponári u. 238.","Toponár, forduló","Répáspuszta","Répáspuszta, forduló"],
                 "frequency": "30 percenként",
                 "firstBus": "05:30",
                 "lastBus": "21:00"
@@ -704,7 +741,8 @@
                 "number": "85",
                 "name": "Helyi autóbusz-állomás - Kisgát- Helyi autóbusz-állomás",
                 "category": "suburban",
-                "stops": ["Füredi lakótelep", "Zselickislak"],
+                "stops": ["Helyi autóbusz-állomás","Vasútálomás","Rákóczi tér","Fő u. 48.","Hársfa u.","Hősök temploma","Mező u. csp.","Kisgát","Pázmány P. u."
+                ,"Rendőrség","Szent Imre u. 29","Szent Imre u. 13.","Széchényi tér","Helyi autóbusz-állomás"],
                 "frequency": "60 percenként",
                 "firstBus": "06:00",
                 "lastBus": "19:00"
@@ -713,7 +751,7 @@
                 "number": "86",
                 "name": "Helyi autóbusz-állomás - METYX - Szennyvíztelep",
                 "category": "education",
-                "stops": ["Toponár", "Egyetem"],
+                "stops": ["Helyi autóbusz-állomás","Vasútálomás","Fő u. 48.","Hársfa u.","Hősök temploma","Mező u. csp.","Kenyérgyár u. 1.","Videoton","Dombóvári u. 4.","METYX","Cabero","Sennyvíztelep"],
                 "frequency": "30 percenként",
                 "firstBus": "05:45",
                 "lastBus": "21:45"
@@ -722,7 +760,7 @@
                 "number": "87",
                 "name": "Helyi autóbusz állomás - Videoton - METYX",
                 "category": "residential",
-                "stops": ["Vasútállomás", "Füredi lakótelep"],
+                "stops": ["Helyi autóbusz-állomás","Vasútálomás","Fő u. 48.","Hársfa u.","Hősök temploma","Mező u. csp.","Kenyérgyár u. 1.","Videoton","Dombóvári u. 4.","METYX"],
                 "frequency": "20 percenként",
                 "firstBus": "05:30",
                 "lastBus": "22:30"
@@ -731,7 +769,7 @@
                 "number": "88",
                 "name": "Helyi autóbusz-állomás - Videoton",
                 "category": "residential",
-                "stops": ["Donner", "Belváros"],
+                "stops": ["Helyi autóbusz-állomás","Vasútálomás","Fő u. 48.","Hársfa u.","Hősök temploma","Mező u. csp.","Kenyérgyár u. 1.","Videoton"],
                 "frequency": "15 percenként",
                 "firstBus": "05:00",
                 "lastBus": "23:30"
@@ -740,7 +778,7 @@
                 "number": "89",
                 "name": "Helyi autóbusz-állomás - Kaposvári Egyetem",
                 "category": "hospital",
-                "stops": ["Egyetem", "Kórház"],
+                "stops": ["Helyi autóbusz-állomás","Vasútálomás","Fő u. 48.","Hársfa u.","Hősök temploma","Mező u. csp.","Izzó u.","Guba S. u. 57","Guba S. u. 81.","Villamossági Gyár","Kaposvári Egyetem"],
                 "frequency": "25 percenként",
                 "firstBus": "06:00",
                 "lastBus": "22:15"
@@ -749,7 +787,7 @@
                 "number": "90",
                 "name": "Helyi autóbusz-állomás - Rómahegy",
                 "category": "suburban",
-                "stops": ["Kaposfüred", "Zselickislak"],
+                "stops": ["Helyi autóbusz-állomás","Berzsenyi u. felüljáró","Jókai liget","Szigetvári u. 6.","Szigetvári u. 62.","Ballakúti u.","Szigetvári u. 139.","Nyár u.","Rómahegy"],
                 "frequency": "70 percenként",
                 "firstBus": "06:30",
                 "lastBus": "19:00"
@@ -758,7 +796,8 @@
                 "number": "91",
                 "name": "Rómahegy - Pázmány P u. - Füredi u. csp.",
                 "category": "hospital",
-                "stops": ["Belváros", "Füredi lakótelep", "Kórház"],
+                "stops": ["Rómahegy","Nyár u.","Szigetvári u. 139.","Ballakúti u.","Szigetvári u. 62.","Szigetvári u. 6.","Jókai liget","Berzsenyi u. felüljáró","Helyi autóbusz-állomás","Vasútálomás","Fő u. 48.","Hársfa u."
+                ,"Virág u.","Pázmány P. u. 1.","Vöröstelek u.","Hegyi u.","Buzsáki u.","Arany J. tér","Füredi úti csomópont"],
                 "frequency": "30 percenként",
                 "firstBus": "05:10",
                 "lastBus": "22:30"
@@ -793,6 +832,11 @@
                         <i class="fas fa-bus bus-icon"></i>
                         ${route.number} - ${route.name}
                     </div>
+                    <div>
+                        <button class="route-button" id="iranyBtn">
+                            Irány&nbsp;<img src="switch.png" alt="Switch" style="width: 20px; height: 20px; max-width: 40px; max-width: 20px;">
+                        </button>
+                    </div>
                     <div class="route-details">
                         <div class="next-departure">
                             <i class="far fa-clock"></i>
@@ -802,6 +846,7 @@
                             <i class="fas fa-sync-alt"></i>
                             Járatsűrűség: ${route.frequency}
                         </div>
+                    </div>
                         <div class="show-stops" onclick="toggleStops(this)">
                             <i class="fas fa-map-marker-alt"></i>
                             Megállók megjelenítése
@@ -811,11 +856,15 @@
                                 `<div><i class="fas fa-stop"></i> ${stop}</div>`
                             ).join('')}
                         </div>
-                    </div>
                 `;
                 routeContainer.appendChild(routeCard);
             });
         }
+
+        //Irány változtató gomb
+        /*document.getElementById("iranyBtn").onclick = function() {
+            busRoutes.number.stops.reverse();
+        };*/
 
         function toggleStops(element) {
             const stopsList = element.nextElementSibling;
