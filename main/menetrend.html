@@ -936,31 +936,6 @@
             });
         }
 
-        // Időjárás widget hozzáadása
-        function addWeatherWidget() {
-            const header = document.querySelector('.header-content');
-            const weatherWidget = document.createElement('div');
-            weatherWidget.className = 'weather-widget';
-            weatherWidget.innerHTML = `
-                <div style="
-                    background: rgba(255, 255, 255, 0.1);
-                    padding: 0.5rem 1rem;
-                    border-radius: 20px;
-                    color: white;
-                    margin-top: 1rem;
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
-                ">
-                    <i class="fas fa-sun"></i>
-                    <span>Kaposvár: 22°C</span>
-                    <i class="fas fa-wind"></i>
-                    <span>Szél: 12 km/h</span>
-                </div>
-            `;
-            header.appendChild(weatherWidget);
-        }
-
         function setupNotifications() {
             const notificationBtn = document.createElement('button');
             notificationBtn.className = 'filter-button';
