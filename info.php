@@ -169,7 +169,7 @@ catch(PDOException $e) {
             margin-right: 10px;
             margin-top: 30px;
             margin-bottom: 30px;
-            max-height: 50px;
+            max-height: 70px;
         }
 
 
