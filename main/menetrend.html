@@ -223,8 +223,16 @@
             margin: 0 auto;
         }
 
+        #odaBtn, #visszaBtn{
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            margin-top: 2%;
+            margin-right: 13%;
+        }
+
         .route-button {
-            padding: 12px 24px;
+            padding: 12px 28px;
             background-color: var(--accent-color);
             color: var(--primary-color);
             border: none;
@@ -234,6 +242,7 @@
             transition: transform 0.2s, background-color 0.2s;
             display: flex;
             float: right;
+            margin-right: 10px;
         }
 
         .route-button:hover {
@@ -794,6 +803,7 @@
             },
             {
                 "number": "91",
+                "id": "91",
                 "name": "Rómahegy - Pázmány P u. - Füredi u. csp.",
                 "category": "hospital",
                 "stops": ["Rómahegy","Nyár u.","Szigetvári u. 139.","Ballakúti u.","Szigetvári u. 62.","Szigetvári u. 6.","Jókai liget","Berzsenyi u. felüljáró","Helyi autóbusz-állomás","Vasútálomás","Fő u. 48.","Hársfa u."
@@ -832,11 +842,7 @@
                         <i class="fas fa-bus bus-icon"></i>
                         ${route.number} - ${route.name}
                     </div>
-                    <div>
-                        <button class="route-button" id="iranyBtn">
-                            Irány&nbsp;<img src="switch.png" alt="Switch" style="width: 20px; height: 20px; max-width: 40px; max-width: 20px;">
-                        </button>
-                    </div>
+                    
                     <div class="route-details">
                         <div class="next-departure">
                             <i class="far fa-clock"></i>
@@ -846,6 +852,14 @@
                             <i class="fas fa-sync-alt"></i>
                             Járatsűrűség: ${route.frequency}
                         </div>
+                        <div class="button-group">
+                        <button class="route-button" id="visszaBtn">
+                            Vissza
+                        </button>
+                        <button class="route-button" id="odaBtn">
+                            Oda
+                        </button>
+                    </div>
                     </div>
                         <div class="show-stops" onclick="toggleStops(this)">
                             <i class="fas fa-map-marker-alt"></i>
@@ -863,7 +877,9 @@
 
         //Irány változtató gomb
         /*document.getElementById("iranyBtn").onclick = function() {
-            busRoutes.number.stops.reverse();
+            if (busRoutes.id == "91"){
+                busRoutes.name("91").stops.reverse()
+            }
         };*/
 
         function toggleStops(element) {
