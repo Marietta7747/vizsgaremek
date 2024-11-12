@@ -470,8 +470,7 @@ try {
                 "number": "12",
                 "name": "Helyi autóbusz-állomás - Sopron u. - Laktanya",
                 "category": "residential",
-                "stops": ["Helyi autóbusz-állomás","Corso","Zárda u.","Honvéd u.","Arany J. tér","Losonc-köz","Brassó u.","Sopron u.","Búzavirág u.","Laktanya"
-                ,"Laktanya","Búzavirág u.","Nagyszeben u.","Losonc-köz","Arany J. tér","Honvéd u.","Somssich P. u.","Szent Imre u. 13.","Széchényi tér","Rákóczi tér","Helyi autóbusz-állomás"],
+                "stops": ["Helyi autóbusz-állomás","Corso","Zárda u.","Honvéd u.","Arany J. tér","Losonc-köz","Brassó u.","Sopron u.","Búzavirág u.","Laktanya"],
                 "frequency": "15 percenként",
                 "firstBus": "05:00",
                 "lastBus": "22:30"
