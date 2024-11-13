@@ -245,7 +245,7 @@ try {
             height: 40px;
             text-align: center;
             margin-top: 2%;
-            margin-right: 15.5%;
+            margin-right: 14%;
         }
 
         .route-button {
