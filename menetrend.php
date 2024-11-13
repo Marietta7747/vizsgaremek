@@ -38,23 +38,23 @@ try {
             min-height: 100vh;
         }
 
-/*--------------------------------------------------------------------------------------------------------HEADER--------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------CSS - HEADER---------------------------------------------------------------------------------------------------*/
 
         .header {
             position: relative;
             background-color: var(--primary-color);
             color: var(--text-light);
             box-shadow: var(--shadow);
-            margin: 0 auto;
             display: flex;
             flex-direction: column;
             text-align: center;
-            align-items: center;
+            align-items: left;
             gap: 1rem;
             padding: 16px;
         }
 
         nav {
+            
             position: relative;
             background-color: var(--primary-color);
             padding: 8px;
@@ -68,6 +68,7 @@ try {
             margin-right: 10px;
             margin-top: 30px;
             max-height: 50px;
+            
         }
 
 
@@ -192,7 +193,7 @@ try {
             color: var(--primary-color);
         }
         
-/*--------------------------------------------------------------------------------------------------------HEADER END----------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------HEADER END-----------------------------------------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------------------------------------------CSS - OTHER PARTS----------------------------------------------------------------------------------------------*/
         #filterButtons {
@@ -348,7 +349,7 @@ try {
         }
 /*--------------------------------------------------------------------------------------------------------OTHER PARTS END------------------------------------------------------------------------------------------------*/
 
-/*--------------------------------------------------------------------------------------------------------@MEDIA--------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------CSS - @MEDIA---------------------------------------------------------------------------------------------------*/
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -405,14 +406,15 @@ try {
                 font-size: 0.8rem;
             }
         }
-/*--------------------------------------------------------------------------------------------------------@MEDIA END----------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------@MEDIA END-----------------------------------------------------------------------------------------------------*/
         
     </style>
 </head>
 <body>
         <div class="header">
-            <nav class="active" id="nav">
+        <nav class="active" id="nav">
             <ul>
+            
                 <li><a href="index.php" style="color: #FFFFFF; font-weight: bold;"><img src="placeholder.png" style="height: 30px; width: 30px;"> Főoldal</a></li>
               <li><a href="buy.php" style="color: #FFFFFF; font-weight: bold;"><img src="tickets.png" style="height: 30px; width: 30px;"> Jegyvásárlás</a></li>
               <li><a href="menetrend.php" style="color: #FFFFFF; font-weight: bold;"><img src="calendar.png" style="height: 30px; width: 30px;"> Menetrend</a></li>
@@ -429,9 +431,10 @@ try {
                 <div class="live-indicator">
                     <i class="fas fa-circle"></i> Élő követés
                 </div>
-                <div id="time" class="time"></div>
+                <div style="margin-right: 40%;margin-left: 40%" id="time" class="time"></div>
             </div>
-            <div class="search-container">
+
+            <div style="margin: 0 auto; align-items: center" class="search-container">
                 <input type="text" id="searchBox" placeholder="Keress járatszám vagy útvonal alapján..." />
                 <i class="fas fa-search search-icon"></i>
             </div>
@@ -1046,4 +1049,3 @@ try {
     </script>
 </body>
 </html>
-
