@@ -310,7 +310,7 @@ try {
 /*--------------------------------------------------------------------------------------------------------SUGGESTIONS LIST END-------------------------------------------------------------------------------------------*/        
 
 /*--------------------------------------------------------------------------------------------------------CSS - @MEDIA---------------------------------------------------------------------------------------------------*/
-        @media (max-width: 768px) {
+        @media (max-width: 480px) {
             .input-group {
                 flex-direction: column;
             }
@@ -702,10 +702,10 @@ try {
                         destination: end,
                         travelMode: 'TRANSIT',
                         transitOptions:{
-                            modes: ['BUS'],
-                            routingPreference: 'FEWER_TRANSFERS'
+                            modes: ['BUS','RAIL'],
+                            routingPreference: 'LESS_WALKING'
                         },
-                        unitSystem: google.maps.UnitSystem.IMPERIAL
+                        unitSystem: google.maps.UnitSystem.METRIC
                     };
 
                     directionsService.route(request, function(result, status) {
