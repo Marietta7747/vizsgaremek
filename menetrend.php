@@ -245,7 +245,7 @@ try {
             height: 40px;
             text-align: center;
             margin-top: 2%;
-            margin-right: 13%;
+            margin-right: 15.5%;
         }
 
         .route-button {
@@ -372,38 +372,23 @@ try {
             100% { opacity: 1; }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 480px) {
             .header-content {
                 padding: 1rem;
             }
 
             h1 {
-                font-size: 2rem;
-            }
-
-            .filter-button {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            .route-container {
-                grid-template-columns: 1fr;
-                padding: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
                 font-size: 1.5rem;
-            }
-
-            #filterButtons {
-                gap: 0.5rem;
             }
 
             .filter-button {
                 padding: 0.5rem 0.8rem;
                 font-size: 0.8rem;
+            }
+
+            .route-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
             }
         }
 /*--------------------------------------------------------------------------------------------------------@MEDIA END-----------------------------------------------------------------------------------------------------*/
@@ -431,8 +416,8 @@ try {
                 <div class="live-indicator">
                     <i class="fas fa-circle"></i> Élő követés
                 </div>
-                <div style="margin-right: 40%;margin-left: 40%" id="time" class="time"></div>
-            </div>
+                <div style="margin-right: 50%;margin-left: 35%; width: 30%;" id="time" class="time"></div>
+                </div>
 
             <div style="margin: 0 auto; align-items: center" class="search-container">
                 <input type="text" id="searchBox" placeholder="Keress járatszám vagy útvonal alapján..." />
@@ -474,7 +459,7 @@ try {
                 "name": "Helyi autóbusz-állomás - Sopron u. - Laktanya",
                 "category": "residential",
                 "stops": ["Helyi autóbusz-állomás","Corso","Zárda u.","Honvéd u.","Arany J. tér","Losonc-köz","Brassó u.","Sopron u.","Búzavirág u.","Laktanya"],
-                "frequency": "15 percenként",
+                "frequency": "10 percenként",
                 "firstBus": "05:00",
                 "lastBus": "22:30"
             },
