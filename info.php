@@ -43,6 +43,7 @@ catch(PDOException $e) {
             
         }
 
+/*--------------------------------------------------------------------------------------------------------CSS - HEADER---------------------------------------------------------------------------------------------------*/
         .header {
             position: relative;
             background-color: var(--primary-color);
@@ -52,109 +53,6 @@ catch(PDOException $e) {
             box-shadow: var(--shadow);
         }
 
-        #navbar {
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            padding: 15px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        #navbar h1 {
-            font-size: 1.5em;
-            color: var(--text-light);
-            margin: 0;
-            flex-grow: 1;
-        }
-
-        .navbar-nav {
-            display: flex;
-            gap: 20px;
-            margin-left: auto;
-        }
-
-        .navbar-nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .navbar-nav a:hover {
-            color: var(--accent-color);
-        }
-
-        main {
-            padding: 20px;
-            margin-top: 100px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .card {
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            padding: 20px;
-            margin: 15px 0;
-            width: 80%;
-            max-width: 600px;
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: scale(1.02);
-        }
-
-        .card h2 {
-            color: var(--primary-color);
-        }
-
-        .doc-link {
-            text-decoration: none;
-            color: #333;
-            transition: color 0.3s;
-        }
-
-        .doc-link:hover {
-            color: var(--accent-color);
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            border-radius: 10px;
-            margin-top: 20px;
-            box-shadow: var(--shadow);
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        ul li {
-            margin-bottom: 8px;
-            padding: 5px;
-        }
-        
-        @media (max-width: 768px) {
-            #navbar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .navbar-nav {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
         nav {
             position: relative;
             background-color: var(--primary-color);
@@ -164,14 +62,13 @@ catch(PDOException $e) {
             align-items: center;
             justify-content: center;
             border-radius: 3px;
-            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
             transition: width 0.6s linear;
             margin-right: 10px;
             margin-top: 30px;
             margin-bottom: 30px;
             max-height: 70px;
         }
-
 
         nav.active {
             width: 99%;
@@ -249,25 +146,97 @@ catch(PDOException $e) {
         nav.active .icon .line2 {
             transform: rotate(765deg) translateY(-5.5px);
         }
-        .navh1{
-max-width: 1200px;
-margin: 0 auto;
-padding: 20px;
-        }
-       .lang{
-        height: 40px; background-color: white; color: black; border: 2px solid black; width: 20%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;border-radius: 15px;
-    font-weight: bold;
 
-    }
-       .lang:hover{
-        background-color: black;
-        color: white;
-        border: 2px solid black;
+        .navh1{
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+/*--------------------------------------------------------------------------------------------------------HEADER END-----------------------------------------------------------------------------------------------------*/
         
-       }
-      p{
-        font-weight: bold;
-      }
+/*--------------------------------------------------------------------------------------------------------CSS - OTHER PARTS----------------------------------------------------------------------------------------------*/
+        main {
+            padding: 20px;
+            margin-top: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            margin: 15px 0;
+            width: 80%;
+            max-width: 600px;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+        }
+
+        .card h2 {
+            color: var(--primary-color);
+        }
+
+        .doc-link {
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        .doc-link:hover {
+            color: var(--accent-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+            padding: 5px;
+        }
+
+        .lang{
+            height: 40px; background-color: white; color: black; border: 2px solid black; width: 20%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;border-radius: 15px;
+            font-weight: bold;
+
+        }
+
+       .lang:hover{
+            background-color: black;
+            color: white;
+            border: 2px solid black;
+        }
+
+        p{
+            font-weight: bold;
+        }
+/*--------------------------------------------------------------------------------------------------------OTHER PARTS END------------------------------------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------------------------------------------------CSS - @MEDIA---------------------------------------------------------------------------------------------------*/       
+        @media (max-width: 768px) {
+            .navbar-nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+/*--------------------------------------------------------------------------------------------------------@MEDIA END-----------------------------------------------------------------------------------------------------*/
+
     </style>
 </head>
 <body>
@@ -336,51 +305,48 @@ padding: 20px;
     </footer>
     <script>
 
-var btn1 = document.getElementById('lang_eng');
-var btn2 = document.getElementById('lang_de');
-var btn3 = document.getElementById('lang_hu');
-var sz = document.getElementById('szoveg');
-var Operation = document.getElementById('Op');
-var rolunk = document.getElementById('rolunk');
-var atlathatosag = document.getElementById('atlat');
-var kozszolgalatisag = document.getElementById('kozszo');
-var minoseg = document.getElementById('mino')
-var dok = document.getElementById('dok');
-var dok1 = document.getElementById('dok1');
-var dok2 = document.getElementById('dok2');
-var dok3 = document.getElementById('dok3');
-var dok4 = document.getElementById('dok4');
-var elerhetoseg = document.getElementById('eler');
+    var btn1 = document.getElementById('lang_eng');
+    var btn2 = document.getElementById('lang_de');
+    var btn3 = document.getElementById('lang_hu');
+    var sz = document.getElementById('szoveg');
+    var Operation = document.getElementById('Op');
+    var rolunk = document.getElementById('rolunk');
+    var atlathatosag = document.getElementById('atlat');
+    var kozszolgalatisag = document.getElementById('kozszo');
+    var minoseg = document.getElementById('mino')
+    var dok = document.getElementById('dok');
+    var dok1 = document.getElementById('dok1');
+    var dok2 = document.getElementById('dok2');
+    var dok3 = document.getElementById('dok3');
+    var dok4 = document.getElementById('dok4');
+    var elerhetoseg = document.getElementById('eler');
 
+    btn1.addEventListener('click', function() {
+        sz.textContent = "Dear Travelers! Welcome to our company, Kaposvári Közlekedési Zrt. Not only will you be able to meet our site not only with the operation of our company, but also find the latest information on the journey and the current timetable that we have designed and modified to make it as comfortable as possible for our passengers. We are committed to environmental consciousness, so for a few years our entire fleet has been replaced by alternative powered compressed natural gas (CNG) buses, with no pollutant or noise emission. Our flights, which deliver around 8.2 million passengers per year, are also easy to use for people with visual, hearing and disability. With my colleagues, we strive to provide a high-quality service that more and more people are using for public transport. Thank you for choosing us during your trip! Veizer Jánosné Chief Executive Officer Kaposvári Közlekedési Zrt.";
+        Operation.textContent="Operation";
+        rolunk.textContent="about us";
+        dok.textContent="Documents";
+        elerhetoseg.textContent="Contact Information"
+    });
 
+    btn2.addEventListener('click', function() {
+        sz.textContent = "Liebe Reisen Öffentlichkeit! Willkommen zurück unser Unternehmen, Kaposvár Transport Company. Auf unserer Website können Sie nicht nur über den Betrieb unseres Unternehmens erfahren, aber Sie werden die neuesten Informationen und aktuellen Zeitplan finden Sie die Fahrt beeinflussen, was und modifizierte entworfen wurde, um es bequemer für die Passagiere zu transportieren. Wir sind auf das Umweltbewusstsein verpflichtet, so ein paar Jahren ersetzt wurde buszflottánkat insgesamt alternativ mit komprimiertem Erdgas (CNG) betriebene Busse zu arbeiten, was die Emissionen Schadstoff- und Lärm sind unbedeutend. Unsere Flüge, die jährlich rund 8,2 Millionen Passagiere befördern, sind auch für Menschen mit Seh-, Hör- und Behinderungen leicht zu benutzen. Meine Kollegen und ich bemühen sich, einen qualitativ hochwertigen Service zu bieten, von denen immer mehr Menschen mit den öffentlichen Verkehrsmitteln zu machen. Vielen Dank, dass Sie sich für uns während Ihrer Reise! Veizer Jánosné Chief Executive Officer Kaposvári Közlekedési Zrt.";
+        Operation.textContent="Betrieb";
+        rolunk.textContent="Über uns";
+        dok.textContent="Dokumente";
+        elerhetoseg.textContent="Kontaktinformationen"
+    });
 
+    btn3.addEventListener('click', function() {
+        sz.textContent = "Tisztelt Utazóközönségünk!Üdvözlöm  társaságunk, a Kaposvári Közlekedési Zrt. oldalán. Honlapunkon nemcsak cégünk működésével ismerkedhet meg, de megtalálja az utazást érintő legfrissebb információkat és az aktuális menetrendet is, melyet úgy alakítottunk ki és úgy módosítunk, hogy minél kényelmesebbé tegyük a közlekedést utasaink számára.Elkötelezettek vagyunk környezet-tudatosság mellett, ezért néhány éve teljes buszflottánkat alternatív meghajtású sűrített földgázzal (CNG) üzemelő buszokra cseréltük, melyek  szennyezőanyag- és zajkibocsátása is elenyésző. Járatainkat - amelyeken évente mintegy 8,2 millió utast szállítunk - látás-, hallás- és mozgássérültek is könnyen tudják használni.Kollégáimmal együtt arra törekszünk, hogy olyan színvonalas szolgáltatást nyújtsunk, amely által egyre többen veszik igénybe a közösségi közlekedést.Köszönjük, hogy utazása során minket választ!Veizer JánosnévezérigazgatóKaposvári Közlekedési Zrt.";
+        Operation.textContent="Működés";
+        rolunk.textContent="Rólunk";
+        dok.textContent="Dokumentumok";
+        elerhetoseg.textContent="Elérhetőség"
+    }); 
 
-
-btn1.addEventListener('click', function() {
-    sz.textContent = "Dear Travelers! Welcome to our company, Kaposvári Közlekedési Zrt. Not only will you be able to meet our site not only with the operation of our company, but also find the latest information on the journey and the current timetable that we have designed and modified to make it as comfortable as possible for our passengers. We are committed to environmental consciousness, so for a few years our entire fleet has been replaced by alternative powered compressed natural gas (CNG) buses, with no pollutant or noise emission. Our flights, which deliver around 8.2 million passengers per year, are also easy to use for people with visual, hearing and disability. With my colleagues, we strive to provide a high-quality service that more and more people are using for public transport. Thank you for choosing us during your trip! Veizer Jánosné Chief Executive Officer Kaposvári Közlekedési Zrt.";
-    Operation.textContent="Operation";
-    rolunk.textContent="about us";
-    dok.textContent="Documents";
-    elerhetoseg.textContent="Contact Information"
-});
-
-btn2.addEventListener('click', function() {
-    sz.textContent = "Liebe Reisen Öffentlichkeit! Willkommen zurück unser Unternehmen, Kaposvár Transport Company. Auf unserer Website können Sie nicht nur über den Betrieb unseres Unternehmens erfahren, aber Sie werden die neuesten Informationen und aktuellen Zeitplan finden Sie die Fahrt beeinflussen, was und modifizierte entworfen wurde, um es bequemer für die Passagiere zu transportieren. Wir sind auf das Umweltbewusstsein verpflichtet, so ein paar Jahren ersetzt wurde buszflottánkat insgesamt alternativ mit komprimiertem Erdgas (CNG) betriebene Busse zu arbeiten, was die Emissionen Schadstoff- und Lärm sind unbedeutend. Unsere Flüge, die jährlich rund 8,2 Millionen Passagiere befördern, sind auch für Menschen mit Seh-, Hör- und Behinderungen leicht zu benutzen. Meine Kollegen und ich bemühen sich, einen qualitativ hochwertigen Service zu bieten, von denen immer mehr Menschen mit den öffentlichen Verkehrsmitteln zu machen. Vielen Dank, dass Sie sich für uns während Ihrer Reise! Veizer Jánosné Chief Executive Officer Kaposvári Közlekedési Zrt.";
-    Operation.textContent="Betrieb";
-    rolunk.textContent="Über uns";
-    dok.textContent="Dokumente";
-    elerhetoseg.textContent="Kontaktinformationen"
-});
-
-btn3.addEventListener('click', function() {
-    sz.textContent = "Tisztelt Utazóközönségünk!Üdvözlöm  társaságunk, a Kaposvári Közlekedési Zrt. oldalán. Honlapunkon nemcsak cégünk működésével ismerkedhet meg, de megtalálja az utazást érintő legfrissebb információkat és az aktuális menetrendet is, melyet úgy alakítottunk ki és úgy módosítunk, hogy minél kényelmesebbé tegyük a közlekedést utasaink számára.Elkötelezettek vagyunk környezet-tudatosság mellett, ezért néhány éve teljes buszflottánkat alternatív meghajtású sűrített földgázzal (CNG) üzemelő buszokra cseréltük, melyek  szennyezőanyag- és zajkibocsátása is elenyésző. Járatainkat - amelyeken évente mintegy 8,2 millió utast szállítunk - látás-, hallás- és mozgássérültek is könnyen tudják használni.Kollégáimmal együtt arra törekszünk, hogy olyan színvonalas szolgáltatást nyújtsunk, amely által egyre többen veszik igénybe a közösségi közlekedést.Köszönjük, hogy utazása során minket választ!Veizer JánosnévezérigazgatóKaposvári Közlekedési Zrt.";
-    Operation.textContent="Működés";
-    rolunk.textContent="Rólunk";
-    dok.textContent="Dokumentumok";
-    elerhetoseg.textContent="Elérhetőség"
-});     
-const toggle = document.getElementById('toggle')
-        const nav = document.getElementById('nav')
+    const toggle = document.getElementById('toggle')
+            const nav = document.getElementById('nav')
 
         toggle.addEventListener('click', () => nav.classList.toggle('active'))
     </script>

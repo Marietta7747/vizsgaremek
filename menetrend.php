@@ -63,7 +63,7 @@ try {
             align-items: center;
             justify-content: center;
             border-radius: 3px;
-            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
             transition: width 0.6s linear;
             margin-right: 10px;
             margin-top: 30px;
