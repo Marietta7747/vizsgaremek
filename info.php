@@ -234,10 +234,6 @@ catch(PDOException $e) {
 
 /*--------------------------------------------------------------------------------------------------------CSS - FOOTER---------------------------------------------------------------------------------------------------*/
         footer {
-            background: var(--primary-color);
-            color: var(--text-light);
-            padding: 3rem 2rem;
-            margin-top: 4rem;
             text-align: center;
             padding: 10px;
             background-color: var(--primary-color);
@@ -245,6 +241,9 @@ catch(PDOException $e) {
             border-radius: 10px;
             margin-top: 20px;
             box-shadow: var(--shadow);
+            background: var(--primary-color);
+            color: var(--text-light);
+            padding: 3rem 2rem;
         }
 
         .footer-content {
