@@ -579,7 +579,8 @@ try {
                 "category": "residential",
                 "stops": ["Raktár u.","Raktár u. 2.","Jutai u. 45.","Tóth Á. u.","Jutai u. 24.","Hajnóczy u. csp.","Vasútköz"
                 ,"Városi könyvtár","Füredi úti csomópont","ÁNTSZ","Pázmány P. u.","Kisgát","Mező u. csp.","Kenyérgyár u. 1.","Videoton"],
-                "reverseRoute": [ ],
+                "reverseRoute": ["Videoton","Kenyérgyár u. 3.","Kenyérgyár u. 1.","Mező u. csp.","Kisgát","Pázmány P. u.","ÁNTSZ","Füredi úti csomópont","Városi könyvtár","Vasútköz","Hajnóczy u. csp.","Jutai u. 24."
+                ,"Tóth Á. u.","Jutai u. 45.","Raktár u. 2.","Raktár u."],
                 "frequency": "15 percenként",
                 "firstBus": "05:10",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
@@ -591,7 +592,8 @@ try {
                 "category": "industrial",
                 "stops": ["Kaposfüred, forduló","Kaposfüredi u. 244.","Kaposfüred, központ","Állomás u.","Kaposfüred, vá.","Kaposfüredi u. 104.","Kaposfüredi u. 12.","Volán-telep","Laktanya","Búzavirág u.","Kinizsi ltp."
                 ,"Toldi lakónegyed","Füredi úti csomópont","ÁNTSZ","Pázmány P. u.","Kisgát","Mező u. csp.","Izzó u.","Guba S. u. 57.","Guba S. u. 81.","Villamossági Gyár","Kaposvári Egyetem"],
-                "reverseRoute": [ ],
+                "reverseRoute": ["Kaposvári Egyetem","Villamossági Gyár","Guba S. u. 81.","Guba S. u. 57.","Izzó u.","Mező u. csp.","Kisgát","Pázmány P. u.","ÁNTSZ","Füredi úti csomópont","Toldi lakónegyed","Kinizsi ltp."
+                ,"Búzavirág u.","Laktanya","Volán-telep","Kaposfüredi u. 12.","Kaposfüredi u. 104.","Kaposfüred, központ","Állomás u.","Kaposfüred vá.","Állomás u.","Kaposfüred, központ","Kaposfüredi u. 244.","Kaposfüred, forduló"],
                 "frequency": "40 percenként",
                 "firstBus": "05:30",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
