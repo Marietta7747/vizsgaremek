@@ -22,6 +22,7 @@ catch(PDOException $e) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Volán Szervezeti Információs Lap</title>
     <style>
+
         :root {
             --primary-color: #001F3F;
             --accent-color: #FFC107;
@@ -36,9 +37,10 @@ catch(PDOException $e) {
         }
 
         body {
-            font-family: sans-serif, Roboto;
+            text-align: justify;
+            font-family: 'Segoe UI',tahoma,Geneva, Verdana, sans-seriff;
             background-color: #f5f5f5;
-            color: #333;
+            color: #000;
             min-height: 100vh;
             
         }
@@ -153,8 +155,25 @@ catch(PDOException $e) {
             padding: 20px;
         }
 /*--------------------------------------------------------------------------------------------------------HEADER END-----------------------------------------------------------------------------------------------------*/
-        
+ 
 /*--------------------------------------------------------------------------------------------------------CSS - OTHER PARTS----------------------------------------------------------------------------------------------*/
+        .navbar-nav {
+            display: flex;
+            gap: 20px;
+            margin-left: auto;
+        }
+
+        .navbar-nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .navbar-nav a:hover {
+            color: var(--accent-color);
+        }
+
         main {
             padding: 20px;
             margin-top: 100px;
@@ -164,6 +183,7 @@ catch(PDOException $e) {
         }
 
         .card {
+            font-size: 15px;
             background-color: white;
             border-radius: 15px;
             box-shadow: var(--shadow);
@@ -184,22 +204,12 @@ catch(PDOException $e) {
 
         .doc-link {
             text-decoration: none;
-            color: #333;
+            color: darkgray;
             transition: color 0.3s;
         }
 
         .doc-link:hover {
             color: var(--accent-color);
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            border-radius: 10px;
-            margin-top: 20px;
-            box-shadow: var(--shadow);
         }
 
         ul {
@@ -210,33 +220,77 @@ catch(PDOException $e) {
             margin-bottom: 8px;
             padding: 5px;
         }
-
-        .lang{
-            height: 40px; background-color: white; color: black; border: 2px solid black; width: 20%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;border-radius: 15px;
-            font-weight: bold;
-
+       
+        #map{
+        margin-top: 5%;  
         }
 
-       .lang:hover{
-            background-color: black;
-            color: white;
-            border: 2px solid black;
-        }
-
-        p{
+        a{
             font-weight: bold;
+            font-size 10%;
+            color: gray;
         }
 /*--------------------------------------------------------------------------------------------------------OTHER PARTS END------------------------------------------------------------------------------------------------*/
 
-/*--------------------------------------------------------------------------------------------------------CSS - @MEDIA---------------------------------------------------------------------------------------------------*/       
+/*--------------------------------------------------------------------------------------------------------CSS - FOOTER---------------------------------------------------------------------------------------------------*/
+        footer {
+            background: var(--primary-color);
+            color: var(--text-light);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            text-align: center;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h2 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+/*--------------------------------------------------------------------------------------------------------FOOTER END-----------------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------------------------CSS - @MEDIA-------------------------------------------------------------------------------------------------------*/
         @media (max-width: 768px) {
+            #navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
             .navbar-nav {
                 flex-direction: column;
                 gap: 10px;
             }
         }
-/*--------------------------------------------------------------------------------------------------------@MEDIA END-----------------------------------------------------------------------------------------------------*/
-
+/*-----------------------------------------------------------------------------------------------------@MEDIA END---------------------------------------------------------------------------------------------------------*/
     </style>
 </head>
 <body>
@@ -258,18 +312,9 @@ catch(PDOException $e) {
     </div>
 </div>
     <main>
-        <section id="about" class="card">
-            <button style="margin-top: 5%; margin-right: 5%;margin-left: 15%;" class="lang" id="lang_eng">Eng</button>
-            <button style="margin-top: 5%;margin-right: 5%;" class="lang" id="lang_de">De</button>
-            <button style="margin-top: 5%; margin-right: 5%;" class="lang" id="lang_hu">Hu</button></span>
-            <br>
-            <h2 id="rolunk" style="margin-top: 10%;">Rólunk</h2><br>
-            <p id="szoveg"><span style="font-weight: bold">Tisztelt utazóközönségünk!</span><br><br>Üdvözlöm  társaságunk, a Kaposvári Közlekedési Zrt. oldalán.<br> Honlapunkon nemcsak cégünk működésével ismerkedhet meg, de megtalálja az utazást érintő legfrissebb információkat és az aktuális menetrendet is, melyet úgy alakítottunk ki és úgy módosítunk, hogy minél kényelmesebbé tegyük a közlekedést utasaink számára.<br>Elkötelezettek vagyunk környezet-tudatosság mellett, ezért néhány éve teljes buszflottánkat alternatív meghajtású sűrített földgázzal (CNG) üzemelő buszokra cseréltük, melyek  szennyezőanyag- és zajkibocsátása is elenyésző.<br> Járatainkat - amelyeken évente mintegy 8,2 millió utast szállítunk - látás-, hallás- és mozgássérültek is könnyen tudják használni.<br>Kollégáimmal együtt arra törekszünk, hogy olyan színvonalas szolgáltatást nyújtsunk, amely által egyre többen veszik igénybe a közösségi közlekedést.<br>Köszönjük, hogy utazása során minket választ!<br>Veizer JánosnévezérigazgatóKaposvári Közlekedési Zrt.</p>
-      
-        </section>
+       
 
-        <section id="operations" class="card">
-            <h2 id="Op">Működés</h2><br>
+        <section id="about" class="card" style="font-weight: bold; font-style: italic; text-align:center">
             <ul>
                 
                 <li><i id="atlat" class="fas fa-balance-scale"></i> Átláthatóság</li>
@@ -279,74 +324,205 @@ catch(PDOException $e) {
         </section>
 
         <section id="documents" class="card">
-            <h2 id="dok">Dokumentációk</h2>
+    <h2 style="text-align:center">Dokumentumok</h2><br>
+
+    <h3 style="text-align:center">A 2009. évi CXXII. törvény 2.§ (1) - (2) bek. alapján közzététel</h3>
+        <ul>
+        <li>
             <ul>
-                <li><a id="dok1"  href="#" class="doc-link"><i class="fas fa-file-alt"></i> Alapító Okirat</a></li>
-                <li><a id="Dok2" class="doc-link"><i class="fas fa-file-alt"></i> Működési Szabályzat</a></li>
-                <li><a id="Dok3" href="#" class="doc-link"><i class="fas fa-file-alt"></i> Pénzügyi Jelentések</a></li>
-                <li><a id="Dok4" href="#" class="doc-link"><i class="fas fa-file-alt"></i> Éves Jelentés</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KTRT-20110101-1.pdf">Vezető tisztségviselők illetménye 2011.01.01.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KTRT-20110701.pdf">Vezető tisztségviselők illetménye 2011.07.01.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KTRT-20120101.pdf">Vezető tisztségviselők illetménye 2012.01.01.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KTRT-20120301.pdf">Vezető tisztségviselők illetménye 2012.03.01.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KTRT-20120901.pdf">Vezető tisztségviselők illetménye 2012.09.01.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KTRT-20130101.pdf">Vezető tisztségviselők illetménye 2013.01.01.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KTRT-20130701.pdf">Vezető tisztségviselők illetménye 2013.07.01.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KTRT-20140531.pdf">Vezető tisztségviselők illetménye 2014.05.31.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KTRT-20150101.pdf">Vezető tisztségviselők illetménye 2015.01.01.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KTRT-20160826.pdf">Vezető tisztségviselők illetménye 2016.08.26.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KTRT-20170424.pdf">Vezető tisztségviselők illetménye 2017.04.24.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KTRT-20180103.pdf">Vezető tisztségviselők illetménye 2018.01.03.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KK-Zrt-Közzététel-20190228.pdf">Vezető tisztségviselők illetménye 2019.02.28.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KK-Zrt-Közzététel-20190620.pdf">Vezető tisztségviselők illetménye 2019.06.20.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KK-Zrt-Közzététel-200311.pdf">Vezető tisztségviselők illetménye 2020.03.11</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KK_Zrt_Kozzetetel_20220412.pdf">Vezető tisztségviselők illetménye 2022.04.12.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KK-Zrt-Közzététel-20230310.pdf">Vezető tisztségviselők illetménye 2023.03.01.</a></li>
+                        
+                    </ul>
+</section>
+<section id="documents" class="card">
+                    <h3 style="text-align:center">A 2009. évi CXXII. törvény 2.§ (3) - (4) bek. alapján közzététel</h3>
+            </ul>
+            <ul>
+                <li><a href="Beszerzések-2.sz_.-melléklet-2.pdf">Szerződések 2017</a></li>
+                <li><a href="#public-service">Közszolgáltatási szerződés 2013.01.01.</a>
+                    <ul>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/ksz1m.pdf">1. sz. melléklet</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/ksz2m.pdf">2. sz. melléklet</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/ksz3m.pdf">3. sz. melléklet</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/ksz4m.pdf">4. sz. melléklet</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/ksz5m.pdf">5. sz. melléklet</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/ksz6m.pdf">6. sz. melléklet</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/ksz7m.pdf">7. sz. melléklet</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/ksz8m.pdf">8. sz. melléklet</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/ksz9m.pdf">9. sz. melléklet</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/ksz10m.pdf">10. sz. melléklet</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/ksz11m.pdf">11-12. sz. melléklet</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Közszolg.szerz_.-1.-sz.-módosítás.pdf">Közszolgáltatási szerződés 1. sz. módosítás</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Közszolg.szerz_.-2.-sz.-módosítás.pdf">Közszolgáltatási szerződés 2. sz. módosítás</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Közszolg.szerz_.-3.-sz.-módosítás.pdf">Közszolgáltatási szerződés 3. sz. módosítás</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Közszolg.szerz_.-4.-sz.-módosítás.pdf">Közszolgáltatási szerződés 4. sz. módosítás</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Közszolg.szerz_.-5.-sz.-módosítás.pdf">Közszolgáltatási szerződés 5. sz. módosítás</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Közszolg.szerz_.-6.-sz.-módosítás.pdf">Közszolgáltatási szerződés 6. sz. módosítás</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Közszolgáltatási-szerződés-7.sz_.-módosítás.pdf">Közszolgáltatási szerződés 7. sz. módosítás</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Közszolgáltatási-szerződés-11.-sz.-mód.pdf">Közszolgáltatási szerződés 11. sz. módosítás</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Közszolgáltatási-szerződés-12.-sz.-módosítása.pdf">Közszolgáltatási szerződés 12. sz. módosítás</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Közszolgáltatási-szerződés-13.-sz.-módosítása-002.pdf">Közszolgáltatási szerződés 13. sz. módosítás</a></li>
+                    </ul>
+
+                    </section>
+            <section id="documents" class="card">
+                <h2 style="text-align:center">Közzététel</h2><br>
+                    <ul>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Kapos-Holding-Zrt.-Adatvédelmi-Szabályzat-20191120-compressed.pdf">Adatvédelmi szabályzat</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/SZMSZ_2023.pdf">Szervezeti és működési szabályzat</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Szervezeti-ábra.pdf">Szervezeti ábra</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Panaszkezelési szabályzat">Panaszkezelési szabályozat</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Kapos%20Holding-Szervezeti%20integritást%20sértő%20panaszok%20kezelésének%20szabályozása.pdf">Szervezeti integritást sértő panaszok kezelésének szabályozása</a>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Közzétételi%20Szabályzat_20240201.pdf">Közzétételi Szabályzat</a></li>
+
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Energetikai_jelentes_2017.pdf">Energetikai jelentés 2017.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/energetika2018.pdf">Energetikai jelentés 2018.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/energetika-2019.pdf">Energetikai jelentés 2019.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Éves_2020_Közlekedési_aláírt.pdf">Energetikai jelentés 2020.</a></li>
+                        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/20180821091132548.pdf">Á.SZ. jelentés</a></li>
+
+
+                    </ul>
+</section>
+
+
+<section id="procurement" class="card">
+    <h2 style="text-align:center">Közbeszerzés</h2><br>
+    <ul>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/statisztikai-osszegzes-2015-2.pdf">2015. évi statisztikai összegzés</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Kaposvari-Kozlekedesi-Zrt.pdf">2016. évi közbeszerzések</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/statisztikai_osszegezes_2016-1.pdf">2016. évi statisztikai összegzés</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/kozbeszerzesi_terv_2017-1.pdf">2017. évi közbeszerzési terv</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/statisztikai-osszegezes-2017-1.pdf">2017. évi statisztikai összegzés</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/kozbeszerzesi_terv_2018-2.pdf">2018. évi közbeszerzési terv</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/2018.-évi-Közbeszerzési-terv.pdf">2018. évi közbeszerzési terv (módosított)</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Közbeszerzési-terv-2019.pdf">2019. évi közbeszerzési terv</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/STATISZTIKAI-ÖSSZEGEZÉS-2019-KK-Zrt.pdf">2019. évi statisztikai összegzés</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/2020.-évi-közbeszerzési-terv.pdf">2020. évi közbeszerzési terv</a></li>
+    </ul>
+</section>
+
+
+
+<section id="documents" class="card">
+    <h2 style="text-align:center">Foglalkoztatotti adatok</h2><br>
+    <ul>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KTRT_kozerdeku_adatok_2015.pdf">Foglalkoztatotti adatok 2015</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KTRT_kozerdeku_adatok_2016_I_NE.pdf">Foglalkoztatotti adatok 2016. I. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KTRT_kozerdeku_adatok_2016_II_NE.pdf">Foglalkoztatotti adatok 2016. II. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KTRT_kozerdeku_adatok_2016_III_NE.pdf">Foglalkoztatotti adatok 2016. III. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Közérdekű_2016_IV.pdf">Foglalkoztatotti adatok 2016. IV. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KKZRT_kozerdeku_adatok_2017_I_NE.pdf">Foglalkoztatotti adatok 2017. I. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KKZRT_kozerdeku_adatok_2017_II_NE.pdf">Foglalkoztatotti adatok 2017. II. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KKZRT_kozerdeku_adatok_2017_III_NE.pdf">Foglalkoztatotti adatok 2017. III. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KKZRT_kozerdeku_adatok_2017_IV_NE.pdf">Foglalkoztatotti adatok 2017. IV. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KKZRT_kozerdeku_adatok_2018_I_NE.pdf">Foglalkoztatotti adatok 2018. I. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KKZRT_kozerdeku_adatok_2018_II_NE.pdf">Foglalkoztatotti adatok 2018. II. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KKZRT_kozerdeku_adatok_2018_III_NE.pdf">Foglalkoztatotti adatok 2018. III. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/KKözlekedési-IV.-negyedéves-közzététel.pdf">Foglalkoztatotti adatok 2018. IV. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/2019-I-negyedév-közzététel.pdf">Foglalkoztatotti adatok 2019. I. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/2019-II-negyedév-közzététel-KK-Zrt.pdf">Foglalkoztatotti adatok 2019. II. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/2019-negyedéves-közzététel-közlekedési.pdf">Foglalkoztatotti adatok 2019. III. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/2019-negyedéves-közzététel-közlekedési.pdf">Foglalkoztatotti adatok 2019. IV. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Közlekedési-2020-I-II-III-IV.-Negyedéves-közzététel.pdf">Foglalkoztatotti adatok 2020. I-IV. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Közlekedési%202021.%20I-II-III-IV.%20negyedévi%20közzététel.pdf">Foglalkoztatotti adatok 2021. I-IV. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Közlekedési-2022.-I-IV.-negyedévi-közzététel.pdf">Foglalkoztatotti adatok 2022. I-IV. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Közlekedési%20-%202023.%20I-IV.%20negyedévi%20közzététel.pdf">Foglalkoztatotti adatok 2023. I-IV. negyedév</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Közlekedési%20-%202024.%20I.%20negyedévi%20közzététel.pdf">Foglalkoztatotti adatok 2024. I. negyedév</a></li>
+    </ul>
+</section>
+
+
+
+<section id="reports" class="card">
+    <h2 style="text-align:center">Beszámolók</h2><br>
+    <ul>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/20160824095952231.pdf">2015. évi beszámoló</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/20180817114300492.pdf">2016. évi beszámoló</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/20180817113901683.pdf">2017. évi beszámoló</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/2018.-évi-Beszámoló-honlapra-2.pdf">2018. évi beszámoló</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/2019.-évi-beszámoló-honlapra.pdf">2019. évi beszámoló</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Beszámoló-2020.pdf">2020. évi beszámoló</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/2021.-évi-Beszámoló.pdf">2021. évi beszámoló</a></li>
+        <li><a href="https://www.kaposbusz.hu/static/files/oldalak/Éves-Beszámoló-2022.pdf">2022. évi beszámoló</a></li>
+    </ul>
+</section>
+
+
+
+<section id="about" class="card" style="font-weight: bold; color: gray">
+            <ul>
+                <h2 style="text-align:center">Üzletszabályzat</h2><br>
+                <li></i>Aktuális üzletszabályzat:Érvényes 2022. október 17-től</li>
+              <br>
+                <h4>Korábbi üzletszabályzatok:</h4><br>
+
+                <li></i>Érvényes  2020. szeptember 21-től</li>
+                <li></i>Érvényes 2020. január 1-től </li>
+                <li></i> Érvényes 2019. január 1-től</li>
+                <li></i> Érvényes 2018. január 1-től</li>
             </ul>
         </section>
 
-        <section id="contacts" class="card">
-            <h2 id="eler">Elérhetőségek</h2>
+        <section style="font-style: italic" id="contacts" class="card">
+            <h2 style="text-align:center" id="eler">Elérhetőségek</h2>
             <ul>
                 <li><i class="fas fa-phone"></i> +36-82/411-850</li>
                 <li><i class="fas fa-envelope"></i> titkarsag@kkzrt.hu</li>
                 <li><i class="fas fa-map-marker-alt"></i> 7400 Kaposvár, Cseri út 16.</li>
                 <li><i class="fas fa-map-marker-alt"></i> Áchim András utca 1.</li>
 
+
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2753.752828799859!2d17.785107176739764!3d46.354449773601026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476815fb4c7fae55%3A0x2527be16dba52f77!2zS2Fwb3N2w6FyLCDDgWNoaW0gQW5kcsOhcyB1LiAxLCA3NDAw!5e0!3m2!1shu!2shu!4v1731483865822!5m2!1shu!2shu" width="100%" height="40%" style="border:0;" allowfullscreen="" loading="lazy" id="map" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </ul>
         </section>
     </main>
 
     <footer>
-        <p id="copy">© 2024 Kaposvár Volán. Minden jog fenntartva.</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h2>Kaposvár közlekedés</h2>
+                <p style="font-style: italic">Megbízható közlekedési szolgáltatások<br> az Ön kényelméért már több mint 50 éve.</p><br>
+                <div class="social-links">
+                    <a style="color: darkblue;" href="https://www.facebook.com/VOLANBUSZ/"><i class="fab fa-facebook"></i></a>
+                    <a style="color: lightblue"href="https://x.com/volanbusz_hu?mx=2"><i class="fab fa-twitter"></i></a>
+                    <a style="color: red"href="https://www.instagram.com/volanbusz/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+           
+            <div  class="footer-section">
+                <h3>Elérhetőség</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-phone"></i> +36-82/411-850</li>
+                    <li><i class="fas fa-envelope"></i> titkarsag@kkzrt.hu</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 7400 Kaposvár, Cseri út 16.</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Áchim András utca 1.</li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p>© 2024 Kaposvár közlekedési Zrt. Minden jog fenntartva.</p>
+        </div>
     </footer>
     <script>
-
-    var btn1 = document.getElementById('lang_eng');
-    var btn2 = document.getElementById('lang_de');
-    var btn3 = document.getElementById('lang_hu');
-    var sz = document.getElementById('szoveg');
-    var Operation = document.getElementById('Op');
-    var rolunk = document.getElementById('rolunk');
-    var atlathatosag = document.getElementById('atlat');
-    var kozszolgalatisag = document.getElementById('kozszo');
-    var minoseg = document.getElementById('mino')
-    var dok = document.getElementById('dok');
-    var dok1 = document.getElementById('dok1');
-    var dok2 = document.getElementById('dok2');
-    var dok3 = document.getElementById('dok3');
-    var dok4 = document.getElementById('dok4');
-    var elerhetoseg = document.getElementById('eler');
-
-    btn1.addEventListener('click', function() {
-        sz.textContent = "Dear Travelers! Welcome to our company, Kaposvári Közlekedési Zrt. Not only will you be able to meet our site not only with the operation of our company, but also find the latest information on the journey and the current timetable that we have designed and modified to make it as comfortable as possible for our passengers. We are committed to environmental consciousness, so for a few years our entire fleet has been replaced by alternative powered compressed natural gas (CNG) buses, with no pollutant or noise emission. Our flights, which deliver around 8.2 million passengers per year, are also easy to use for people with visual, hearing and disability. With my colleagues, we strive to provide a high-quality service that more and more people are using for public transport. Thank you for choosing us during your trip! Veizer Jánosné Chief Executive Officer Kaposvári Közlekedési Zrt.";
-        Operation.textContent="Operation";
-        rolunk.textContent="about us";
-        dok.textContent="Documents";
-        elerhetoseg.textContent="Contact Information"
-    });
-
-    btn2.addEventListener('click', function() {
-        sz.textContent = "Liebe Reisen Öffentlichkeit! Willkommen zurück unser Unternehmen, Kaposvár Transport Company. Auf unserer Website können Sie nicht nur über den Betrieb unseres Unternehmens erfahren, aber Sie werden die neuesten Informationen und aktuellen Zeitplan finden Sie die Fahrt beeinflussen, was und modifizierte entworfen wurde, um es bequemer für die Passagiere zu transportieren. Wir sind auf das Umweltbewusstsein verpflichtet, so ein paar Jahren ersetzt wurde buszflottánkat insgesamt alternativ mit komprimiertem Erdgas (CNG) betriebene Busse zu arbeiten, was die Emissionen Schadstoff- und Lärm sind unbedeutend. Unsere Flüge, die jährlich rund 8,2 Millionen Passagiere befördern, sind auch für Menschen mit Seh-, Hör- und Behinderungen leicht zu benutzen. Meine Kollegen und ich bemühen sich, einen qualitativ hochwertigen Service zu bieten, von denen immer mehr Menschen mit den öffentlichen Verkehrsmitteln zu machen. Vielen Dank, dass Sie sich für uns während Ihrer Reise! Veizer Jánosné Chief Executive Officer Kaposvári Közlekedési Zrt.";
-        Operation.textContent="Betrieb";
-        rolunk.textContent="Über uns";
-        dok.textContent="Dokumente";
-        elerhetoseg.textContent="Kontaktinformationen"
-    });
-
-    btn3.addEventListener('click', function() {
-        sz.textContent = "Tisztelt Utazóközönségünk!Üdvözlöm  társaságunk, a Kaposvári Közlekedési Zrt. oldalán. Honlapunkon nemcsak cégünk működésével ismerkedhet meg, de megtalálja az utazást érintő legfrissebb információkat és az aktuális menetrendet is, melyet úgy alakítottunk ki és úgy módosítunk, hogy minél kényelmesebbé tegyük a közlekedést utasaink számára.Elkötelezettek vagyunk környezet-tudatosság mellett, ezért néhány éve teljes buszflottánkat alternatív meghajtású sűrített földgázzal (CNG) üzemelő buszokra cseréltük, melyek  szennyezőanyag- és zajkibocsátása is elenyésző. Járatainkat - amelyeken évente mintegy 8,2 millió utast szállítunk - látás-, hallás- és mozgássérültek is könnyen tudják használni.Kollégáimmal együtt arra törekszünk, hogy olyan színvonalas szolgáltatást nyújtsunk, amely által egyre többen veszik igénybe a közösségi közlekedést.Köszönjük, hogy utazása során minket választ!Veizer JánosnévezérigazgatóKaposvári Közlekedési Zrt.";
-        Operation.textContent="Működés";
-        rolunk.textContent="Rólunk";
-        dok.textContent="Dokumentumok";
-        elerhetoseg.textContent="Elérhetőség"
-    }); 
-
-    const toggle = document.getElementById('toggle')
-            const nav = document.getElementById('nav')
+        const toggle = document.getElementById('toggle')
+        const nav = document.getElementById('nav')
 
         toggle.addEventListener('click', () => nav.classList.toggle('active'))
     </script>
