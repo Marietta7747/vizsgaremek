@@ -542,21 +542,22 @@ try {
                 "name": "Helyi autóbusz-állomás - Sopron u. - Laktanya",
                 "category": "residential",
                 "stops": ["Helyi autóbusz-állomás","Corso","Zárda u.","Honvéd u.","Arany J. tér","Losonc-köz","Brassó u.","Sopron u.","Búzavirág u.","Laktanya"],
+                "reverseRoute": ["Laktanya","Búzavirág u.","Nagyszeben u.","Losonc-köz","Arany J. tér","Honvéd u.","Somssich P. u.","Szent Imre u. 13","Széchényi tér","Rákóczi tér","Helyi autóbusz-állomás"],
                 "frequency": "10 percenként",
                 "firstBus": "05:00",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "13",
                 "name": "Helyi autóbusz-állomás - Kecelhegy - Helyi autóbusz-állomás",
                 "category": "residential",
                 "stops": ["Helyi autóbusz-állomás","Berzsenyi u. felüljáró","Berzsenyi u. 30.","Füredi úti csomópont","Városi könyvtár","Vasútköz","Hajnóczy u. csp.","Mátyás k. u., forduló","Kecelhegyalja u.","Kőrösi Cs. S. u.","Kecelhegyi iskola"
-                ,"Bthlen G. u.","Magyar Nobel-díjasok tere","Eger u.","Állatkórház","Kölcsey u.","Tompa M. u.","Berzsenyi u. felüljáró","Helyi autóbusz-állomás"],
+                ,"Bethlen G. u.","Magyar Nobel-díjasok tere","Eger u.","Állatkórház","Kölcsey u.","Tompa M. u.","Berzsenyi u. felüljáró","Helyi autóbusz-állomás"],
                 "frequency": "20 percenként",
                 "firstBus": "05:30",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                "visszafeleMegy": "nem"
+                "visszafeleMegy": false
             },
             {
                 "number": "20",
@@ -564,10 +565,13 @@ try {
                 "category": "suburban",
                 "stops": ["Raktár u.","Jutai u. 45.","Tóth Á. u.","Jutai u. 24.","Hajnóczy u. csp.","Vasútköz","Városi könyvtár","Füredi úti csomópont","Toldi lakónegyed","Kinizsi ltp.","Búzavirág u."
                 ,"Laktanya","Laktanya","Búzavirág u.","Nagyszeben u.","Losonc-köz","Arany J. tér","ÁNTSZ","Pázmány P. u.","Kisgát","Mező u. csp.","Kenyérgyár u. 1.","Videoton"],
+                "reverseRoute": ["Videoton","Kenyérgyár u. 3.","Kenyérgyár u. 1.","Mező u. csp.","Kisgát","Pázmány P. u.","ÁNTSZ","Arany J. tér","Losonc-köz","Brassó u.","Sopron u."
+                ,"Búzavirág u.","Laktanya","Laktanya","Búzavirág u.","Kinizsi ltp.","Toldi lakónegyed","Füredi úti csomópont","Városi könyvtár","Vasútköz","Hajnóczy u. csp.","Jutai u. 24."
+                ,"Tóth Á. u.","Jutai u. 45.","Raktár u. 2.","Raktár u."],
                 "frequency": "30 percenként",
                 "firstBus": "05:15",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "21",
@@ -575,10 +579,11 @@ try {
                 "category": "residential",
                 "stops": ["Raktár u.","Raktár u. 2.","Jutai u. 45.","Tóth Á. u.","Jutai u. 24.","Hajnóczy u. csp.","Vasútköz"
                 ,"Városi könyvtár","Füredi úti csomópont","ÁNTSZ","Pázmány P. u.","Kisgát","Mező u. csp.","Kenyérgyár u. 1.","Videoton"],
+                "reverseRoute": [ ],
                 "frequency": "15 percenként",
                 "firstBus": "05:10",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "23",
@@ -586,10 +591,11 @@ try {
                 "category": "industrial",
                 "stops": ["Kaposfüred, forduló","Kaposfüredi u. 244.","Kaposfüred, központ","Állomás u.","Kaposfüred, vá.","Kaposfüredi u. 104.","Kaposfüredi u. 12.","Volán-telep","Laktanya","Búzavirág u.","Kinizsi ltp."
                 ,"Toldi lakónegyed","Füredi úti csomópont","ÁNTSZ","Pázmány P. u.","Kisgát","Mező u. csp.","Izzó u.","Guba S. u. 57.","Guba S. u. 81.","Villamossági Gyár","Kaposvári Egyetem"],
+                "reverseRoute": [ ],
                 "frequency": "40 percenként",
                 "firstBus": "05:30",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "26",
@@ -597,10 +603,11 @@ try {
                 "category": "hospital",
                 "stops": ["Kaposfüred, forduló","Kaposfüredi u. 244","Kaposfüred, központ","Állomás u.","Kaposfüred, vá.","Állomás u.","Kaposfüred, központ","Kaposfüredi u. 104.","Kaposfüredi u. 12.","Volán-telep","Laktanya","Búzavirág u."
                 ,"Kinizsi ltp.","Losonc-köz","Arany J. tér","ÁNTSZ","Pázmány P. u.","Kisgát","Mező u. csp.","Kenyérgyár u. 1.","Kenyérgyár u. 3","Videoton","Dombovári u. 4.","METYX"],
+                "reverseRoute": [ ],
                 "frequency": "30 percenként",
                 "firstBus": "05:15",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "27",
@@ -608,20 +615,22 @@ try {
                 "category": "suburban",
                 "stops": ["Laktanya","Búzavirág u.","Kinizsi ltp.","Toldi lakónyegyed","Füredi úti csomópont","ÁNTSZ","Pázmány P. u.","Kisgát","Mező u. csp."
                 ,"Hősök temploma","Gyár u.","Pécsi úti iskola","Kométa, forduló"],
+                "reverseRoute": [ ],
                 "frequency": "60 percenként",
                 "firstBus": "06:00",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "31",
                 "name": "Helyi autóbusz-állomás - Egyenesi u. forduló",
                 "category": "suburban",
                 "stops": ["Helyi autóbusz-állomás", "Berzsenyi u. felüljáró","Tompa M. u.","Kölcsey u.","Állatkórház","Eger u.","Kapoli A. u.","Egyenesi u. 42.","Beszédes J. u.","Egyenesi u. forduló"],
+                "reverseRoute": [ ],
                 "frequency": "40 percenként",
                 "firstBus": "05:20",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "32",
@@ -632,7 +641,7 @@ try {
                 "frequency": "25 percenként",
                 "firstBus": "05:10",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                "visszafeleMegy": "nem"
+                "visszafeleMegy": false
             },
             {
                 "number": "33",
@@ -644,7 +653,7 @@ try {
                 "frequency": "15 percenként",
                 "firstBus": "06:00",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                "visszafeleMegy": "nem"
+                "visszafeleMegy": false
             },
             {
                 "number": "40",
@@ -652,10 +661,11 @@ try {
                 "category": "industrial",
                 "stops": ["Koppány vezér u.","Erdősor u.","Rózsa u.","67-es sz. út","Berzsenyi u. felüljáró","Helyi autóbusz-állomás","Berzsenyi u. felüljáró","Berzsenyi u. 30.","Füredi úti csomópont","Városi könyvtár"
                 ,"Vasútköz","Hajnóczy u. csp.","Jutai u. 24.","Tóth Á. u.","Jutai u. 45.","Raktár u. 2.","Raktár u."],
+                "reverseRoute": [ ],
                 "frequency": "45 percenként",
                 "firstBus": "05:30",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "41",
@@ -663,10 +673,11 @@ try {
                 "category": "suburban",
                 "stops": ["Koppány vezér u.","Erdősor u.","Rózsa u.","Szegfű u.","Jókai u.","Bartók B. u.","Berzsenyi u. felüljáró","Helyi autóbusz-állomás","Berzsenyi u. felüljáró","Berzsenyi u. 30.","Füredi úti csomópont","Városi könyvtár"
                 ,"Vasútköz","Hajnóczy u. csp.","Jutai u. 24.","Tóth Á. u.","Jutai u. 45.","Raktár u. 2.","Raktár u."],
+                "reverseRoute": [ ],
                 "frequency": "30 percenként",
                 "firstBus": "05:15",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "42",
@@ -674,10 +685,11 @@ try {
                 "category": "suburban",
                 "stops": ["Töröcske, forduló","Fenyves u. 31.","Fenyves u. 37/A","Szőlőhegy","Kertbarát alsó","Kertbarát felső","Gyertyános","Harangvirág u.","Aranyeső u.","Zichy u.","Táncsics M. u.","Bartók B. u.","Berzsenyi u. felüljáró"
                 ,"Helyi autóbusz-állomás","Vasútállomás","Tallián Gy. u. 4.","Kórház","Tallián Gy. u. 56.","Tallián Gy. u. 82.","ÁNTSZ","Füredi úti csomópont","Toldi lakónegyed","Kinizsi ltp.","Búzavirág u.","Laktanya"],
+                "reverseRoute": [ ],
                 "frequency": "45 percenként",
                 "firstBus": "05:30",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "43",
@@ -688,7 +700,7 @@ try {
                 "frequency": "20 percenként",
                 "firstBus": "06:00",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "nem"
+                "visszafeleMegy": false
             },
             {
                 "number": "44",
@@ -699,17 +711,18 @@ try {
                 "frequency": "35 percenként",
                 "firstBus": "05:20",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "nem"
+                "visszafeleMegy": false
             },
             {
                 "number": "45",
                 "name": "Helyi autóbusz-állomás - 67-es út - Koppány vezér u.",
                 "category": "suburban",
                 "stops": ["Helyi autóbusz-állomás","Berzsenyi u. felüljáró","67-es sz. út","Rózsa u.","Gönczi F. u.","Koppány vezér u."],
+                "reverseRoute": [ ],
                 "frequency": "30 percenként",
                 "firstBus": "05:15",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "46",
@@ -717,10 +730,11 @@ try {
                 "category": "hospital",
                 "stops": ["Helyi autóbusz-állomás","Berzsenyi u. felüljáró","Bartók B. u.","Táncsics M. u.","Zichy u.","Aranyeső u.","Harangvirág u."
                 ,"Gyertányos","Kertbarát felső","Kertbarát alsó","Szőlőhegy","Fenyves u. 37/A","Fenyves u. 31.","Töröcske, forduló"],
+                "reverseRoute": [ ],
                 "frequency": "25 percenként",
                 "firstBus": "05:30",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "47",
@@ -728,30 +742,33 @@ try {
                 "category": "education",
                 "stops": ["Koppány vezér u.","Gönczi F. u.","Rózsa u.","67-es sz. út","Berzsenyi u. felüljáró","Helyi autóbusz-állomás","Vasútállomás","Tallián Gy. u. 4.","Kórház","Tallián Gy. u. 56."
                 ,"Tallián Gy. u. 82.","ÁNTSZ","Füredi úti csomópont","Toldi lakónegyed","Kinizsi ltp.","Búzavirág u.","Laktanya","Volán-telep","Kaposfüredi u. 12.","Kaposfüredi u. 104.","Kaposfüred, központ","Kaposfüred, forduló"],
+                "reverseRoute": [ ],
                 "frequency": "15 percenként",
                 "firstBus": "05:50",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "61",
                 "name": "Helyi- autóbuszállomás - Béla király u.",
                 "category": "suburban",
                 "stops": ["Helyi autóbusz-állomás","Baross G. u.","Csalogány u.","Vikár B.u.","Béla király u."],
+                "reverseRoute": [ ],
                 "frequency": "60 percenként",
                 "firstBus": "06:30",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "62",
                 "name": "Helyi autóbusz-állomás - Városi fürdő - Béla király u.",
                 "category": "industrial",
                 "stops": ["Helyi aiutóbusz-állomás","Berzsenyi u. felüljáró","Városi fürdő","Csalogány u.","Vikár B. u.","Béla király u."],
+                "reverseRoute": [ ],
                 "frequency": "30 percenként",
                 "firstBus": "05:15",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "70",
@@ -759,10 +776,11 @@ try {
                 "category": "residential",
                 "stops": ["Helyi autóbusz-állomás","Berzsenyi u. felüljáró","Berzsenyi u. 30.","Füredi úti csomópont","Toldi lakónegyed"
                 ,"Kinizsi ltp.","Búzavirág u.","Laktanya","Zöld fűtőmű","Volán-telep","Kaposfüredi u. 12.","Kaposfüredi u. 104.","Kaposfüred, központ","Kaposfüredi u. 244.","Kaposfüred, forduló"],
+                "reverseRoute": [ ],
                 "frequency": "15 percenként",
                 "firstBus": "05:00",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "71",
@@ -771,10 +789,11 @@ try {
                 "stops": ["Kaposfüred, forduló","Kaposfüredi u. 244.","Kaposfüred, központ","Kaposfüredi u. 104.","Kaposfüredi u. 12.","Volán-telep","Zöld fűtőmű","Laktanya"
                 ,"Búzavirág u.","Kinizsi ltp.","Toldi lakónegyed","Füredi úti csomópont","Berzsenyi u. 30.","Berzsenyi u. felüljáró","Helyi autóbusz-állomás","Rákóczi tér","Fő u. 37-39."
                 ,"Hársfa u.","Hősök temploma","Gyár u.","Pécsi úti iskola","Nádasdi u.","Móricz Zs. u.","Pécsi u. 227.","Várhegy feljáró","Kaposszentjakab, forduló"],
+                "reverseRoute": [ ],
                 "frequency": "40 percenként",
                 "firstBus": "05:10",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "72",
@@ -783,10 +802,11 @@ try {
                 "stops": ["Kaposfüred, forduló","Kaposfüredi u. 244.","Kaposfüred, központ","Állomás u.","Kaposfüred, vá.","Állomás u.","Kaposfüred, központ","Kaposfüredi u. 104.","Kaposfüredi u. 12.","Volán-telep","Zöld fűtőmű","Laktanya"
                 ,"Búzavirág u.","Kinizsi ltp.","Toldi lakónegyed","Füredi úti csomópont","Berzsenyi u. 30.","Berzsenyi u. felüljáró","Helyi autóbusz-állomás","Vasútállomás","Fő u. 48.","Hársfa u.","Hősök temploma","Gyár u.","Pécsi úti iskola"
                 ,"Nádasdi u.","Nap u.","Hold u.","Nádasdi u.","Móricz Zs. u.","Pécsi u. 227.","Várhegy feljáró","Kaposzsentjakab, forduló"],
+                "reverseRoute": [ ],
                 "frequency": "50 percenként",
                 "firstBus": "06:00",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "73",
@@ -795,10 +815,11 @@ try {
                 "stops": ["Kaposfüred, forduló","Kaposfüredi u. 244.","Kaposfüred, központ","Kaposfüredi u. 104.","Kaposfüredi u. 12.","Volán-telep","Zöld fűtőmű","Laktanya"
                 ,"Búzavirág u.","Kinizsi ltp.","Toldi lakónegyed","Füredi úti csomópont","Berzsenyi u. 30.","Berzsenyi u. felüljáró","Helyi autóbusz-állomás","Rákóczi tér","Fő u. 37-39."
                 ,"Hársfa u.","Hősök temploma","Gyár u.","Pécsi úti iskola","Kométa, forduló","Nádasdi u.","Móricz Zs. u.","Pécsi u. 227.","Várhegy feljáró","Kaposszentjakab, forduló"],
+                "reverseRoute": [ ],
                 "frequency": "45 percenként",
                 "firstBus": "06:15",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "74",
@@ -808,17 +829,18 @@ try {
                 "frequency": "20 percenként",
                 "firstBus": "05:45",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "nem"
+                "visszafeleMegy": false
             },
             {
                 "number": "75",
                 "name": "Helyi autóbusz-állomás - Kaposszentjakab",
                 "category": "suburban",
                 "stops": ["Helyi autóbusz-állomás","Rákóczi tér","Fő u. 37-39.","Hársfa u.","Hősök temploma","Gyár u.","Pécsi úti iskola","Nádasdi u.","Móricz Zs. u.","Pécsi u. 227.","Várhegy feljáró","Kaposszentjakab, forduló"],
+                "reverseRoute": [ ],
                 "frequency": "60 percenként",
                 "firstBus": "06:30",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "81",
@@ -826,10 +848,11 @@ try {
                 "category": "industrial",
                 "stops": ["Helyi autóbusz-állomás","Vasútálomás","Hársfa u.","Hősök temploma","Mező u. csp.","Izzó u.","Guba S. u. 57","Guba S. u. 81.","Villamossági Gyár","Kaposvári Egyetem"
                 ,"Toponár, posta","Toponár, Orci elágazás","Toponári u. 182.","Toponári u. 238.","Toponár, forduló"],
+                "reverseRoute": [ ],
                 "frequency": "35 percenként",
                 "firstBus": "05:45",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "82",
@@ -837,10 +860,11 @@ try {
                 "category": "education",
                 "stops": ["Helyi autóbusz-állomás","Vasútálomás","Tallián Gy. u. 4","Kórház","Tallián Gy. u. 56.","Tallián Gy. u. 82.","Pázmány P. u.","Kisgát","Mező u. csp."
                 ,"Izzó u.","Guba S. u. 57","Guba S. u. 81.","Villamossági Gyár","Kaposvári Egyetem","Toponár, posta","Toponár, Orci elágazás","Toponár, Orci út","Toponár, Szabó P. u."],
+                "reverseRoute": [ ],
                 "frequency": "25 percenként",
                 "firstBus": "06:00",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "83",
@@ -848,10 +872,11 @@ try {
                 "category": "industrial",
                 "stops": ["Helyi autóbusz-állomás","Vasútálomás","Fő u. 48.","Hársfa u.","Hősök temploma","Mező u. csp.","Izzó u.","Guba S. u. 57","Guba S. u. 81.","Villamossági Gyár","Kaposvári Egyetem"
                 ,"Toponár, posta","Toponár, Orci elágazás","Toponár, Orci út","Toponár, Szabó P. u.","Toponár, Erdei F. u.","Toponár, Orci út","Toponár, Orci elágazás","Toponári u. 182.","Toponári u. 238.","Toponár, forduló"],
+                "reverseRoute": [ ],
                 "frequency": "50 percenként",
                 "firstBus": "06:15",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "84",
@@ -859,10 +884,11 @@ try {
                 "category": "residential",
                 "stops": ["Helyi autóbusz-állomás","Vasútálomás","Fő u. 48.","Hársfa u.","Hősök temploma","Mező u. csp.","Izzó u.","Guba S. u. 57","Guba S. u. 81.","Villamossági Gyár","Kaposvári Egyetem"
                 ,"Toponár, posta","Toponár, Orci elágazás","Toponári u. 182.","Toponári u. 238.","Toponár, forduló","Répáspuszta","Répáspuszta, forduló"],
+                "reverseRoute": [ ],
                 "frequency": "30 percenként",
                 "firstBus": "05:30",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "85",
@@ -873,57 +899,62 @@ try {
                 "frequency": "60 percenként",
                 "firstBus": "06:00",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "nem"
+                "visszafeleMegy": false
             },
             {
                 "number": "86",
                 "name": "Helyi autóbusz-állomás - METYX - Szennyvíztelep",
                 "category": "education",
                 "stops": ["Helyi autóbusz-állomás","Vasútálomás","Fő u. 48.","Hársfa u.","Hősök temploma","Mező u. csp.","Kenyérgyár u. 1.","Videoton","Dombóvári u. 4.","METYX","Cabero","Sennyvíztelep"],
+                "reverseRoute": [ ],
                 "frequency": "30 percenként",
                 "firstBus": "05:45",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "87",
                 "name": "Helyi autóbusz állomás - Videoton - METYX",
                 "category": "residential",
                 "stops": ["Helyi autóbusz-állomás","Vasútálomás","Fő u. 48.","Hársfa u.","Hősök temploma","Mező u. csp.","Kenyérgyár u. 1.","Videoton","Dombóvári u. 4.","METYX"],
+                "reverseRoute": [ ],
                 "frequency": "20 percenként",
                 "firstBus": "05:30",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "88",
                 "name": "Helyi autóbusz-állomás - Videoton",
                 "category": "residential",
                 "stops": ["Helyi autóbusz-állomás","Vasútálomás","Fő u. 48.","Hársfa u.","Hősök temploma","Mező u. csp.","Kenyérgyár u. 1.","Videoton"],
+                "reverseRoute": [ ],
                 "frequency": "15 percenként",
                 "firstBus": "05:00",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "89",
                 "name": "Helyi autóbusz-állomás - Kaposvári Egyetem",
                 "category": "hospital",
                 "stops": ["Helyi autóbusz-állomás","Vasútálomás","Fő u. 48.","Hársfa u.","Hősök temploma","Mező u. csp.","Izzó u.","Guba S. u. 57","Guba S. u. 81.","Villamossági Gyár","Kaposvári Egyetem"],
+                "reverseRoute": [ ],
                 "frequency": "25 percenként",
                 "firstBus": "06:00",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "90",
                 "name": "Helyi autóbusz-állomás - Rómahegy",
                 "category": "suburban",
                 "stops": ["Helyi autóbusz-állomás","Berzsenyi u. felüljáró","Jókai liget","Szigetvári u. 6.","Szigetvári u. 62.","Ballakúti u.","Szigetvári u. 139.","Nyár u.","Rómahegy"],
+                "reverseRoute": [ ],
                 "frequency": "70 percenként",
                 "firstBus": "06:30",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             },
             {
                 "number": "91",
@@ -931,10 +962,11 @@ try {
                 "category": "hospital",
                 "stops": ["Rómahegy","Nyár u.","Szigetvári u. 139.","Ballakúti u.","Szigetvári u. 62.","Szigetvári u. 6.","Jókai liget","Berzsenyi u. felüljáró","Helyi autóbusz-állomás","Vasútálomás","Fő u. 48.","Hársfa u."
                 ,"Virág u.","Pázmány P. u. 1.","Vöröstelek u.","Hegyi u.","Buzsáki u.","Arany J. tér","Füredi úti csomópont"],
+                "reverseRoute": [ ],
                 "frequency": "30 percenként",
                 "firstBus": "05:10",
                 "napMegy": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                "visszafeleMegy": "igen"
+                "visszafeleMegy": true
             }
 
         ];
@@ -1013,11 +1045,10 @@ try {
             });
         });*/
 
-
         function displayRoutes(filter = "all") {
             const routeContainer = document.getElementById('routeContainer');
             routeContainer.innerHTML = "";
-            
+
             const filteredRoutes = filter === "all" 
                 ? busRoutes 
                 : busRoutes.filter(route => route.category === filter);
@@ -1026,7 +1057,11 @@ try {
                 const routeCard = document.createElement('div');
                 routeCard.className = 'route-card';
                 routeCard.style.animationDelay = `${index * 0.1}s`;
-                
+
+                // Az alapértelmezett megállók a rendes útvonal alapján
+                let stops = [...route.stops];
+                let reversed = false; // A visszafele állapotot nyomon követjük
+
                 routeCard.innerHTML = `
                     <div class="route-number">
                         <i class="fas fa-bus bus-icon"></i>
@@ -1042,29 +1077,79 @@ try {
                             Járatsűrűség: ${route.frequency}
                         </div>
                         <div class="button-group">
-                            <button class="route-button" id="visszaBtn">
+                            <!-- A "Vissza" gombot letiltjuk, ha nincs visszaút -->
+                            <button class="route-button" id="visszaBtn" ${route.visszafeleMegy ? '' : 'disabled'} onclick="toggleStopsReversed(${index})">
                                 Vissza
                             </button>
-                            <button class="route-button" id="odaBtn">
+                            <button class="route-button" id="odaBtn" onclick="toggleStopsBtn(this, ${index}, 'oda')">
                                 Oda
                             </button>
                         </div>
                     </div>
-                        <div class="show-stops" onclick="toggleStops(this)">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Megállók megjelenítése
-                        </div>
-                        <div class="stops-list">
-                            ${route.stops.map((stop, i) => 
-                                `<div><i class="fas fa-stop"></i> ${stop}</div>`
-                            ).join('')}
-                        </div>
+                    <div class="show-stops" onclick="toggleStops(this)">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Megállók megjelenítése
+                    </div>
+                    <div class="stops-list">
+                        ${stops.map(stop => 
+                            `<div><i class="fas fa-stop"></i> ${stop}</div>`
+                        ).join('')}
+                    </div>
                 `;
                 routeContainer.appendChild(routeCard);
+
+                // "Vissza" gomb működése
+                routeCard.querySelector('.route-button').onclick = function() {
+                    reversed = !reversed; // A visszafele utat vagy az alapútvonalat jelenítjük meg
+                    stops = reversed ? [...route.reverseRoute] : [...route.stops];
+                    routeCard.querySelector('.stops-list').innerHTML = stops.map(stop => 
+                        `<div><i class="fas fa-stop"></i> ${stop}</div>`
+                    ).join('');
+                };
             });
         }
 
         function toggleStops(element) {
+            const stopsList = element.nextElementSibling;
+            const isVisible = stopsList.style.display === "block";
+            
+            stopsList.style.display = isVisible ? "none" : "block";
+            element.innerHTML = isVisible
+                ? '<i class="fas fa-map-marker-alt"></i> Megállók megjelenítése'
+                : '<i class="fas fa-map-marker-alt"></i> Megállók elrejtése';
+        }
+
+        function toggleStopsBtn(element, index, direction) {
+            const routeCard = document.querySelectorAll('.route-card')[index];
+            const route = busRoutes[index];
+            
+            let stops;
+            
+            if (direction === 'oda') {
+                // Ha az 'Oda' gombot nyomták meg, akkor az alap útvonal (stops) elemeit jelenítjük meg
+                stops = route.stops;
+            }
+
+            const stopsList = routeCard.querySelector('.stops-list');
+            stopsList.innerHTML = stops.map(stop => 
+                `<div><i class="fas fa-stop"></i> ${stop}</div>`
+            ).join('');
+        }
+
+
+        function toggleStopsReversed(index) {
+            const routeCard = document.querySelectorAll('.route-card')[index];
+            const route = busRoutes[index];
+            let stops = route.visszafeleMegy ? [...route.reverseRoute] : [...route.stops];
+            
+            const stopsList = routeCard.querySelector('.stops-list');
+            stopsList.innerHTML = stops.map(stop => 
+                `<div><i class="fas fa-stop"></i> ${stop}</div>`
+            ).join('');
+        }
+
+
+        /*function toggleStops(element) {
             const stopsList = element.nextElementSibling;
             const isVisible = stopsList.style.display === "block";
             
@@ -1080,7 +1165,7 @@ try {
                     stopsList.style.opacity = "1";
                 }, 10);
             }
-        }
+        }*/
 
         // Keresés funkcionalitás
         const searchBox = document.getElementById('searchBox');
