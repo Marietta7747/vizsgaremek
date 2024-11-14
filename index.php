@@ -39,8 +39,7 @@ try {
             padding: 0;
             min-height: 100vh;
         }
-
-        
+ 
 /*--------------------------------------------------------------------------------------------------------CSS - HEADER---------------------------------------------------------------------------------------------------*/
         .header {
             position: relative;
@@ -309,6 +308,53 @@ try {
         }
 /*--------------------------------------------------------------------------------------------------------SUGGESTIONS LIST END-------------------------------------------------------------------------------------------*/        
 
+/*--------------------------------------------------------------------------------------------------------CSS - FOOTER---------------------------------------------------------------------------------------------------*/
+footer {
+            text-align: center;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: var(--shadow);
+            background: var(--primary-color);
+            color: var(--text-light);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h2 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+/*--------------------------------------------------------------------------------------------------------FOOTER END-----------------------------------------------------------------------------------------------------*/
+
 /*--------------------------------------------------------------------------------------------------------CSS - @MEDIA---------------------------------------------------------------------------------------------------*/
         @media (max-width: 480px) {
             .input-group {
@@ -414,6 +460,35 @@ try {
         </div>
     </div>
 <!-- -----------------------------------------------------------------------------------------------------POPULAR DESTINATIONS INFO PANEL END---------------------------------------------------------------------------- -->
+
+<!-- -----------------------------------------------------------------------------------------------------HTML - FOOTER------------------------------------------------------------------------------------------------ -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h2>Kaposvár közlekedés</h2>
+                <p style="font-style: italic">Megbízható közlekedési szolgáltatások<br> az Ön kényelméért már több mint 50 éve.</p><br>
+                <div class="social-links">
+                    <a style="color: darkblue;" href="https://www.facebook.com/VOLANBUSZ/"><i class="fab fa-facebook"></i></a>
+                    <a style="color: lightblue"href="https://x.com/volanbusz_hu?mx=2"><i class="fab fa-twitter"></i></a>
+                    <a style="color: red"href="https://www.instagram.com/volanbusz/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+           
+            <div  class="footer-section">
+                <h3>Elérhetőség</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-phone"></i> +36-82/411-850</li>
+                    <li><i class="fas fa-envelope"></i> titkarsag@kkzrt.hu</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 7400 Kaposvár, Cseri út 16.</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Áchim András utca 1.</li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p>© 2024 Kaposvár közlekedési Zrt. Minden jog fenntartva.</p>
+        </div>
+    </footer>
+<!-- -----------------------------------------------------------------------------------------------------FOOTER END--------------------------------------------------------------------------------------------------- -->
 
     <script>
 
