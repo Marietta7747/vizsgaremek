@@ -1,20 +1,18 @@
 <?php
 session_start();
+require_once 'config.php';
 
-// Adatbázis kapcsolat
-$db_host = 'localhost';
-$db_user = 'root';
-$db_pass = '';
-$db_name = 'volan_app';
+// Debug információ
+error_log("Session tartalma: " . print_r($_SESSION, true));
 
-try {
-    $conn = new PDO("mysql:host=$db_host;dbname=$db_name;charset=utf8", $db_user, $db_pass);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-    die("Kapcsolódási hiba: " . $e->getMessage());
+// Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
+if (!isset($_SESSION['user_id'])) {
+    error_log("Nincs bejelentkezve, átirányítás a login.php-ra");
+    header("Location: login.php");
+    exit();
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="hu">
@@ -39,8 +37,9 @@ try {
             padding: 0;
             min-height: 100vh;
         }
- 
-/*--------------------------------------------------------------------------------------------------------CSS - HEADER---------------------------------------------------------------------------------------------------*/
+
+        
+      /*--------------------------------------------------------------------------------------------------------CSS - HEADER---------------------------------------------------------------------------------------------------*/
         .header {
             position: relative;
             background-color: var(--primary-color);
@@ -59,13 +58,14 @@ try {
             align-items: center;
             justify-content: center;
             border-radius: 3px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
             transition: width 0.6s linear;
             margin-right: 10px;
             margin-top: 30px;
             margin-bottom: 30px;
             max-height: 50px;
         }
+
 
         nav.active {
             width: 99%;
@@ -308,61 +308,14 @@ try {
         }
 /*--------------------------------------------------------------------------------------------------------SUGGESTIONS LIST END-------------------------------------------------------------------------------------------*/        
 
-/*--------------------------------------------------------------------------------------------------------CSS - FOOTER---------------------------------------------------------------------------------------------------*/
-footer {
-            text-align: center;
-            padding: 10px;
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            border-radius: 10px;
-            margin-top: 20px;
-            box-shadow: var(--shadow);
-            background: var(--primary-color);
-            color: var(--text-light);
-            padding: 3rem 2rem;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .footer-section h2 {
-            margin-bottom: 1rem;
-            color: var(--accent-color);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
-/*--------------------------------------------------------------------------------------------------------FOOTER END-----------------------------------------------------------------------------------------------------*/
-
 /*--------------------------------------------------------------------------------------------------------CSS - @MEDIA---------------------------------------------------------------------------------------------------*/
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
             .input-group {
                 flex-direction: column;
             }
             
             .input-wrapper {
-                width: 90%;
+                width: 95%;
             }
             
             .button-group {
@@ -390,7 +343,12 @@ footer {
               <li><a href="buy.php" style="color: #FFFFFF; font-weight: bold;"><img src="tickets.png" style="height: 30px; width: 30px;"> Jegyvásárlás</a></li>
               <li><a href="menetrend.php" style="color: #FFFFFF; font-weight: bold;"><img src="calendar.png" style="height: 30px; width: 30px;"> Menetrend</a></li>
               <li><a href="info.php" style="color: #FFFFFF; font-weight: bold;"><img src="information-button.png" style="height: 30px; width: 30px;"> Információ</a></li>
-            </ul>
+<li class="nav-item">
+    <a href="logout.php" class="nav-link">
+        <i class="fas fa-sign-out-alt"></i> Kijelentkezés
+    </a>
+</li>            
+</ul>
             <button class="icon" id="toggle">
               <div class="line line1"></div>
               <div class="line line2"></div>
@@ -423,6 +381,8 @@ footer {
                     <i class="fas fa-route"></i>
                     Útvonal keresése
                 </button>
+                <input type="time" id="arrivalTime" style="width:10%" require> 
+                
             </div>
         </div>
 <!-- -----------------------------------------------------------------------------------------------------SEARCH PANEL END----------------------------------------------------------------------------------------------- -->
@@ -461,35 +421,6 @@ footer {
     </div>
 <!-- -----------------------------------------------------------------------------------------------------POPULAR DESTINATIONS INFO PANEL END---------------------------------------------------------------------------- -->
 
-<!-- -----------------------------------------------------------------------------------------------------HTML - FOOTER------------------------------------------------------------------------------------------------ -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h2>Kaposvár közlekedés</h2>
-                <p style="font-style: italic">Megbízható közlekedési szolgáltatások<br> az Ön kényelméért már több mint 50 éve.</p><br>
-                <div class="social-links">
-                    <a style="color: darkblue;" href="https://www.facebook.com/VOLANBUSZ/"><i class="fab fa-facebook"></i></a>
-                    <a style="color: lightblue"href="https://x.com/volanbusz_hu?mx=2"><i class="fab fa-twitter"></i></a>
-                    <a style="color: red"href="https://www.instagram.com/volanbusz/"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-           
-            <div  class="footer-section">
-                <h3>Elérhetőség</h3>
-                <ul class="footer-links">
-                    <li><i class="fas fa-phone"></i> +36-82/411-850</li>
-                    <li><i class="fas fa-envelope"></i> titkarsag@kkzrt.hu</li>
-                    <li><i class="fas fa-map-marker-alt"></i> 7400 Kaposvár, Cseri út 16.</li>
-                    <li><i class="fas fa-map-marker-alt"></i> Áchim András utca 1.</li>
-                </ul>
-            </div>
-        </div>
-        <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
-            <p>© 2024 Kaposvár közlekedési Zrt. Minden jog fenntartva.</p>
-        </div>
-    </footer>
-<!-- -----------------------------------------------------------------------------------------------------FOOTER END--------------------------------------------------------------------------------------------------- -->
-
     <script>
 
 /*--------------------------------------------------------------------------------------------------------JAVASCRIPT - SUGGESTIONS LIST----------------------------------------------------------------------------------*/
@@ -520,36 +451,7 @@ footer {
             "Pázmány P. u.", "Kisgát", "Arany J. u", "Rózsa u.", "Corso"
         ];
 
-        // Function to filter options based on input
-        function filterOptions(id) {
-            const input = document.getElementById(id);
-            const suggestionBox = document.getElementById(id + '-suggestions');
-            const query = input.value.toLowerCase();
-            
-            // Clear previous suggestions
-            suggestionBox.innerHTML = '';
-            
-            if (query.length > 0) {
-                const filteredStations = busStations.filter(station => station.toLowerCase().includes(query));
-                
-                filteredStations.forEach(station => {
-                    const li = document.createElement('li');
-                    li.textContent = station;
-                    li.onclick = function() {
-                        input.value = station;
-                        suggestionBox.innerHTML = '';
-                    };
-                    suggestionBox.appendChild(li);
-                });
-            }
-        }
-
-        // Optional: Close suggestions list when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!event.target.closest('.search-panel')) {
-                document.querySelectorAll('.suggestions-list').forEach(list => list.innerHTML = '');
-            }
-        });*/
+        */
 /*--------------------------------------------------------------------------------------------------------SUGGESTIONS LIST END-------------------------------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------------------------------------------JAVASCRIPT - SWITCH BUTTON LOGIC-------------------------------------------------------------------------------*/
@@ -688,7 +590,7 @@ footer {
                     {name: "Dombóvári u. 4.", lat: 46.363947670980195 , lng:    17.833637595176697    } ,                                                                    
                     {name: "Kaposvári Egyetem forduló", lat: 46.384574192377820 , lng:    17.826073765754700    } ,                                                                                     
                     {name: "Virág u.", lat: 46.358487167595270 , lng:    17.803862392902374    } ,                                                                                 
-                    {name: "Pázmány P. u.", lat: 46.360912068665720 , lng:    17.801375985145570    } ,                                                                               
+                    {name: "Pázmány P. u. 1.", lat: 46.360912068665720 , lng:    17.801375985145570    } ,                                                                               
                     {name: "Vöröstelek u.", lat: 46.364267880170260 , lng:    17.799975872039795    } ,                                                                                     
                     {name: "Hegyi u.", lat: 46.367684561948180 , lng:    17.797811329364777    } ,                                                                           
                     {name: "Tallián Gy. u. 4.", lat: 46.357163607490010 , lng:    17.797277569770813    } ,                                                                                      
@@ -771,16 +673,18 @@ footer {
                 document.getElementById("routeBtn").onclick = function() {
                     const start = document.getElementById("start").value;
                     const end = document.getElementById("end").value;
+                    const date = document.getElementById("arrivalTime").date;
 
                     const request = {
                         origin: start,
                         destination: end,
                         travelMode: 'TRANSIT',
                         transitOptions:{
-                            modes: ['BUS','RAIL'],
-                            routingPreference: 'LESS_WALKING'
+                            arrivalTime: date,
+                            modes: ['BUS'],
+                            routingPreference: 'FEWER_TRANSFERS'
                         },
-                        unitSystem: google.maps.UnitSystem.METRIC
+                        unitSystem: google.maps.UnitSystem.IMPERIAL
                     };
 
                     directionsService.route(request, function(result, status) {
