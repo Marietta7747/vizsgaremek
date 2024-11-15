@@ -1057,17 +1057,18 @@ try {
                     <div class="route-details">
                         <div class="first-departure">
                             <i class="far fa-clock"></i>
-                            Első indulás: ${route.firstBus}
+                            &nbsp;Első indulás: ${route.firstBus} <span style="font-weight: bold;font-size:40px;margin-left:3%">←</span>
                         </div>
                         <div class="button-group">
-                            <!-- A "Vissza" gombot letiltjuk, ha nincs visszaút -->
                             <button class="route-button" id="visszaBtn" ${route.visszafeleMegy ? '' : 'disabled'} onclick="toggleStopsReversed(${index})">
                                 Vissza
                             </button>
+                            
                             <button class="route-button" id="odaBtn" onclick="toggleStopsBtn(this, ${index}, 'oda')">
                                 Oda
                             </button>
                         </div>
+                        <span style="font-weight: bold;font-size:40px; margin-left:30%">←&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→</span>
                     </div>
                     <div class="show-stops" onclick="toggleStops(this)">
                         <i class="fas fa-map-marker-alt"></i>
