@@ -11,6 +11,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
+
 ?>
 
 
@@ -23,10 +24,15 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --primary-color: #001F3F;
+            --primary-color:linear-gradient(to right, #211717,#b30000);
             --accent-color: #FFC107;
             --text-light: #FFFFFF;
             --shadow: 0 2px 4px rgba(0,0,0,0.1);
+            --secondary-color: #3498db;
+            --hover-color: #2980b9;
+            --background-light: #f8f9fa;
+            --text-light: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
         }
 
         body {
@@ -40,109 +46,214 @@ if (!isset($_SESSION['user_id'])) {
 
         
       /*--------------------------------------------------------------------------------------------------------CSS - HEADER---------------------------------------------------------------------------------------------------*/
-        .header {
-            position: relative;
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            padding: 16px;
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
+      .header {
+    position: relative;
+    background: var(--primary-color);
+    color: var(--text-light);
+    padding: 1rem;
+    box-shadow: 0 2px 10px var(--shadow-color);
+}
 
-        nav {
-            position: relative;
-            background-color: var(--primary-color);
-            padding: 8px;
-            width: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 3px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-            transition: width 0.6s linear;
-            margin-right: 10px;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            max-height: 50px;
-        }
+.header h1 {
+    margin: 0;
+    text-align: center;
+    font-size: 2rem;
+    padding: 1rem 0;
+}
+
+.nav-wrapper {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1000;
+}
+
+.nav-container {
+    position: relative;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.menu-btn:hover {
+    background: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px var(--shadow-color);
+}
+
+.hamburger {
+    position: relative;
+    width: 30px;
+    height: 20px;
+}
+
+.hamburger span {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: var(--text-light);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.hamburger span:nth-child(3) { bottom: 0; }
+
+.menu-btn.active .hamburger span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-btn.active .hamburger span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-btn.active .hamburger span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 1rem);
+    left: 0;
+    background: var(--text-light);
+    border-radius: 12px;
+    min-width: 280px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 10px 30px var(--shadow-color);
+    overflow: hidden;
+}
+
+.dropdown-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.menu-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-items li {
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.dropdown-menu.active .menu-items li {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.menu-items li:nth-child(1) { transition-delay: 0.1s; }
+.menu-items li:nth-child(2) { transition-delay: 0.2s; }
+.menu-items li:nth-child(3) { transition-delay: 0.3s; }
+.menu-items li:nth-child(4) { transition-delay: 0.4s; }
+.menu-items li:nth-child(5) { transition-delay: 0.5s; }
+
+.menu-items a {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-items a:hover {
+    background: linear-gradient(to right, #211717,#b30000);
+    color: white;
+    padding-left: 2rem;
+}
+
+.menu-items a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: darkred;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.menu-items a:hover::before {
+    transform: scaleY(1);
+}
+
+.menu-items a img {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    transition: transform 0.3s ease;
+}
+
+.menu-items a:hover img {
+    transform: scale(1.2) rotate(5deg);
+}
+
+.menu-items a span {
+    font-size: 17px;
+}
 
 
-        nav.active {
-            width: 99%;
-        }
+.menu-items a.active {
+    background: white;
+    color: black;
+    font-weight: 600;
+}
 
-        nav ul {
-            display: flex;
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            width: 0;
-            transition: width 0.6s linear;
-        }
+.menu-items a.active::before {
+    transform: scaleY(1);
+}
 
-        nav.active ul {
-            width: 100%;
-        }
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
 
-        nav ul li {
-            transform: rotateY(0deg);
-            opacity: 0;
-            transition: transform 0.6s linear, opacity 0.6s linear;
-            padding: 15px;
-        }
+.menu-items a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: gray;
+    left: 0;
+    top: 0;
+    transform: scale(0);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s ease;
+}
 
-        nav.active ul li {
-            opacity: 1;
-            transform: rotateY(360deg);
-        }
-
-        nav ul a {
-            position: relative;
-            color: #000;
-            text-decoration: none;
-            margin: 0 5px;
-        }
-
-        .icon {
-            background-color: var(--primary-color);
-            border: 0;
-            cursor: pointer;
-            padding: 0;
-            position: relative;
-            height: 30px;
-            width: 30px;
-        }
-
-        .icon:hover{
-            background-color: var(--primary-color);
-        }
-
-        .icon:focus {
-            outline: 0;
-        }
-
-        .icon .line {
-            background-color: var(--text-light);
-            height: 2px;
-            width: 20px;
-            position: absolute;
-            top: 10px;
-            left: 5px;
-            transition: transform 0.6s linear;
-        }
-
-        .icon .line2 {
-            top: auto;
-            bottom: 10px;
-        }
-
-        nav.active .icon .line1 {
-            transform: rotate(-765deg) translateY(5.5px);
-        }
-
-        nav.active .icon .line2 {
-            transform: rotate(765deg) translateY(-5.5px);
-        }
+.menu-items a:active::after {
+    animation: ripple 0.6s ease-out;
+}
 /*--------------------------------------------------------------------------------------------------------HEADER END-----------------------------------------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------------------------------------------CSS - OTHER PARTS----------------------------------------------------------------------------------------------*/
@@ -236,7 +347,7 @@ if (!isset($_SESSION['user_id'])) {
 
         .schedule-header {
             background-color: var(--primary-color);
-            color: var(--text-light);
+            color: black;
             padding: 15px;
         }
 
@@ -253,7 +364,7 @@ if (!isset($_SESSION['user_id'])) {
 
         #schedule th {
             background-color: var(--primary-color);
-            color: var(--text-light);
+            color: black;
         }
 
         #schedule tr:hover {
@@ -332,32 +443,110 @@ if (!isset($_SESSION['user_id'])) {
         }
 /*--------------------------------------------------------------------------------------------------------@MEDIA END-----------------------------------------------------------------------------------------------------*/
 
+/*---------------------------------------------------------------------------------------------------------CSS FOOTER------------------------------------------------------------------------------------------------------*/
+footer {
+            text-align: center;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: var(--shadow);
+            background: var(--primary-color);
+            color: var(--text-light);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h2 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
     </style>
 </head>
 <body>
 <!-- -----------------------------------------------------------------------------------------------------HTML - HEADER-------------------------------------------------------------------------------------------------- -->
-    <div class="header">
-        <nav class="active" id="nav">
-            <ul>
-              <li><a href="index.php" style="color: #FFFFFF; font-weight: bold;"><img src="placeholder.png" style="height: 30px; width: 30px;"> Főoldal</a></li>
-              <li><a href="buy.php" style="color: #FFFFFF; font-weight: bold;"><img src="tickets.png" style="height: 30px; width: 30px;"> Jegyvásárlás</a></li>
-              <li><a href="menetrend.php" style="color: #FFFFFF; font-weight: bold;"><img src="calendar.png" style="height: 30px; width: 30px;"> Menetrend</a></li>
-              <li><a href="info.php" style="color: #FFFFFF; font-weight: bold;"><img src="information-button.png" style="height: 30px; width: 30px;"> Információ</a></li>
-<li class="nav-item">
-    <a href="logout.php" class="nav-link">
-        <i class="fas fa-sign-out-alt"></i> Kijelentkezés
-    </a>
-</li>            
-</ul>
-            <button class="icon" id="toggle">
-              <div class="line line1"></div>
-              <div class="line line2"></div>
+<div class="header">
+    <div class="nav-wrapper">
+        <div class="nav-container">
+            <button class="menu-btn" id="menuBtn">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </button>
-          </nav>
-        <div class="container">
-            <h1><i class="fas fa-map-marked-alt"></i> Kaposvári Útvonaltervező</h1>
+            <nav class="dropdown-menu" id="dropdownMenu">
+                <ul class="menu-items">
+                    <li>
+                        <a href="index.php" class="active">
+                            <img src="placeholder.png" alt="Főoldal">
+                            <span>Főoldal</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="buy.php">
+                            <img src="tickets.png" alt="Jegyvásárlás">
+                            <span>Jegyvásárlás</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="menetrend.php">
+                            <img src="calendar.png" alt="Menetrend">
+                            <span>Menetrend</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="jaratok.php">
+                            <img src="bus.png" alt="Járatok">
+                            <span>Járatok</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="info.php">
+                            <img src="information-button.png" alt="Információ">
+                            <span>Információ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="logout.php">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Kijelentkezés</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
+            <h1><i class="fas fa-map-marked-alt"></i> Kaposvári Útvonaltervező</h1>
+        </div>
+    
 <!-- -----------------------------------------------------------------------------------------------------HEADER END----------------------------------------------------------------------------------------------------- -->
 
 <!-- -----------------------------------------------------------------------------------------------------HTML - SEARCH PANEL-------------------------------------------------------------------------------------------- -->
@@ -381,7 +570,7 @@ if (!isset($_SESSION['user_id'])) {
                     <i class="fas fa-route"></i>
                     Útvonal keresése
                 </button>
-                <input type="time" id="arrivalTime" style="width:10%" require> 
+                
                 
             </div>
         </div>
@@ -419,7 +608,38 @@ if (!isset($_SESSION['user_id'])) {
             </div>
         </div>
     </div>
+
+
 <!-- -----------------------------------------------------------------------------------------------------POPULAR DESTINATIONS INFO PANEL END---------------------------------------------------------------------------- -->
+
+<footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h2>Kaposvár közlekedés</h2>
+                <p style="font-style: italic">Megbízható közlekedési szolgáltatások<br> az Ön kényelméért már több mint 50 éve.</p><br>
+                <div class="social-links">
+                    <a style="color: darkblue; padding:1px;" href="https://www.facebook.com/VOLANBUSZ/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" style="max-width:10px;"><path fill="#00008b" d="M279.1 288l14.2-92.7h-88.9v-60.1c0-25.4 12.4-50.1 52.2-50.1h40.4V6.3S260.4 0 225.4 0c-73.2 0-121.1 44.4-121.1 124.7v70.6H22.9V288h81.4v224h100.2V288z"/></svg></a>
+                    <a style="color: lightblue; padding:1px;"href="https://x.com/volanbusz_hu?mx=2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="max-width:15px;"><path fill="#add8e6" d="M459.4 151.7c.3 4.5 .3 9.1 .3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53 51.7 63.7 129.3 105.3 216.4 109.8-1.6-7.8-2.6-15.9-2.6-24 0-57.8 46.8-104.9 104.9-104.9 30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3z"/></svg></a>
+                    <a style="color: red; padding:1px;"href="https://www.instagram.com/volanbusz/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="max-width:15px;"><path fill="#ff0000" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+                </div>
+            </div>
+           
+            <div  class="footer-section">
+                <h3>Elérhetőség</h3>
+                <ul class="footer-links">
+                    <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="max-width:17px;"><path fill="#ffffff" d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg> +36-82/411-850</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="max-width:17px;"><path fill="#ffffff" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg> titkarsag@kkzrt.hu</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" style="max-width:16px;"><path fill="#ffffff" d="M172.3 501.7C27 291 0 269.4 0 192 0 86 86 0 192 0s192 86 192 192c0 77.4-27 99-172.3 309.7-9.5 13.8-29.9 13.8-39.5 0zM192 272c44.2 0 80-35.8 80-80s-35.8-80-80-80-80 35.8-80 80 35.8 80 80 80z"/></svg> 7400 Kaposvár, Cseri út 16.</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" style="max-width:16px;"><path fill="#ffffff" d="M172.3 501.7C27 291 0 269.4 0 192 0 86 86 0 192 0s192 86 192 192c0 77.4-27 99-172.3 309.7-9.5 13.8-29.9 13.8-39.5 0zM192 272c44.2 0 80-35.8 80-80s-35.8-80-80-80-80 35.8-80 80 35.8 80 80 80z"/></svg> Áchim András utca 1.</li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p>© 2024 Kaposvár közlekedési Zrt. Minden jog fenntartva.</p>
+        </div>
+    </footer>
+
+    <!-- -----------------------------------------------------------------------------------------------------FOOTER---------------------------------------------------------------------------------------------------------- -->
 
     <script>
 
@@ -451,7 +671,57 @@ if (!isset($_SESSION['user_id'])) {
             "Pázmány P. u.", "Kisgát", "Arany J. u", "Rózsa u.", "Corso"
         ];
 
-        */
+// Legördülő listák inicializálása
+function initializeDropdowns() {
+    const startSelect = document.getElementById('start');
+    const endSelect = document.getElementById('end');
+    
+    // Opciók hozzáadása mindkét legördülő listához
+    busStations.forEach(station => {
+        // Kezdő állomás select
+        const startOption = new Option(station, station);
+        startSelect.add(startOption);
+        
+        // Végállomás select
+        const endOption = new Option(station, station);
+        endSelect.add(endOption);
+    });
+}
+
+// Állomások felcserélése
+function switchStations() {
+    const startSelect = document.getElementById('start');
+    const endSelect = document.getElementById('end');
+    
+    const tempValue = startSelect.value;
+    startSelect.value = endSelect.value;
+    endSelect.value = tempValue;
+}
+
+// Event listener a switch gombhoz
+document.getElementById('switchBtn').addEventListener('click', switchStations);
+
+// Oldal betöltésekor inicializáljuk a legördülő listákat
+document.addEventListener('DOMContentLoaded', initializeDropdowns);
+
+// Segédfüggvény a kiválasztott állomások validálására
+function validateSelection() {
+    const startSelect = document.getElementById('start');
+    const endSelect = document.getElementById('end');
+    
+    if (startSelect.value === endSelect.value) {
+        alert('A kezdő és végállomás nem lehet ugyanaz!');
+        return false;
+    }
+    return true;
+}
+
+// Form submit kezelése
+document.querySelector('form').addEventListener('submit', function(e) {
+    if (!validateSelection()) {
+        e.preventDefault();
+    }
+});*/
 /*--------------------------------------------------------------------------------------------------------SUGGESTIONS LIST END-------------------------------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------------------------------------------JAVASCRIPT - SWITCH BUTTON LOGIC-------------------------------------------------------------------------------*/
@@ -468,11 +738,34 @@ if (!isset($_SESSION['user_id'])) {
 /*--------------------------------------------------------------------------------------------------------SWITCH BUTTON LOGIC END----------------------------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------------------------------------------JAVASCRIPT - NAV BAR SCRIPT------------------------------------------------------------------------------------*/
-        //navbar script
-        const toggle = document.getElementById('toggle')
-        const nav = document.getElementById('nav')
 
-        toggle.addEventListener('click', () => nav.classList.toggle('active'))
+document.getElementById('menuBtn').addEventListener('click', function() {
+    this.classList.toggle('active');
+    document.getElementById('dropdownMenu').classList.toggle('active');
+});
+
+// Kívülre kattintás esetén bezárjuk a menüt
+document.addEventListener('click', function(event) {
+    const menu = document.getElementById('dropdownMenu');
+    const menuBtn = document.getElementById('menuBtn');
+    
+    if (!menu.contains(event.target) && !menuBtn.contains(event.target)) {
+        menu.classList.remove('active');
+        menuBtn.classList.remove('active');
+    }
+});
+
+// Aktív oldal jelölése
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = window.location.pathname.split('/').pop();
+    const menuItems = document.querySelectorAll('.menu-items a');
+    
+    menuItems.forEach(item => {
+        if (item.getAttribute('href') === currentPage) {
+            item.classList.add('active');
+        }
+    });
+});
 /*--------------------------------------------------------------------------------------------------------NAV BAR SCRIPT END---------------------------------------------------------------------------------------------*/
     
         let map, directionsService, directionsRenderer;
@@ -590,7 +883,7 @@ if (!isset($_SESSION['user_id'])) {
                     {name: "Dombóvári u. 4.", lat: 46.363947670980195 , lng:    17.833637595176697    } ,                                                                    
                     {name: "Kaposvári Egyetem forduló", lat: 46.384574192377820 , lng:    17.826073765754700    } ,                                                                                     
                     {name: "Virág u.", lat: 46.358487167595270 , lng:    17.803862392902374    } ,                                                                                 
-                    {name: "Pázmány P. u. 1.", lat: 46.360912068665720 , lng:    17.801375985145570    } ,                                                                               
+                    {name: "Pázmány P. u.", lat: 46.360912068665720 , lng:    17.801375985145570    } ,                                                                               
                     {name: "Vöröstelek u.", lat: 46.364267880170260 , lng:    17.799975872039795    } ,                                                                                     
                     {name: "Hegyi u.", lat: 46.367684561948180 , lng:    17.797811329364777    } ,                                                                           
                     {name: "Tallián Gy. u. 4.", lat: 46.357163607490010 , lng:    17.797277569770813    } ,                                                                                      
@@ -673,14 +966,12 @@ if (!isset($_SESSION['user_id'])) {
                 document.getElementById("routeBtn").onclick = function() {
                     const start = document.getElementById("start").value;
                     const end = document.getElementById("end").value;
-                    const date = document.getElementById("arrivalTime").date;
 
                     const request = {
                         origin: start,
                         destination: end,
                         travelMode: 'TRANSIT',
                         transitOptions:{
-                            arrivalTime: date,
                             modes: ['BUS'],
                             routingPreference: 'FEWER_TRANSFERS'
                         },
@@ -718,10 +1009,13 @@ if (!isset($_SESSION['user_id'])) {
                 }
 
                 window.onload = initMap;
+    
+   
     </script>
 
         <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArXtWdllsylygVw5t_k-22sXUJn-jMU8k&libraries=places&callback=initMap&loading=async">
     </script>
+
 </body>
 </html>
 
