@@ -1,20 +1,18 @@
 <?php
-
-$db_host = 'localhost';
-$db_user = 'root';       
-$db_pass = '';          
-$db_name = 'volan_app';  
+// Hibák megjelenítése
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 try {
-    // PDO kapcsolat létrehozása
-    $conn = new PDO("mysql:host=$db_host;dbname=$db_name;charset=utf8", $db_user, $db_pass);
-    
-    // Hibakezelés beállítása
+    $host = 'localhost';
+    $dbname = 'volan_app'; // Ellenőrizd, hogy ez egyezik-e az adatbázisod nevével!
+    $username = 'root';
+    $password = '';
+
+    $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-} catch (PDOException $e) {
-    // Hibakezelés: hibaüzenet naplózása, amit a felhasználónak nem kell látnia
-    error_log("Kapcsolódási hiba: " . $e->getMessage());
-    die("Kapcsolódási hiba! Kérjük próbálja meg később.");
+
+} catch(PDOException $e) {
+    die("Kapcsolódási hiba: " . $e->getMessage());
 }
 ?>

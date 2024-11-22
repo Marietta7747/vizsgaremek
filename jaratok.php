@@ -20,6 +20,10 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kaposvár Helyi Járatok</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="betolt.js"></script>
+    <script src="busRoutes.js"></script>
+
     <style>
         :root {
             --primary-color:linear-gradient(to right, #211717,#b30000);
@@ -284,7 +288,7 @@ try {
 
         .route-card:hover{
             color: 000;
-            background: #303639;
+            background: #E9E8E8;
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
@@ -398,6 +402,27 @@ try {
             .route-container {
                 grid-template-columns: 1fr;
                 padding: 1rem;
+            }
+
+            #datePicker{
+                margin-left: 28%;
+            }
+
+            .route-number{
+                display: grid;
+                padding-right: 40px;
+            }
+
+            .route-name{
+                display: grid;
+            }
+
+            .route-card{
+                width: 340px;
+            }
+
+            .nav-wrapper{
+                left: 0.01rem;
             }
         }
 /*--------------------------------------------------------------------------------------------------------@MEDIA END-----------------------------------------------------------------------------------------------------*/
@@ -525,7 +550,7 @@ try {
         document.getElementById("datePicker").value = today.toISOString().split("T")[0];
         document.getElementById("datePicker").min = today.toISOString().split("T")[0];
 
-        const busRoutes = [
+        /*const busRoutes = [
             {
                 "number": "12",
                 "name": "Helyi autóbusz-állomás - Sopron u. - Laktanya",
@@ -717,7 +742,7 @@ try {
                 "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
             }
 
-        ];
+        ];*/
 
 
         function displayRoutes(filter = "all", selectedDate = new Date()) {
@@ -730,7 +755,7 @@ try {
             // Filter routes based on the selected day
             const filteredRoutes = filter === "all" 
                 ? busRoutes.filter(route => route.dayGoes.includes(dayOfWeek))
-                : busRoutes.filter(route => route.category === filter && route.dayGoes.includes(dayOfWeek));
+                : busRoutes.filter(route => route.dayGoes.includes(dayOfWeek));
 
             // Create route cards
             filteredRoutes.forEach((route, index) => {
@@ -738,6 +763,7 @@ try {
                 routeCard.className = 'route-card';
                 routeCard.style.animationDelay = `${index * 0.1}s`;
 
+                // Add route details and click event for navigation
                 routeCard.innerHTML = `
                     <div id="route-details" class="route-number">
                         ${route.number}
@@ -746,6 +772,14 @@ try {
                         ${route.name}
                     </div>
                 `;
+                routeCard.addEventListener('click', () => {
+                    // Redirect to indulasIdo.php with route details in the URL
+                    const url = new URL('indulasIdo.php', window.location.origin);
+                    url.searchParams.append('routeNumber', route.number);
+                    url.searchParams.append('routeName', route.name);
+                    url.searchParams.append('dayGoes', route.dayGoes);
+                    window.location.href = url.toString();
+                });
 
                 routeContainer.appendChild(routeCard);
             });
@@ -764,6 +798,8 @@ try {
                 }
             });
         });
+
+
 
         // Mobilbarát menü
         function setupMobileMenu() {

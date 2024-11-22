@@ -21,12 +21,18 @@ try {
     <title>Számla Generátor</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="betölt.js"></script>
+
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         :root {
-            --primary-color: #001F3F;
-            --accent-color: #FFC107;
+            --primary-color:linear-gradient(to right, #211717,#b30000);
+            --accent-color: #7A7474;
             --text-light: #FFFFFF;
+
             --shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
@@ -51,65 +57,214 @@ try {
             margin-bottom: 20px;
         }
 
-        .navh1{
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        .header {
+    position: relative;
+    background: var(--primary-color);
+    color: var(--text-light);
+    padding: 1rem;
+    box-shadow: 0 2px 10px var(--shadow-color);
+}
 
-        nav {
-            position: relative;
-            background-color: var(--primary-color);
-            padding: 8px;
-            width: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 3px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            transition: width 0.6s linear;
-            margin-right: 10px;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            max-height: 50px;
-        }
+.header h1 {
+    margin: 0;
+    text-align: center;
+    font-size: 2rem;
+    padding: 1rem 0;
+}
 
-        nav.active {
-            width: 99%;
-        }
+.nav-wrapper {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1000;
+}
 
-        nav ul {
-            display: flex;
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            width: 0;
-            transition: width 0.6s linear;
-        }
+.nav-container {
+    position: relative;
+}
 
-        nav.active ul {
-            width: 100%;
-        }
+.menu-btn {
+    background: none;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
 
-        nav ul li {
-            transform: rotateY(0deg);
-            opacity: 0;
-            transition: transform 0.6s linear, opacity 0.6s linear;
-            padding: 15px;
-        }
+.menu-btn:hover {
+    background: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px var(--shadow-color);
+}
 
-        nav.active ul li {
-            opacity: 1;
-            transform: rotateY(360deg);
-        }
+.hamburger {
+    position: relative;
+    width: 30px;
+    height: 20px;
+}
 
-        nav ul a {
-            position: relative;
-            color: #000;
-            text-decoration: none;
-            margin: 0 5px;
-        }
+.hamburger span {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: var(--text-light);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
 
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.hamburger span:nth-child(3) { bottom: 0; }
+
+.menu-btn.active .hamburger span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-btn.active .hamburger span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-btn.active .hamburger span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 1rem);
+    left: 0;
+    background: var(--text-light);
+    border-radius: 12px;
+    min-width: 280px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 10px 30px var(--shadow-color);
+    overflow: hidden;
+}
+
+.dropdown-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.menu-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-items li {
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.dropdown-menu.active .menu-items li {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.menu-items li:nth-child(1) { transition-delay: 0.1s; }
+.menu-items li:nth-child(2) { transition-delay: 0.2s; }
+.menu-items li:nth-child(3) { transition-delay: 0.3s; }
+.menu-items li:nth-child(4) { transition-delay: 0.4s; }
+.menu-items li:nth-child(5) { transition-delay: 0.5s; }
+
+.menu-items a {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-items a:hover {
+    background: linear-gradient(to right, #211717,#b30000);
+    color: white;
+    padding-left: 2rem;
+}
+
+.menu-items a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: darkred;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.menu-items a:hover::before {
+    transform: scaleY(1);
+}
+
+.menu-items a img {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    transition: transform 0.3s ease;
+}
+
+.menu-items a:hover img {
+    transform: scale(1.2) rotate(5deg);
+}
+
+.menu-items a span {
+    font-size: 17px;
+}
+
+
+.menu-items a.active {
+    background: white;
+    color: black;
+    font-weight: 600;
+}
+
+.menu-items a.active::before {
+    transform: scaleY(1);
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.menu-items a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: gray;
+    left: 0;
+    top: 0;
+    transform: scale(0);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s ease;
+}
+
+.menu-items a:active::after {
+    animation: ripple 0.6s ease-out;
+}
         .icon {
             background-color: var(--primary-color);
             border: 0;
@@ -189,7 +344,7 @@ try {
         input:focus, select:focus {
             border-color: var(--accent-color);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
         }
 
         .button-group {
@@ -197,12 +352,13 @@ try {
             justify-content: center;
             gap: 15px;
             margin-top: 25px;
+             
         }
 
         button {
             padding: 12px 25px;
             background-color: var(--accent-color);
-            color: var(--primary-color);
+            color: var(--text-light);
             border: none;
             border-radius: 8px;
             font-size: 15px;
@@ -211,7 +367,7 @@ try {
         }
 
         button:hover {
-            background-color: #FFD700;
+            background-color: #908B8B;
             transform: translateY(-2px);
         }
 
@@ -306,7 +462,7 @@ try {
 
         .footer-section h2 {
             margin-bottom: 1rem;
-            color: var(--accent-color);
+            color: var(--text-light);
         }
 
         .footer-links {
@@ -356,24 +512,71 @@ try {
 </head>
 <body>
 
-    <div class="header">
-        <nav class="active" id="nav">
-            <ul>
-              <li><a href="index.php" style="color: #FFFFFF; font-weight: bold;"><img src="placeholder.png" style="height: 30px; width: 30px;"> Főoldal</a></li>
-              <li><a href="buy.html.php" style="color: #FFFFFF; font-weight: bold;"><img src="tickets.png" style="height: 30px; width: 30px;"> Jegyvásárlás</a></li>
-              <li><a href="menetrend.php" style="color: #FFFFFF; font-weight: bold;"><img src="calendar.png" style="height: 30px; width: 30px;"> Menetrend</a></li>
-              <li><a href="info.php" style="color: #FFFFFF; font-weight: bold;"><img src="information-button.png" style="height: 30px; width: 30px;"> Információ</a></li>
+<div class="header">
+    <div class="nav-wrapper">
+        <div class="nav-container">
+            <button class="menu-btn" id="menuBtn">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <nav class="dropdown-menu" id="dropdownMenu">
+                <ul class="menu-items">
+                    <li>
+                        <a href="index.php" class="active">
+                            <img src="placeholder.png" alt="Főoldal">
+                            <span>Főoldal</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="buy.php">
+                            <img src="tickets.png" alt="Jegyvásárlás">
+                            <span>Jegyvásárlás</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="menetrend.php">
+                            <img src="calendar.png" alt="Menetrend">
+                            <span>Menetrend</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="jaratok.php">
+                            <img src="bus.png" alt="járatok">
+                            <span>Járatok</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="info.php">
+                            <img src="information-button.png" alt="Információ">
+                            <span>Információ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="logout.php">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Kijelentkezés</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    
+             <div id="toggle"></div>
+            <h1><i class="fas fa-map-marked-alt"></i> Jegy és bérlet vásárlás</h1>
+        </div>
+    
 
             </ul>
-            <button class="icon" id="toggle">
-              <div class="line line1"></div>
-              <div class="line line2"></div>
+              
             </button>
           </nav>
 
 
         <div class="navh1">
-            <h1>Jegy és bérlet vásárlás</h1>
         </div>
     </div>
 
@@ -493,8 +696,64 @@ try {
                 <button onclick="downloadPDF()">PDF letöltése</button>
             </div>
         </div>
-    </div>
+    </div><br>
 
+
+<!-----------------------------------------Késések igazolás generálás------------------------------>
+<div class="container">
+        <form id="kesesigazolas">
+            <h1 style="text-align:center">Késés Igazolás</h1>
+            <div class="section-title">Utas adatai</div>
+            <div class="input-group">
+                <div class="input-wrapper">
+                    <label class="input-label">Név*</label>
+                    <input type="text" id="nev" required>
+                </div>
+                <div class="input-wrapper">
+                    <label class="input-label">Bérletszám / Jegyszám*</label>
+                    <input type="text" id="berletszam" required>
+                </div>
+            </div>
+
+            <div class="section-title">Járat adatai</div>
+            <div class="input-group">
+                <div class="input-wrapper">
+                    <label class="input-label">Járatszám*</label>
+                    <input type="text" id="jaratszam" required>
+                </div>
+                <div class="input-wrapper">
+                    <label class="input-label">Dátum*</label>
+                    <input type="date" id="datum" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="input-wrapper">
+                    <label class="input-label">Tervezett indulás*</label>
+                    <input type="time" id="tervezett_indulas" value="00:00" required>
+                </div>
+                <div class="input-wrapper">
+                    <label class="input-label">Tényleges indulás*</label>
+                    <input type="time" id="tenyleges_indulas" value="00:00" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="input-wrapper">
+                    <label class="input-label">Felszállás helye*</label>
+                    <select type="text" id="felszallas" placeholder="pázmány péter utca 1" required></select>
+                </div>
+                <div class="input-wrapper">
+                    <label class="input-label">Leszállás helye*</label>
+                    <select type="text" id="leszallas" placeholder="füredi utcai csomópont" required></select>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit">Igazolás generálása</button>
+            </div>
+        </form>
+    </div>
 <!-- -----------------------------------------------------------------------------------------------------HTML - FOOTER------------------------------------------------------------------------------------------------ -->
     <footer>
         <div class="footer-content">
@@ -526,14 +785,67 @@ try {
 
     <script>
       
+const busStations = [
+            "helyi autóbusz állomás", "Berzsenyi u. felűljáró", "Berzsenyi u. 30.", "Ballakúti u.",
+            "Lonkahegy forduló", "Nyár", "Berzsenyi u. felűljáró", "Jókai liget", "Szigetvári u. 6.",
+            "Szigetvári u. 62.", "Szigetvári u. 139.", "Kaposfüred vá.", "Bersenyi u. 30.", "Füredi u. csp.",
+            "Toldi lakónegyed", "Kinizsi ltp.", "Búzavirág u.", "Laktanya", "Volán-telep", "Kaposfüredi u. 12.",
+            "Kaposfüredi u. 104.", "Kaposfüred központ", "Állomás u.", "Kaposfüredi u. 244.", "Kaposfüred forduló",
+            "Városi könyvtár", "Vasútköz", "Raktár u. forduló", "Mátyás k. u. forduló", "Egyenesi u. forduló",
+            "Koppány vezér u. forduló", "Töröcske forduló", "Béla király u. forduló", "Kaposszentjakab forduló",
+            "Toponár forduló", "NABI forduló", "Kaposvári Egyetem", "Videoton", "Buzsáki u.", "Aranytér",
+            "Sopron u. forduló", "Tóth Árpád u.", "Kométa forduló", "67-es sz. út", "Rózsa u.", "Erdősor u.",
+            "Gönczi F. u.", "Városi Fürdő", "Hajnóczy u. csp.", "Jutai u. 24.", "Jutai u. 45.", "Raktár u. 2.",
+            "Kecelhegyalja u. 6.", "Kőrösi Cs. S. u. 109.", "Kecelhegyi iskola", "Kőrösi Cs. S. u. 45.",
+            "Kenese tér", "Eger u.", "Kapoli A. u.", "Egyenesi u. 42.", "Beszédes J. u.", "Állatkorház", "Kölcsey u.",
+            "Tompa M. u.", "Vasútállomás", "Baross G. u.", "Csalogány u.", "Vikár B. u.", "Fő u. 48.", "Fő u. 37-39.",
+            "Hársfa u.", "Hősök temploma", "Gyár u.", "Pécsi úti iskola", "Nádasdi u.", "Móricz Zs. u.", "Pécsi u. 227.",
+            "Várhegy feljáró", "Nap u", "Hold u.", "Magyar Nobel-díjasok tere", "Bartók B. u.", "Táncsics M. u.",
+            "Zichy M. u.", "Aranyeső u.", "Jókai u.", "Szegfű u.", "Gyertyános", "Kertbarát felső", "Kertbarát alsó",
+            "Szőlőhegy", "Fenyves u. 37/A", "Fenyves u. 31", "Kórház célgazdaság", "Fenyves u. 63.", "Mező u. csp.",
+            "Izzó u.", "Guba S. u. 81.", "Guba S. u. 57.", "Villamossági Gyár", "Toponár posta", "Toponár Orci elágazás",
+            "Toponári u. 182.", "Toponári u. 238.", "Erdei F. u.", "Szabó P. u.", "Orci út 14.", "Répáspuszta",
+            "Kenyérgyár u. 1.", "Kenyérgyár u. 3.", "Dombóvári u. 4.", "Kaposvári Egyetem forduló", "Virág u.",
+            "Pázmány P. u.", "Vöröstelek u.", "Hegyi u.", "Tallián Gy. u. 4.", "Kórház", "Tallián Gy. u. 56.",
+            "Tallián Gy. u. 82.", "ÁNTSZ", "Rendőrség", "Szent Imre u. 29.", "Szent Imre u. 13.", "Széchenyi tér",
+            "Zárda u.", "Honvéd u.", "Arany J. tér", "Losonc-köz", "Brassó u.", "Nagyszeben u.", "Somssich P. u.",
+            "Pázmány P. u.", "Kisgát", "Arany J. u", "Rózsa u.", "Corso"
+        ];
+
+function initializeDropdowns() {
+    const startSelect = document.getElementById('felszallas');
+    const endSelect = document.getElementById('leszallas');
+    
+    busStations.forEach(station => {
+        const startOption = new Option(station, station);
+        startSelect.add(startOption);
+        
+        const endOption = new Option(station, station);
+        endSelect.add(endOption);
+    });
+}
+
+function switchStations() {
+    const startSelect = document.getElementById('start');
+    const endSelect = document.getElementById('end');
+    
+    const tempValue = startSelect.value;
+    startSelect.value = endSelect.value;
+    endSelect.value = tempValue;
+}
+
+document.addEventListener('DOMContentLoaded', initializeDropdowns);
+
         const today = new Date();
         document.getElementById("validFrom").value = today.toISOString().split("T")[0];
         document.getElementById("validFrom").min = today.toISOString().split("T")[0];
+        const delay = new Date();
+        document.getElementById("datum").value = today.toISOString().split("T")[0];
+        document.getElementById("datum").min = today.toISOString().split("T")[0];
 
-        // Set validUntil min date and default (next month for monthly tickets)
+
         document.getElementById("validUntil").min = today.toISOString().split("T")[0];
 
-        // Calculate price when ticket type or quantity changes
         function updatePrice() {
             const ticketSelect = document.getElementById('ticketType');
             const quantity = document.getElementById('quantity').value;
@@ -632,38 +944,428 @@ Egyedi azonosító: ${formData.invoiceId}
             
         }
 
-        function downloadPDF() {
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF();
-            
-            // Add company logo/header
-            pdf.setFontSize(20);
-            pdf.setTextColor(0, 31, 63); // Primary color
-            pdf.text("Volán Számla", 105, 20, { align: "center" });
-            
-            // Add invoice details
-            pdf.setFontSize(12);
-            pdf.setTextColor(0, 0, 0);
-            const invoiceText = document.getElementById('invoiceDetails').innerText;
-            const splitText = pdf.splitTextToSize(invoiceText, 180);
-            pdf.text(splitText, 15, 40);
+       function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    try {
+        // Alapbeállítások
+        const margin = 20;
+        const pageWidth = 210;
+        const contentWidth = pageWidth - (2 * margin);
 
-            // Add QR code
-            const qrCanvas = document.getElementById('qrcode');
-            const imgData = qrCanvas.toDataURL('image/png');
-            pdf.addImage(imgData, 'PNG', 150, 200, 40, 40);
+        // Színek definíciója
+        const colors = {
+            primary: [0, 31, 63],    // Sötétkék
+            secondary: [245, 245, 245], // Világosszürke
+            accent: [230, 230, 230],    // Középszürke
+            text: [51, 51, 51],        // Sötétszürke
+            lightText: [102, 102, 102]  // Világosabb szürke
+        };
 
-            // Add footer
-            pdf.setFontSize(8);
-            pdf.text("Ez egy elektronikusan generált számla.", 105, 280, { align: "center" });
-            
-            pdf.save(`számla-${new Date().toISOString().slice(0,10)}.pdf`);
+        // Fejléc
+        doc.setFillColor(...colors.secondary);
+        doc.rect(0, 0, pageWidth, 45, 'F');
+
+        // Cég logó helye (ha van)
+        try {
+            const logoBase64 = document.getElementById('logo')?.src;
+            if (logoBase64) {
+                doc.addImage(logoBase64, 'SVG', margin, 10, 30, 30);
+            }
+        } catch (error) {
+            console.warn('Logo betöltése sikertelen:', error);
         }
 
-        const toggle = document.getElementById('toggle')
-        const nav = document.getElementById('nav')
+        // Cégnév és számlainformációk a fejlécben
+        doc.setTextColor(...colors.primary);
+        doc.setFontSize(22);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Kaposvári Közlekedési Zrt.', margin + 35, 25);
 
-        toggle.addEventListener('click', () => nav.classList.toggle('active'));
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'normal');
+        doc.text([
+            'Adószám: 12345678-2-14',
+            'Cégjegyzékszám: 01-10-123456',
+            'Bankszámlaszám: 11111111-22222222-33333333',
+            'Székhely: 7400 Kaposvár'
+        ], margin + 35, 30, { lineHeightFactor: 1.2 });
+
+        // Számla cím szakasz
+        doc.setFillColor(...colors.accent);
+        doc.rect(0, 45, pageWidth, 15, 'F');
+        doc.setTextColor(...colors.text);
+        doc.setFontSize(16);
+        doc.setFont('helvetica', 'bold');
+        doc.text('SZÁMLA', pageWidth/2, 55, { align: 'center' });
+
+        // Form adatok beszerzése
+        const formData = {
+            szamlaszam: document.getElementById('szamlaszam').value,
+            invoiceDate: new Date().toLocaleDateString('hu-HU'),
+            name: document.getElementById('name').value,
+            vatNumber: document.getElementById('vatNumber').value,
+            address: document.getElementById('address').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            ticketType: document.getElementById('ticketType').options[document.getElementById('ticketType').selectedIndex].text,
+            quantity: document.getElementById('quantity').value,
+            validFrom: document.getElementById('validFrom').value,
+            validUntil: document.getElementById('validUntil').value,
+            paymentMethod: document.getElementById('paymentMethod').value,
+            totalPrice: document.getElementById('totalPrice').textContent,
+            invoiceId: generateRandomId()
+        };
+
+        let y = 70;
+
+        // Számla alapadatok box
+        doc.setFillColor(...colors.secondary);
+        doc.roundedRect(margin, y, contentWidth/2 - 5, 40, 3, 3, 'F');
+        doc.setFontSize(10);
+        doc.setTextColor(...colors.text);
+        
+        // Bal oldali adatok
+        doc.setFont('helvetica', 'bold');
+        doc.text('Számlaszám:', margin + 5, y + 10);
+        
+        doc.setFont('helvetica', 'normal');
+        doc.text(formData.szamlaszam, margin + 30, y + 10);
+        doc.text(formData.invoiceDate, margin + 5, y + 20);
+
+        // QR kód a jobb felső sarokban
+        try {
+            const qrCanvas = document.getElementById('qrcode');
+            const qrBase64 = qrCanvas.toDataURL('image/png');
+            doc.addImage(qrBase64, 'PNG', pageWidth - margin - 35, y, 35, 35);
+        } catch (error) {
+            console.warn('QR kód betöltése sikertelen:', error);
+        }
+
+        y += 45;
+
+        // Vevő adatok szakasz
+        doc.setFillColor(149, 6, 6);
+        doc.setTextColor(255, 255, 255);
+        doc.rect(margin, y, contentWidth, 8, 'F');
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Adatok', margin + 5, y + 6);
+
+        y += 15;
+        doc.setTextColor(...colors.text);
+        doc.setFontSize(11);
+
+        function addField(label, value, yPos, leftMargin = margin) {
+            doc.setFont('helvetica', 'bold');
+            doc.text(label, leftMargin, yPos);
+            doc.setFont('helvetica', 'normal');
+            doc.text(value || '', leftMargin + 45, yPos);
+            return yPos + 8;
+        }
+
+        y = addField('Név:', formData.name, y);
+        if (formData.vatNumber) {
+            y = addField('Adószám:', formData.vatNumber, y);
+        }
+        y = addField('Cím:', formData.address, y);
+        y = addField('E-mail:', formData.email, y);
+        y = addField('Telefon:', formData.phone, y);
+
+        y += 10;
+
+        const quantity = parseInt(formData.quantity);
+        const unitPrice = parseInt(formData.totalPrice) / quantity;
+        const netPrice = unitPrice * quantity;
+        const vat = netPrice * 0.27; // 27% ÁFA
+        const grossPrice = netPrice + vat;
+
+        // Lábléc
+        y = 270;
+        doc.setFillColor(...colors.accent);
+        doc.rect(0, y, pageWidth, 27, 'F');
+        doc.setFontSize(9);
+        doc.setTextColor(...colors.lightText);
+
+        const footer = [
+            'Ez a számla elektronikusan került kiállításra és hitelesítésre.',
+            `Egyedi azonosító: ${formData.invoiceId}`,
+            'Köszönjük, hogy szolgáltatásainkat választotta!'
+        ];
+
+        footer.forEach((line, i) => {
+            doc.text(line, pageWidth/2, y + 6 + (i * 5), { align: 'center' });
+        });
+
+        // PDF mentése
+        const cleanName = formData.name
+            ? formData.name.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()
+            : 'szamla';
+        const filename = `szamla_${cleanName}_${formData.invoiceId}.pdf`;
+        doc.save(filename);
+
+    } catch (error) {
+        console.error('Hiba a PDF generálása során:', error);
+        alert(`Hiba történt a PDF generálása során: ${error.message}`);
+    }
+}
+
+// Meglévő eseménykezelők megtartása
+document.getElementById('ticketType').addEventListener('change', updatePrice);
+document.getElementById('quantity').addEventListener('change', updatePrice);
+document.getElementById('validFrom').addEventListener('change', updatePrice);
+
+// Nav
+
+document.getElementById('menuBtn').addEventListener('click', function() {
+    this.classList.toggle('active');
+    document.getElementById('dropdownMenu').classList.toggle('active');
+});
+
+// Kívülre kattintás esetén bezárjuk a menüt
+document.addEventListener('click', function(event) {
+    const menu = document.getElementById('dropdownMenu');
+    const menuBtn = document.getElementById('menuBtn');
+    
+    if (!menu.contains(event.target) && !menuBtn.contains(event.target)) {
+        menu.classList.remove('active');
+        menuBtn.classList.remove('active');
+    }
+});
+
+// Aktív oldal jelölése
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = window.location.pathname.split('/').pop();
+    const menuItems = document.querySelectorAll('.menu-items a');
+    
+    menuItems.forEach(item => {
+        if (item.getAttribute('href') === currentPage) {
+            item.classList.add('active');
+        }
+    });
+});
+//Nav end
+
+        document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('kesesigazolas');
+
+    function kesesSzamitas(tervezett, tenyleges) {
+        try {
+            const tervIdopont = new Date(`1970-01-01T${tervezett}`);
+            const tenyIdopont = new Date(`1970-01-01T${tenyleges}`);
+            
+            if (isNaN(tervIdopont.getTime()) || isNaN(tenyIdopont.getTime())) {
+                throw new Error('Érvénytelen időformátum');
+            }
+            
+            return Math.round((tenyIdopont - tervIdopont) / (1000 * 60));
+        } catch (error) {
+            console.error('Hiba a késés számításánál:', error);
+            throw error;
+        }
+    }
+
+    async function loadImage(path) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => {
+                try {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    const ctx = canvas.getContext('2d');
+                    if (!ctx) {
+                        reject(new Error('Nem sikerült létrehozni a canvas kontextust'));
+                        return;
+                    }
+                    ctx.drawImage(img, 0, 0);
+                    resolve(canvas.toDataURL('image/png'));
+                } catch (error) {
+                    reject(error);
+                }
+            };
+            img.onerror = () => reject(new Error(`Nem sikerült betölteni a képet: ${path}`));
+            img.src = path;
+        });
+    }
+
+    async function pdfKeszites(adatok) {
+        if (!window.jspdf) {
+            alert('A PDF generáló könyvtár nem található. Kérjük, frissítse az oldalt.');
+            return;
+        }
+
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        try {
+            // Alapbeállítások
+            const margin = 25;
+            const pageWidth = 210;
+            const contentWidth = pageWidth - (2 * margin);
+
+            // Fejléc háttér - világosabb szürke
+            doc.setFillColor(245, 245, 245);
+            doc.rect(0, 0, pageWidth, 40, 'F');
+
+            // Logo betöltésének megpróbálása
+            try {
+                const logoBase64 = await loadImage('logo.svg');
+                doc.addImage(logoBase64, 'SVG', margin, 10, 15, 15);
+            } catch (error) {
+                console.warn('Logo betöltése sikertelen:', error);
+                // Folytatjuk logo nélkül
+            }
+
+            // Fejléc szöveg - sötétszürke
+            doc.setTextColor(51, 51, 51);
+            doc.setFontSize(20);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Kaposvári Közlekedési Zrt.', margin + 40, 22);
+
+            // Alcím sáv - középszürke
+            doc.setFillColor(230, 230, 230);
+            doc.rect(0, 40, pageWidth, 10, 'F');
+            doc.setTextColor(51, 51, 51);
+            doc.setFontSize(14);
+            doc.text('KÉSÉS IGAZOLÁS', pageWidth/2, 47, { align: 'center' });
+
+            // Adatok szakasz
+            let y = 65;
+            doc.setTextColor(68, 68, 68);
+            doc.setFontSize(11);
+
+            function addDataField(label, value, yPos) {
+                if (!label || !value) return yPos; // Üres mezők kihagyása
+                
+                // Háttér minden második sorhoz - nagyon világos szürke
+                if ((yPos - 65) / 8 % 2 === 0) {
+                    doc.setFillColor(250, 250, 250);
+                    doc.rect(margin, yPos - 4, contentWidth, 8, 'F');
+                }
+                
+                // Címke
+                doc.setFont('helvetica', 'bold');
+                doc.text(label, margin, yPos);
+                
+                // Érték
+                doc.setFont('helvetica', 'normal');
+                doc.text(String(value), margin + 50, yPos);
+                
+                return yPos + 8;
+            }
+
+            let kesesPerc;
+            try {
+                kesesPerc = kesesSzamitas(adatok.tervezett_indulas, adatok.tenyleges_indulas);
+            } catch (error) {
+                console.error('Hiba a késés számításánál:', error);
+                kesesPerc = 'N/A';
+            }
+
+            // Adatok megjelenítése
+            y = addDataField('Utas neve:', adatok.nev, y);
+            y = addDataField('Bérletszám:', adatok.berletszam, y);
+            y = addDataField('Járatszám:', adatok.jaratszam, y);
+            y = addDataField('Dátum:', adatok.datum, y);
+            y = addDataField('Felszállás:', adatok.felszallas, y);
+            y = addDataField('Leszállás:', adatok.leszallas, y);
+            y = addDataField('Tervezett indulás:', adatok.tervezett_indulas, y);
+            y = addDataField('Tényleges indulás:', adatok.tenyleges_indulas, y);
+
+            // Késés kiemelése - modern stílus
+            y += 10;
+            doc.setFillColor(68, 68, 68);
+            doc.rect(margin, y - 4, contentWidth, 12, 'F');
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(12);
+            doc.text(`KÉSÉS MÉRTÉKE: ${kesesPerc} PERC`, pageWidth/2, y + 3, { align: 'center' });
+
+            // Aláírás betöltésének megpróbálása
+            y = 160;
+            try {
+                const signatureBase64 = await loadImage('alairas.svg');
+                doc.addImage(signatureBase64, 'SVG', margin, y, 40, 20);
+            } catch (error) {
+                console.warn('Aláírás betöltése sikertelen:', error);
+                // Alternatív megoldás aláírás helyett
+                doc.setFont('helvetica', 'italic');
+                doc.setFontSize(10);
+                doc.setTextColor(68, 68, 68);
+                doc.text('Elektronikusan hitelesítve', margin, y + 10);
+            }
+
+            // Lábléc vonal
+            y = 200;
+            doc.setFillColor(200, 200, 200);
+            doc.rect(margin, y, contentWidth, 0.5, 'F');
+
+            // Lábléc információk
+            y += 10;
+            doc.setTextColor(102, 102, 102);
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'normal');
+            const maiDatum = new Date().toLocaleDateString('hu-HU', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            doc.text(`Kiállítás dátuma: ${maiDatum}`, margin, y);
+
+            // Dokumentum azonosító és generálási információ
+            y += 6;
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(8);
+            const docId = Math.random().toString(36).substr(2, 9).toUpperCase();
+            doc.text('Az igazolást a rendszer automatikusan generálta.', margin, y);
+            doc.text(`Dokumentum azonosító: ${docId}`, pageWidth - margin, y, { align: 'right' });
+
+            // Fájlnév generálása biztonságosan
+            const tisztaNev = adatok.nev
+                ? adatok.nev.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()
+                : 'keses_igazolas';
+            const fajlnev = `keses_igazolas_${tisztaNev}_${docId}.pdf`;
+
+            // PDF mentése
+            doc.save(fajlnev);
+
+        } catch (error) {
+            console.error('Részletes hiba a PDF generálása során:', error);
+            alert(`Hiba történt a PDF generálása során: ${error.message}`);
+        }
+    }
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Adatok validálása
+        const required = ['nev', 'jaratszam', 'datum', 'tervezett_indulas', 'tenyleges_indulas'];
+        const hianyzo = required.filter(field => !document.getElementById(field)?.value);
+        
+        if (hianyzo.length > 0) {
+            alert(`Kérjük, töltse ki a következő kötelező mezőket: ${hianyzo.join(', ')}`);
+            return;
+        }
+        
+        const adatok = {
+            nev: document.getElementById('nev').value,
+            berletszam: document.getElementById('berletszam').value,
+            jaratszam: document.getElementById('jaratszam').value,
+            datum: document.getElementById('datum').value,
+            tervezett_indulas: document.getElementById('tervezett_indulas').value,
+            tenyleges_indulas: document.getElementById('tenyleges_indulas').value,
+            felszallas: document.getElementById('felszallas').value,
+            leszallas: document.getElementById('leszallas').value
+        };
+        
+        pdfKeszites(adatok).catch(error => {
+            console.error('Hiba a form feldolgozása során:', error);
+            alert('Váratlan hiba történt. Kérjük, próbálja újra később.');
+        });
+    });
+});
     </script>
 </body>
 </html>

@@ -2,14 +2,52 @@
 session_start();
 require_once 'config.php';
 
-if (isset($_SESSION['errors'])) {
-    foreach ($_SESSION['errors'] as $error) {
-        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                ' . $error . '
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>';
+// Hibák megjelenítése
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
+    $username = $_POST['registerUsername'];
+    $email = $_POST['registerEmail'];
+    $password = $_POST['registerPassword'];
+    $password_confirm = $_POST['registerPasswordConfirm'];
+    
+    $errors = [];
+
+    // Validációk
+    if (empty($username) || empty($email) || empty($password) || empty($password_confirm)) {
+        $errors[] = "Minden mező kitöltése kötelező";
     }
-    unset($_SESSION['errors']);
+
+    if ($password !== $password_confirm) {
+        $errors[] = "A jelszavak nem egyeznek";
+    }
+
+    if (empty($errors)) {
+        try {
+            $sql = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
+            $stmt = $conn->prepare($sql);
+            
+            $params = [
+                ':username' => $username,
+                ':email' => $email,
+                ':password' => $password
+            ];
+            
+            $result = $stmt->execute($params);
+            
+            if ($result) {
+                $_SESSION['success'] = "Sikeres regisztráció!";
+                header("Location: login.php");
+                exit();
+            } else {
+                $errors[] = "Hiba történt a regisztráció során";
+            }
+            
+        } catch (PDOException $e) {
+            $errors[] = "Adatbázis hiba történt: " . $e->getMessage();
+        }
+    }
 }
 ?>
 
@@ -18,84 +56,51 @@ if (isset($_SESSION['errors'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regisztráció - Volánbusz</title>
-    <!-- Bootstrap CSS -->
+    <title>Regisztráció</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --volan-blue: #004b93;
-            --volan-yellow: #ffd800;
-        }
+      
+        
         
         body {
-            background: linear-gradient(135deg, #00008b 0%, #323232 100%);
-            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to TOP, #303639,#b30000,#FFFFFF);
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #000;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .register-container {
-            max-width: 450px;
+            background: linear-gradient(to right, #303639,#b30000);
+            max-width: 400px;
             padding: 2.5rem;
-            background: white;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 30px 90px rgba(0,0,0,1);
         }
         
         .icon-container {
+            
             text-align: center;
             margin-bottom: 2rem;
             animation: fadeIn 1s ease-in;
-            position: relative;
         }
         
-        .icon-container i {
-            font-size: 3.5rem;
-            color: var(--volan-blue);
-            background: linear-gradient(45deg, var(--volan-blue), #0066cc);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .icon-container::after {
-            content: '+';
-            position: absolute;
-            font-size: 2rem;
-            color: var(--volan-yellow);
-            font-weight: bold;
-            right: 35%;
-            top: -5px;
-        }
-        
-        .register-title {
-            color: var(--volan-blue);
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-        
-        .btn-volan {
-            background: linear-gradient(45deg, orange, #FF4500);
+        form{
+            text-align: center;
             color: white;
-            padding: 0.8rem;
-            border: none;
-            transition: all 0.3s;
-            border-radius: 8px;
-            font-weight: 500;
+            font-size: 120%;
         }
-        
-        .btn-volan:hover {
-	    backgroud-color: yellow;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,75,147,0.2);
-            color: white;
-        }
-        
         .form-control {
-            border-left: none;
             padding: 0.8rem;
-            border-radius: 0 8px 8px 0;
+            border-radius: 8px;
+            margin-bottom: 1rem;
         }
         
         .form-control:focus {
@@ -103,22 +108,36 @@ if (isset($_SESSION['errors'])) {
             box-shadow: 0 0 0 0.2rem rgba(0,75,147,0.15);
         }
         
-        .input-group-text {
-            background-color: white;
-            border-right: none;
-            border-radius: 8px 0 0 8px;
+        .form-label {
+            color: var(--volan-blue);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, #000000, #FF0000);
+            border: none;
             padding: 0.8rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(to right, #000000, #FF0000);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,75,147,0.2);
         }
         
         .login-link {
-            color: var(--volan-blue);
+            color: white;
             text-decoration: none;
             transition: all 0.3s;
+            font-weight: bold;
         }
         
         .login-link:hover {
             color: #0066cc;
-            text-decoration: none;
         }
         
         @keyframes fadeIn {
@@ -131,81 +150,68 @@ if (isset($_SESSION['errors'])) {
                 transform: translateY(0);
             }
         }
-        
-        .input-group:focus-within {
-            box-shadow: 0 0 0 0.2rem rgba(0,75,147,0.15);
+
+        .alert {
+            margin-bottom: 1rem;
             border-radius: 8px;
+            padding: 1rem;
         }
-        
-        .password-requirements {
-            font-size: 0.85rem;
-            color: #6c757d;
-            margin-top: 0.5rem;
+
+        .alert-danger {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
         }
     </style>
 </head>
 <body>
-    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="container">
         <div class="register-container">
             <div class="icon-container">
-                <i class="fas fa-bus"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" style="max-width: 200px;" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M288 0C422.4 0 512 35.2 512 80l0 16 0 32c17.7 0 32 14.3 32 32l0 64c0 17.7-14.3 32-32 32l0 160c0 17.7-14.3 32-32 32l0 32c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32l0-32-192 0 0 32c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32l0-32c-17.7 0-32-14.3-32-32l0-160c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32c0 0 0 0 0 0l0-32s0 0 0 0l0-16C64 35.2 153.6 0 288 0zM128 160l0 96c0 17.7 14.3 32 32 32l112 0 0-160-112 0c-17.7 0-32 14.3-32 32zM304 288l112 0c17.7 0 32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-112 0 0 160zM144 400a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm288 0a32 32 0 1 0 0-64 32 32 0 1 0 0 64zM384 80c0-8.8-7.2-16-16-16L208 64c-8.8 0-16 7.2-16 16s7.2 16 16 16l160 0c8.8 0 16-7.2 16-16z"/></svg>
             </div>
-            
-            <h2 class="text-center register-title">Regisztráció</h2>
-            
-            <form action="index.php" method="POST">
+
+            <?php
+            if (!empty($errors)) {
+                foreach ($errors as $error) {
+                    echo '<div class="alert alert-danger">' . $error . '</div>';
+                }
+            }
+            ?>
+
+            <form method="POST" action="register.php">
                 <div class="mb-3">
-                    <div class="input-group">
-                        <span class="input-group-text">
-                            <i class="fas fa-user text-muted"></i>
-                        </span>
-                        <input type="text" class="form-control" id="registerUsername" 
-                               name="registerUsername" placeholder="Felhasználónév" required>
-                    </div>
-                </div>
-                
-                <div class="mb-3">
-                    <div class="input-group">
-                        <span class="input-group-text">
-                            <i class="fas fa-envelope text-muted"></i>
-                        </span>
-                        <input type="email" class="form-control" id="registerEmail" 
-                               name="registerEmail" placeholder="Email cím" required>
-                    </div>
+                    <div><h1 style="color:white; font-weight: bold">Regisztráció</h1></div>
+                    <label for="registerUsername" class="form-label">Felhasználónév:</label>
+                    <input style="font-weight: bold" type="text" class="form-control" id="registerUsername" name="registerUsername" required>
                 </div>
                 
                 <div class="mb-3">
-                    <div class="input-group">
-                        <span class="input-group-text">
-                            <i class="fas fa-lock text-muted"></i>
-                        </span>
-                        <input type="password" class="form-control" id="registerPassword" 
-                               name="registerPassword" placeholder="Jelszó" required>
-                    </div>
-                    <div class="password-requirements">
-                        <i class="fas fa-info-circle me-1"></i>A jelszónak minimum 8 karaktert kell tartalmaznia
-                    </div>
+                    <label for="registerEmail" class="form-label">Email:</label>
+                    <input style="font-weight: bold" type="email" class="form-control" id="registerEmail" name="registerEmail" required>
                 </div>
                 
-                <div class="mb-4">
-                    <div class="input-group">
-                        <span class="input-group-text">
-                            <i class="fas fa-lock text-muted"></i>
-                        </span>
-                        <input type="password" class="form-control" id="registerPasswordConfirm" 
-                               name="registerPasswordConfirm" placeholder="Jelszó megerősítése" required>
-                    </div>
+                <div class="mb-3">
+                    <label for="registerPassword" class="form-label">Jelszó:</label>
+                    <input type="password" class="form-control" id="registerPassword" name="registerPassword" required>
                 </div>
                 
-                <div class="d-grid gap-2">
-                    <button type="submit" name="register" class="btn btn-volan">
-                        <i class="fas fa-user-plus me-2"></i>Regisztráció
-                    </button>
+                <div class="mb-3">
+                    <label for="registerPasswordConfirm" class="form-label">Jelszó megerősítése:</label>
+                    <input type="password" class="form-control" id="registerPasswordConfirm" name="registerPasswordConfirm" required>
                 </div>
+                
+                <button type="submit" name="register" class="btn btn-primary w-100">Regisztráció</button>
             </form>
-            
+
             <div class="text-center mt-4">
-                <p class="mb-0">Már van fiókod? 
+            <p style="color:white;" class="mb-0"><u>Már van fiókod?</u> 
                     <a href="login.php" class="login-link">
                         <i class="fas fa-sign-in-alt me-1"></i>Bejelentkezés
                     </a>
@@ -214,7 +220,6 @@ if (isset($_SESSION['errors'])) {
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

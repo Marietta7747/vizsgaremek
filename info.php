@@ -20,14 +20,20 @@ catch(PDOException $e) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="betölt.js"></script>
     <title>Volán Szervezeti Információs Lap</title>
     <style>
 
-        :root {
-            --primary-color: #001F3F;
+:root {
+    --primary-color:linear-gradient(to right, #211717,#b30000);
             --accent-color: #FFC107;
             --text-light: #FFFFFF;
-            --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow: 0 2px 4px rgba(0,0,0,0.1);
+            --secondary-color: #3498db;
+            --hover-color: #2980b9;
+            --background-light: #f8f9fa;
+            --text-light: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
         }
 
         * {
@@ -44,206 +50,455 @@ catch(PDOException $e) {
             min-height: 100vh;
             
         }
-
-/*--------------------------------------------------------------------------------------------------------CSS - HEADER---------------------------------------------------------------------------------------------------*/
         .header {
-            position: relative;
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            padding: 16px;
-            text-align: center;
-            box-shadow: var(--shadow);
-        }
+    position: relative;
+    background: var(--primary-color);
+    color: var(--text-light);
+    padding: 1rem;
+    box-shadow: 0 2px 10px var(--shadow-color);
+}
 
-        nav {
-            position: relative;
-            background-color: var(--primary-color);
-            padding: 8px;
-            width: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 3px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            transition: width 0.6s linear;
-            margin-right: 10px;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            max-height: 70px;
-        }
+.header h1 {
+    margin: 0;
+    text-align: center;
+    font-size: 2rem;
+    padding: 1rem 0;
+}
 
-        nav.active {
-            width: 99%;
-        }
+.nav-wrapper {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1000;
+}
 
-        nav ul {
-            display: flex;
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            width: 0;
-            transition: width 0.6s linear;
-        }
+.nav-container {
+    position: relative;
+}
 
-        nav.active ul {
-            width: 100%;
-        }
+.menu-btn {
+    background: none;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
 
-        nav ul li {
-            transform: rotateY(0deg);
-            opacity: 0;
-            transition: transform 0.6s linear, opacity 0.6s linear;
-            padding: 15px;
-        }
+.menu-btn:hover {
+    background: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px var(--shadow-color);
+}
 
-        nav.active ul li {
-            opacity: 1;
-            transform: rotateY(360deg);
-        }
+.hamburger {
+    position: relative;
+    width: 30px;
+    height: 20px;
+}
 
-        nav ul a {
-            position: relative;
-            color: #000;
-            text-decoration: none;
-            margin: 0 5px;
-        }
+.hamburger span {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: var(--text-light);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
 
-        .icon {
-            background-color: var(--primary-color);
-            border: 0;
-            cursor: pointer;
-            padding: 0;
-            position: relative;
-            height: 30px;
-            width: 30px;
-        }
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.hamburger span:nth-child(3) { bottom: 0; }
 
-        .icon:hover{
-            background-color: var(--primary-color);
-        }
+.menu-btn.active .hamburger span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
 
-        .icon:focus {
-            outline: 0;
-        }
+.menu-btn.active .hamburger span:nth-child(2) {
+    opacity: 0;
+}
 
-        .icon .line {
-            background-color: var(--text-light);
-            height: 2px;
-            width: 20px;
-            position: absolute;
-            top: 10px;
-            left: 5px;
-            transition: transform 0.6s linear;
-        }
+.menu-btn.active .hamburger span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
 
-        .icon .line2 {
-            top: auto;
-            bottom: 10px;
-        }
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 1rem);
+    left: 0;
+    background: var(--text-light);
+    border-radius: 12px;
+    min-width: 280px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 10px 30px var(--shadow-color);
+    overflow: hidden;
+}
 
-        nav.active .icon .line1 {
-            transform: rotate(-765deg) translateY(5.5px);
-        }
+.dropdown-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
 
-        nav.active .icon .line2 {
-            transform: rotate(765deg) translateY(-5.5px);
-        }
+.menu-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
-        .navh1{
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-/*--------------------------------------------------------------------------------------------------------HEADER END-----------------------------------------------------------------------------------------------------*/
- 
-/*--------------------------------------------------------------------------------------------------------CSS - OTHER PARTS----------------------------------------------------------------------------------------------*/
-        .navbar-nav {
-            display: flex;
-            gap: 20px;
-            margin-left: auto;
-        }
+.menu-items li {
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
 
-        .navbar-nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
+.dropdown-menu.active .menu-items li {
+    transform: translateX(0);
+    opacity: 1;
+}
 
-        .navbar-nav a:hover {
-            color: var(--accent-color);
-        }
+.menu-items li:nth-child(1) { transition-delay: 0.1s; }
+.menu-items li:nth-child(2) { transition-delay: 0.2s; }
+.menu-items li:nth-child(3) { transition-delay: 0.3s; }
+.menu-items li:nth-child(4) { transition-delay: 0.4s; }
+.menu-items li:nth-child(5) { transition-delay: 0.5s; }
 
-        main {
-            padding: 20px;
-            margin-top: 100px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+.menu-items a {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
 
-        .card {
-            font-size: 15px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            padding: 20px;
-            margin: 15px 0;
-            width: 80%;
-            max-width: 600px;
-            transition: transform 0.3s;
-        }
+.menu-items a:hover {
+    background: linear-gradient(to right, #211717,#b30000);
+    color: white;
+    padding-left: 2rem;
+}
 
-        .card:hover {
-            transform: scale(1.02);
-        }
+.menu-items a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: darkred;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
 
-        .card h2 {
-            color: var(--primary-color);
-        }
+.menu-items a:hover::before {
+    transform: scaleY(1);
+}
 
-        .doc-link {
-            text-decoration: none;
-            color: darkgray;
-            transition: color 0.3s;
-        }
+.menu-items a img {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    transition: transform 0.3s ease;
+}
 
-        .doc-link:hover {
-            color: var(--accent-color);
-        }
+.menu-items a:hover img {
+    transform: scale(1.2) rotate(5deg);
+}
 
-        ul {
-            list-style: none;
-        }
+.menu-items a span {
+    font-size: 17px;
+}
 
-        ul li {
-            margin-bottom: 8px;
-            padding: 5px;
-        }
+
+.menu-items a.active {
+    background: white;
+    color: black;
+    font-weight: 600;
+}
+
+.menu-items a.active::before {
+    transform: scaleY(1);
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.menu-items a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: gray;
+    left: 0;
+    top: 0;
+    transform: scale(0);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s ease;
+}
+
+.menu-items a:active::after {
+    animation: ripple 0.6s ease-out;
+}
        
-        #map{
+    
+     /* Main container styles */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    position: relative;
+}
+
+/* Common card styles */
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(179, 0, 0, 0.2);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, #211717, #b30000);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+/* Heading styles */
+.card h2, .card h3 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.card h2::after, .card h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(to right, #211717, #b30000);
+    transition: width 0.3s ease;
+}
+
+.card:hover h2::after, .card:hover h3::after {
+    width: 100px;
+}
+
+/* List styles */
+.card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.card ul li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card ul li:last-child {
+    border-bottom: none;
+}
+
+.card ul li:hover {
+    padding-left: 1rem;
+    background: rgba(179, 0, 0, 0.05);
+}
+
+/* Link styles */
+.card a {
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: block;
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+.card a:hover {
+    color: #b30000;
+    background: rgba(179, 0, 0, 0.05);
+    transform: translateX(10px);
+}
+
+/* Icon styles */
+.card i {
+    margin-right: 10px;
+    color: #b30000;
+    transition: transform 0.3s ease;
+}
+
+.card li:hover i {
+    transform: scale(1.2);
+}
+
+/* Values section special styling */
+#about.card ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    text-align: center;
+}
+
+#about.card li {
+    border: none;
+    padding: 2rem;
+    border-radius: 15px;
+    background: rgba(179, 0, 0, 0.03);
+    transition: all 0.3s ease;
+}
+
+#about.card li:hover {
+    background: rgba(179, 0, 0, 0.08);
+    transform: translateY(-5px);
+}
+
+#about.card i {
+    font-size: 2rem;
+    display: block;
+    margin: 0 auto 1rem;
+}
+
+/* Contact section special styling */
+#contacts.card {
+    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+}
+
+#contacts.card li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#contacts.card i {
+    background: linear-gradient(to right, #211717, #b30000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 0.5rem;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(179, 0, 0, 0.1);
+}
+
+/* Map container styling */
+#map {
+    border-radius: 15px;
+    margin-top: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+#map:hover {
+    box-shadow: 0 15px 40px rgba(179, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+    
+    .card {
+        padding: 1.5rem;
+    }
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply animations to cards */
+.card {
+    animation: fadeIn 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+.card:nth-child(5) { animation-delay: 0.5s; }
+
+/* Loading indicator for elements */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.card.loading {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}   
+      #map{
         margin-top: 5%;  
         }
-
-        a{
+        a
+        {
             font-weight: bold;
             font-size 10%;
-            color: gray;
         }
-/*--------------------------------------------------------------------------------------------------------OTHER PARTS END------------------------------------------------------------------------------------------------*/
-
-/*--------------------------------------------------------------------------------------------------------CSS - FOOTER---------------------------------------------------------------------------------------------------*/
         footer {
-            text-align: center;
-            padding: 10px;
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            border-radius: 10px;
-            margin-top: 20px;
-            box-shadow: var(--shadow);
             background: var(--primary-color);
             color: var(--text-light);
             padding: 3rem 2rem;
+            margin-top: 4rem;
         }
 
         .footer-content {
@@ -256,7 +511,7 @@ catch(PDOException $e) {
 
         .footer-section h2 {
             margin-bottom: 1rem;
-            color: var(--accent-color);
+            color: var(--text-light);
         }
 
         .footer-links {
@@ -276,40 +531,63 @@ catch(PDOException $e) {
         .footer-links a:hover {
             color: var(--accent-color);
         }
-/*--------------------------------------------------------------------------------------------------------FOOTER END-----------------------------------------------------------------------------------------------------*/
+a{
+    color: gray;
+}
 
-/*-----------------------------------------------------------------------------------------------------CSS - @MEDIA-------------------------------------------------------------------------------------------------------*/
-        @media (max-width: 768px) {
-            #navbar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .navbar-nav {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
-/*-----------------------------------------------------------------------------------------------------@MEDIA END---------------------------------------------------------------------------------------------------------*/
+
+
     </style>
 </head>
 <body>
 <div class="header">
-    <nav class="active" id="nav">
-        <ul>
-         <li><a href="index.php" style="color: #FFFFFF; font-weight: bold;"><img src="placeholder.png" style="height: 30px; width: 30px;"> Főoldal</a></li>
-         <li><a href="buy.php" style="color: #FFFFFF; font-weight: bold;"><img src="tickets.png" style="height: 30px; width: 30px;"> Jegyvásárlás</a></li>
-         <li><a href="menetrend.php" style="color: #FFFFFF; font-weight: bold;"><img src="calendar.png" style="height: 30px; width: 30px;"> Menetrend</a></li>
-         <li><a href="info.php" style="color: #FFFFFF; font-weight: bold;"><img src="information-button.png" style="height: 30px; width: 30px;"> Információ</a></li>
-        </ul>
-        <button class="icon" id="toggle">
-          <div class="line line1"></div>
-          <div class="line line2"></div>
-        </button>
-      </nav>
-<div class="navh1">
-        <h1>Volán Szervezeti Információ</h1>
+    <div class="nav-wrapper">
+        <div class="nav-container">
+            <button class="menu-btn" id="menuBtn">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <nav class="dropdown-menu" id="dropdownMenu">
+                <ul class="menu-items">
+                    <li>
+                        <a href="index.php" class="active">
+                            <img src="placeholder.png" alt="Főoldal">
+                            <span>Főoldal</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="buy.php">
+                            <img src="tickets.png" alt="Jegyvásárlás">
+                            <span>Jegyvásárlás</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="menetrend.php">
+                            <img src="calendar.png" alt="Menetrend">
+                            <span>Menetrend</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="info.php">
+                            <img src="information-button.png" alt="Információ">
+                            <span>Információ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="logout.php">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Kijelentkezés</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
-</div>
+            <h1><i class="fas fa-map-marked-alt"></i> Szervezeti Információk</h1>
+        </div>
     <main>
        
 
@@ -401,7 +679,7 @@ catch(PDOException $e) {
 </section>
 
 
-<section id="procurement" class="card">
+<section style="max-height:40%" id="procurement" class="card">
     <h2 style="text-align:center">Közbeszerzés</h2><br>
     <ul>
         <li><a href="https://www.kaposbusz.hu/static/files/oldalak/statisztikai-osszegzes-2015-2.pdf">2015. évi statisztikai összegzés</a></li>
@@ -450,7 +728,7 @@ catch(PDOException $e) {
 
 
 <section id="reports" class="card">
-    <h2 style="text-align:center">Beszámolók</h2><br>
+    <h2 style="text-align:center;">Beszámolók</h2><br>
     <ul>
         <li><a href="https://www.kaposbusz.hu/static/files/oldalak/20160824095952231.pdf">2015. évi beszámoló</a></li>
         <li><a href="https://www.kaposbusz.hu/static/files/oldalak/20180817114300492.pdf">2016. évi beszámoló</a></li>
@@ -520,10 +798,34 @@ catch(PDOException $e) {
         </div>
     </footer>
     <script>
-        const toggle = document.getElementById('toggle')
-        const nav = document.getElementById('nav')
+       
+document.getElementById('menuBtn').addEventListener('click', function() {
+    this.classList.toggle('active');
+    document.getElementById('dropdownMenu').classList.toggle('active');
+});
 
-        toggle.addEventListener('click', () => nav.classList.toggle('active'))
+// Kívülre kattintás esetén bezárjuk a menüt
+document.addEventListener('click', function(event) {
+    const menu = document.getElementById('dropdownMenu');
+    const menuBtn = document.getElementById('menuBtn');
+    
+    if (!menu.contains(event.target) && !menuBtn.contains(event.target)) {
+        menu.classList.remove('active');
+        menuBtn.classList.remove('active');
+    }
+});
+
+// Aktív oldal jelölése
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = window.location.pathname.split('/').pop();
+    const menuItems = document.querySelectorAll('.menu-items a');
+    
+    menuItems.forEach(item => {
+        if (item.getAttribute('href') === currentPage) {
+            item.classList.add('active');
+        }
+    });
+});
     </script>
 </body>
 </html>

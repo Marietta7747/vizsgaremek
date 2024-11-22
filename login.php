@@ -1,14 +1,61 @@
 <?php
-// login.php
 session_start();
 require_once 'config.php';
 
-if (isset($_SESSION['error'])) {
-    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-            ' . $_SESSION['error'] . '
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>';
-    unset($_SESSION['error']);
+/// Password reset logic
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['reset_password'])) {
+    $email = $_POST['resetEmail'];
+    
+    try {
+        $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($user) {
+            // Generate reset token
+            $token = bin2hex(random_bytes(32));
+            $expiry = date('Y-m-d H:i:s', strtotime('+1 hour'));
+            
+            $stmt = $conn->prepare("UPDATE users SET reset_token = :token, reset_expiry = :expiry WHERE email = :email");
+            $stmt->execute([
+                'token' => $token,
+                'expiry' => $expiry,
+                'email' => $email
+            ]);
+            
+            // Redirect to reset-password.php with token
+            header("Location: reset-password.php?token=$token");
+            exit;  // Make sure no further code is executed
+            
+        } else {
+            $_SESSION['error'] = "A megadott email cím nem található!";
+        }
+    } catch(PDOException $e) {
+        $_SESSION['error'] = "Rendszerhiba történt!";
+    }
+}
+
+// Original login logic
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
+    $email = $_POST['loginEmail'];
+    $password = $_POST['loginPassword'];
+    
+    try {
+        $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($user && $password === $user['password']) {
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            header("Location: index.php");
+            exit();
+        } else {
+            $_SESSION['error'] = "Helytelen email vagy jelszó!";
+        }
+    } catch(PDOException $e) {
+        $_SESSION['error'] = "Rendszerhiba történt!";
+    }
 }
 ?>
 
@@ -17,177 +64,173 @@ if (isset($_SESSION['error'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bejelentkezés - Volánbusz</title>
-    <!-- Bootstrap CSS -->
+    <title>Bejelentkezés</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --volan-blue: #004b93;
-            --volan-yellow: #ffd800;
+            --kkzrt-blue: #004b93;
+            --kkzrt-yellow: #ffd800;
         }
         
         body {
-            background: linear-gradient(135deg, #00008b 0%, #323232 100%);
-            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to TOP, #211717,#b30000, #FFFFFF);
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #000;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .login-container {
+            background: linear-gradient(to right, #303639,#b30000);
             max-width: 400px;
             padding: 2.5rem;
-            background: white;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 30px 90px rgba(0,0,0,1);
         }
         
-        .icon-container {
+        form
+        {
             text-align: center;
-            margin-bottom: 2rem;
-            animation: fadeIn 1s ease-in;
-        }
-        
-        .icon-container i {
-            font-size: 3.5rem;
-            color: var(--volan-blue);
-            background: linear-gradient(45deg, var(--volan-blue), #0066cc);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .login-title {
-            color: var(--volan-blue);
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-        
-        .btn-volan {
-            background: linear-gradient(45deg, orange, #FF4500);
             color: white;
-            padding: 0.8rem;
-            border: none;
-            transition: all 0.3s;
-            border-radius: 8px;
-            font-weight: 500;
+            font-size: 120%;
         }
-        
-        .btn-volan:hover {
-	    backgroud-color: yellow;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,75,147,0.2);
-            color: white;
-        }
-        
+
         .form-control {
-            border-left: none;
+            border-radius: 12px !important;
             padding: 0.8rem;
-            border-radius: 0 8px 8px 0;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
         }
         
         .form-control:focus {
-            border-color: var(--volan-blue);
+            border-color: var(--kkzrt-blue);
             box-shadow: 0 0 0 0.2rem rgba(0,75,147,0.15);
         }
         
-        .input-group-text {
-            background-color: white;
-            border-right: none;
-            border-radius: 8px 0 0 8px;
+        .btn-kkzrt {
+            background: linear-gradient(to right, #000000, #FF0000);
+            color: white;
             padding: 0.8rem;
+            border: none;
+            border-radius: 12px !important;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            width: 100%;
         }
         
-        .registration-link {
-            color: var(--volan-blue);
+        .btn-kkzrt:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,75,147,0.2);
+        }
+        
+        .forgot-password-link, .register-link {
+            color: white;
+            font-weight: bold;
             text-decoration: none;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 0.5rem;
+            font-weight: 500;
         }
         
-        .registration-link:hover {
+        .forgot-password-link:hover, .register-link:hover {
             color: #0066cc;
-            text-decoration: none;
+            transform: translateX(3px);
         }
         
-        .form-check-input:checked {
-            background-color: var(--volan-blue);
-            border-color: var(--volan-blue);
+        .modal-content {
+            border-radius: 20px;
+            border: none;
         }
         
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .modal-header {
+            border-radius: 20px 20px 0 0;
+            background: linear-gradient(to right, #303639,#b30000);
+            color: white;
         }
         
-        .input-group:focus-within {
-            box-shadow: 0 0 0 0.2rem rgba(0,75,147,0.15);
-            border-radius: 8px;
+        .modal-footer {
+            border-radius: 0 0 20px 20px;
         }
         
-        .form-floating {
+        .alert {
+            border-radius: 12px;
             margin-bottom: 1rem;
         }
     </style>
 </head>
 <body>
-    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="container">
         <div class="login-container">
-            <div class="icon-container">
-                <i class="fas fa-bus"></i>
+            <div class="icon-container text-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" style="max-width: 200px;" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M288 0C422.4 0 512 35.2 512 80l0 16 0 32c17.7 0 32 14.3 32 32l0 64c0 17.7-14.3 32-32 32l0 160c0 17.7-14.3 32-32 32l0 32c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32l0-32-192 0 0 32c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32l0-32c-17.7 0-32-14.3-32-32l0-160c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32c0 0 0 0 0 0l0-32s0 0 0 0l0-16C64 35.2 153.6 0 288 0zM128 160l0 96c0 17.7 14.3 32 32 32l112 0 0-160-112 0c-17.7 0-32 14.3-32 32zM304 288l112 0c17.7 0 32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-112 0 0 160zM144 400a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm288 0a32 32 0 1 0 0-64 32 32 0 1 0 0 64zM384 80c0-8.8-7.2-16-16-16L208 64c-8.8 0-16 7.2-16 16s7.2 16 16 16l160 0c8.8 0 16-7.2 16-16z"/></svg>
+
             </div>
             
-            <h2 class="text-center login-title">Bejelentkezés</h2>
+            <?php
+            if (isset($_SESSION['error'])) {
+                echo '<div class="alert alert-danger">' . $_SESSION['error'] . '</div>';
+                unset($_SESSION['error']);
+            }
+            if (isset($_SESSION['success'])) {
+                echo '<div class="alert alert-success">' . $_SESSION['success'] . '</div>';
+                unset($_SESSION['success']);
+            }
+            ?>
             
-            <form action="login.php" method="POST">
+            <form method="POST" action="login.php">
                 <div class="mb-3">
-                    <div class="input-group">
-                        <span class="input-group-text">
-                            <i class="fas fa-user text-muted"></i>
-                        </span>
-                        <input type="text" class="form-control" id="loginEmail" name="loginEmail" 
-                               placeholder="Email vagy Felhasználónév" required>
-                    </div>
+                    <label style="font-weight: bold;" for="loginEmail" class="form-label">Email cím:</label>
+                    <input style="font-weight: bold;" type="email" id="loginEmail" name="loginEmail" class="form-control" required>
                 </div>
-                
                 <div class="mb-3">
-                    <div class="input-group">
-                        <span class="input-group-text">
-                            <i class="fas fa-lock text-muted"></i>
-                        </span>
-                        <input type="password" class="form-control" id="loginPassword" 
-                               name="loginPassword" placeholder="Jelszó" required>
-                    </div>
+                    <label style="font-weight: bold;" for="loginPassword" class="form-label">Jelszó:</label>
+                    <input  type="password" id="loginPassword" name="loginPassword" class="form-control" required>
                 </div>
-                
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                    <label class="form-check-label" for="remember">Emlékezz rám</label>
-                </div>
-                
-                <div class="d-grid gap-2">
-                    <button type="submit" name="login" class="btn btn-volan">
-                        <i class="fas fa-sign-in-alt me-2"></i>Bejelentkezés
-                    </button>
-                </div>
+                <button type="submit" name="login" class="btn btn-kkzrt mb-3">Bejelentkezés</button>
             </form>
             
-            <div class="text-center mt-4">
-                <p class="mb-0">Még nincs fiókod? 
-                    <a href="register.php" class="registration-link">
-                        <i class="fas fa-user-plus me-1"></i>Regisztrálj most!
+            <div class="text-center">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" class="forgot-password-link">
+                    <i class="fas fa-key me-1"></i>Elfelejtettem a jelszavam
+                </a>
+                <div class="mt-2">
+                    <a href="register.php" class="register-link">
+                        <i class="fas fa-user-plus me-1"></i>Regisztrálj!
                     </a>
-                </p>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
+    <!-- Forgot Password Modal -->
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Jelszó visszaállítása</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="login.php">
+                        <div class="mb-3">
+                            <label for="resetEmail" class="form-label">Add meg az email címed:</label>
+                            <input type="email" class="form-control" id="resetEmail" name="resetEmail" required>
+                        </div>
+                        <button type="submit" name="reset_password" class="btn btn-kkzrt w-100">Jelszó visszaállítása</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

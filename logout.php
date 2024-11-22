@@ -1,10 +1,19 @@
 <?php
-// logout.php
+// Elindítjuk a sessiont
+session_start();
 
-require_once 'config.php';  // A config fájl betöltése
+// Töröljük az összes session változót
+$_SESSION = array();
 
+// Töröljük a session sütit
+if (isset($_COOKIE[session_name()])) {
+    setcookie(session_name(), '', time()-42000, '/');
+}
+
+// Megszüntetjük a sessiont
 session_destroy();
-setcookie('remember_token', '', time() - 3600, '/');  // Kijelentkezéskor eltávolítjuk a 'remember_token' cookie-t
-header("Location: login.php");  // Visszairányít a bejelentkezéshez
+
+// Átirányítjuk a felhasználót a bejelentkező oldalra
+header("Location: login.php");
 exit();
 ?>
