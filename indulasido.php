@@ -257,6 +257,35 @@ try {
             .route-card{
                 width: 340px;
             }
+
+            .route-number{
+                margin-left: 0;
+                padding-right: 60px;
+            }
+
+            .route-name{
+                margin-left: 0;
+            }
+
+            .routeCon{
+                width: 345px;
+            }
+
+            .switchBtn{
+                margin-right: 0;
+            }
+
+            .header h1{
+                margin-left: 2%;
+            }
+
+            #datePicker{
+                margin-left: 28%;
+            }
+
+            .backBtn{
+                width: 15%;
+            }
         }
 /*--------------------------------------------------------------------------------------------------------@MEDIA END-----------------------------------------------------------------------------------------------------*/
         
@@ -748,7 +777,7 @@ try {
                 <div class="route-number">${routeNumber}</div>
             `;
             document.getElementById('routeNameCon').innerHTML = `
-                <div class="route-name">${routeName}</div>
+                <div class="route-name">${routeName}</div>&nbsp;
                 <div class="switchBtn">
                     <button id="switchBtn" onclick="swicth()">
                         <img src="switch.png" alt="Switch" style="width: 40px; height: 25px; max-width: 40px; max-width: 20px;">
