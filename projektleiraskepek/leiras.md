@@ -4,7 +4,7 @@
 - Az oldal inspirációt ad egy modern közlekedési oldal létrehozásában.
     - A projekt kifejezetten a KKZRT-nek készül, de a már meglévő https://www.volanbusz.hu/-nak és https://www.mavcsoport.hu/-nak is nyújthat inspirációt
 - Tekintettel a felhasználókra online egyszerű jegyrendelés
-<img src="https://github.com/Marietta7747/vizsgaremek/blob/main/projektleiraskepek/jegytipus.png">
+<img src="https://github.com/Marietta7747/vizsgaremek/blob/main/projektleiraskepek/jegyvasarlas.jpg">
 	- Külön készítünk jegyrendelés opciót amely könnyen egy űrlap kitöltésével, később fizetési opció hozzáadásával generálhatunk magunknak az utazáshoz szükséges online jegyet  
 	<img src="jegytipus.png">  
 	
