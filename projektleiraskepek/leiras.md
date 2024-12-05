@@ -6,8 +6,7 @@
 - Tekintettel a felhasználókra online egyszerű jegyrendelés
 <img src="[https://github.com/Marietta7747/vizsgaremek/blob/main/projektleiraskepek/jegyvasarlas.jpg](https://github.com/Marietta7747/vizsgaremek/blob/main/projektleiraskepek/jegyvasarlas.JPG)">
 	- Külön készítünk jegyrendelés opciót amely könnyen egy űrlap kitöltésével, később fizetési opció hozzáadásával generálhatunk magunknak az utazáshoz szükséges online jegyet  
-	<img src="jegytipus.png">  
-	
+	<img src="jegytipus.png" style="float:right;">  
 		- **jegytípusok:** 
 		    - vonaljegy
 		    - napijegy
