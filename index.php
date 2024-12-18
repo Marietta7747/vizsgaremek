@@ -576,9 +576,15 @@ footer {
             <nav class="dropdown-menu" id="dropdownMenu">
                 <ul class="menu-items">
                     <li>
-                        <a href="index.php" class="active">
-                            <img src="placeholder.png" alt="Főoldal">
+                        <a href="fooldal.php" class="active">
+                            <img src="home.png" alt="Főoldal">
                             <span>Főoldal</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.php" class="active">
+                            <img src="placeholder.png" alt="Térkép">
+                            <span>Térkép</span>
                         </a>
                     </li>
                     <li>
