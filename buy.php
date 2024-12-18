@@ -316,6 +316,7 @@ try {
             background: white;
             border-radius: 15px;
             box-shadow: var(--shadow);
+            
         }
 
         .input-group {
@@ -507,7 +508,114 @@ try {
             }
         }
 /*-----------------------------------------------------------------------------------------------------@MEDIA END---------------------------------------------------------------------------------------------------------*/
-   
+:root {
+  --input-focus: #2d8cf0;
+  --font-color: #323232;
+  --font-color-sub: #666;
+  --bg-color: #fff;
+  --main-color: #323232;
+  --error-color: #ff4136;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+
+
+.section-title {
+  color: var(--font-color);
+  font-weight: 900;
+  font-size: 20px;
+  margin-bottom: 25px;
+  width: 100%;
+  text-align: center;
+}
+
+.input-group {
+  width: 100%;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.input-label {
+  color: var(--font-color);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+input {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  background-color: var(--bg-color);
+  box-shadow: 4px 4px var(--main-color);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--font-color);
+  padding: 5px 10px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+input::placeholder {
+  color: var(--font-color-sub);
+  opacity: 0.8;
+}
+
+input:focus {
+  border: 2px solid var(--input-focus);
+}
+
+input:invalid {
+  border-color: var(--error-color);
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 14px;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+input:invalid + .error-message {
+  opacity: 1;
+  max-height: 50px;
+  margin-top: 5px;
+}
+
+/* Active/Pressed State */
+input:active {
+  box-shadow: 0px 0px var(--main-color);
+  transform: translate(3px, 3px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+  #invoiceForm {
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .section-title {
+    font-size: 18px;
+  }
+
+  input {
+    font-size: 14px;
+  }
+}
     </style>
 </head>
 <body>
@@ -525,9 +633,15 @@ try {
             <nav class="dropdown-menu" id="dropdownMenu">
                 <ul class="menu-items">
                     <li>
-                        <a href="index.php" class="active">
-                            <img src="placeholder.png" alt="Főoldal">
+                        <a href="fooldal.php" class="active">
+                            <img src="home.png" alt="Főoldal">
                             <span>Főoldal</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.php" class="active">
+                            <img src="placeholder.png" alt="Térkép">
+                            <span>Térkép</span>
                         </a>
                     </li>
                     <li>
@@ -684,7 +798,7 @@ try {
             </div>
 
             <div class="button-group">
-                <button type="button" onclick="generateInvoice()">Számla generálása</button>
+            <a href="#"><button type="button" >Számla generálása</button></a> 
             </div>
         </form>
 
