@@ -198,11 +198,12 @@ if (!isset($_SESSION['user_id'])) {
     .btn-53{
         color: var(--text-light);
         background-color: #b30000;
-        border-radius: 25px;
+        border-radius: 30px;
         padding: 15px;
         border: none;
         font-size: 1.5rem;
-        margin-left: 45%;
+        margin-left: 42.5%;
+        width: 15%;
     }
 /*--------------------------------------------------------------------------------------------------------CSS - @MEDIA---------------------------------------------------------------------------------------------------*/
     @media (max-width: 480px) {
@@ -258,7 +259,6 @@ if (!isset($_SESSION['user_id'])) {
                 padding: 0.4rem 1rem;
             }
 
-            /* More News button */
             .btn-53 {
                 width: 60%;
                 font-size: 1.3rem;
