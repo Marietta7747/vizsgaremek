@@ -4,7 +4,7 @@ session_start();
 $db_host = 'localhost';
 $db_user = 'root';
 $db_pass = '';
-$db_name = 'volan_app';
+$db_name = 'kkzrt';
 
 try {
     $conn = new PDO("mysql:host=$db_host;dbname=$db_name;charset=utf8", $db_user, $db_pass);
@@ -20,15 +20,16 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kaposvár Helyi Járatok</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link rel="stylesheet" href="footer.css">
-    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="betolt.js"></script>
+    <!--<script src="busRoutesforJaratok.js"></script>-->
 
     <style>
         :root {
             --primary-color:linear-gradient(to right, #211717,#b30000);
-            --accent-color: #7A7474;
+            --accent-color: #FFC107;
             --text-light: #fbfbfb;
+            --shadow: 0 2px 4px rgba(0,0,0,0.1);
             --secondary-color: #3498db;
             --hover-color: #2980b9;
             --background-light: #f8f9fa;
@@ -38,7 +39,7 @@ try {
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #F5F5F5;
+            background: #e8e8e8;
             color: #333;
             margin: 0;
             padding: 0;
@@ -73,7 +74,188 @@ try {
             position: relative;
         }
 
- 
+        .menu-btn {
+            background: none;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px var(--shadow-color);
+        }
+
+        .menu-btn:hover {
+            background: none;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px var(--shadow-color);
+        }
+
+        .hamburger {
+            position: relative;
+            width: 30px;
+            height: 20px;
+        }
+
+        .hamburger span {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: var(--text-light);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+        .hamburger span:nth-child(3) { bottom: 0; }
+
+        .menu-btn.active .hamburger span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-btn.active .hamburger span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-btn.active .hamburger span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 0;
+            background: var(--text-light);
+            border-radius: 12px;
+            min-width: 280px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 10px 30px var(--shadow-color);
+            overflow: hidden;
+        }
+
+        .dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .menu-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-items li {
+            transform: translateX(-100%);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu.active .menu-items li {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .menu-items li:nth-child(1) { transition-delay: 0.1s; }
+        .menu-items li:nth-child(2) { transition-delay: 0.2s; }
+        .menu-items li:nth-child(3) { transition-delay: 0.3s; }
+        .menu-items li:nth-child(4) { transition-delay: 0.4s; }
+        .menu-items li:nth-child(5) { transition-delay: 0.5s; }
+
+        .menu-items a {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            color: black;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-items a:hover {
+            background: linear-gradient(to right, #211717,#b30000);
+            color: white;
+            padding-left: 2rem;
+        }
+
+        .menu-items a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: darkred;
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-items a:hover::before {
+            transform: scaleY(1);
+        }
+
+        .menu-items a img {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-items a:hover img {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .menu-items a span {
+            font-size: 17px;
+        }
+
+
+        .menu-items a.active {
+            background: white;
+            color: black;
+            font-weight: 600;
+        }
+
+        .menu-items a.active::before {
+            transform: scaleY(1);
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        .menu-items a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: gray;
+            left: 0;
+            top: 0;
+            transform: scale(0);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+
+        .menu-items a:active::after {
+            animation: ripple 0.6s ease-out;
+        } 
 
         #datePicker{
             margin-left: 45%;
@@ -86,22 +268,21 @@ try {
 
 /*--------------------------------------------------------------------------------------------------------CSS - BODY CONTENT----------------------------------------------------------------------------------------------*/
         .route-container {
-            display: inline;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: grid;
             padding: 2rem;
             max-width: 1000px;
             margin: 0 auto;
         }
 
         .route-card {
-            background: #fbfbfb;
-            width: 1200px;
+            background: #fcfcfc;
+            width: 950px;
             border-radius: 20px;
-            box-shadow: var(--shadow-color);
-            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            padding: 1rem;
             transition: var(--transition);
             animation: fadeIn 0.5s ease-out;
-            margin: 0 auto;
+            margin-bottom: 10px;
         }
 
         .route-card:hover{
@@ -115,13 +296,12 @@ try {
             background: #b30000;
             display: inline-block;
             width: 3%;
-            height: 60%;
+            height: 35px;
             font-size: 1.5rem;
             font-weight: bold;
             border-radius: 5px;
-            padding-left: 20px;
-            padding-right: 15px;
             color: var(--text-light);
+            padding: 5px 20px;
         }
 
         .route-name{
@@ -129,6 +309,7 @@ try {
             color: #636363;
             font-size: 1.5rem;
             font-weight: bold;
+            margin-left: 5px;
         }
 
         .route-details {
@@ -137,6 +318,53 @@ try {
             gap: 0.8rem;
         }       
 /*--------------------------------------------------------------------------------------------------------BODY CONTENT END------------------------------------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------------------------------------------------CSS - FOOTER---------------------------------------------------------------------------------------------------*/
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: var(--shadow);
+            background: var(--primary-color);
+            color: var(--text-light);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h2 {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+/*--------------------------------------------------------------------------------------------------------FOOTER END-----------------------------------------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------------------------------------------CSS - @MEDIA---------------------------------------------------------------------------------------------------*/
 
@@ -175,21 +403,57 @@ try {
                 padding: 1rem;
             }
 
-            .route-card{
-                width: 340px;
+            #datePicker{
+                margin-left: 28%;
             }
 
             .route-number{
-                display: grid;
-                padding-right: 40px;
+                display: inline;
+                padding-right: 15px;
             }
 
             .route-name{
-                display: grid;
+                display: inline;
+            }
+
+            .route-card{
+                width: 330px;
+            }
+
+            .nav-wrapper{
+                left: 0.01rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .header-content {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .route-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
             }
 
             #datePicker{
                 margin-left: 28%;
+            }
+
+            .route-number{
+                display: inline;
+                padding-right: 15px;
+            }
+
+            .route-name{
+                display: inline;
+            }
+
+            .route-card{
+                width: 295px;
             }
 
             .nav-wrapper{
@@ -230,7 +494,7 @@ try {
                         <li>
                             <a href="buy.php">
                                 <img src="tickets.png" alt="Jegyvásárlás">
-                                <span>Jegyvásárlás</span>
+                                <span>Késés Igazolás</span>
                             </a>
                         </li>
                         <li>
@@ -241,8 +505,8 @@ try {
                         </li>
                         <li>
                             <a href="jaratok.php">
-                            <img src="bus.png" alt="Járatok">
-                                <span>&nbsp; Járatok</span>
+                                <img src="bus.png" alt="járatok">
+                                <span>Járatok</span>
                             </a>
                         </li>
                         <li>
@@ -261,8 +525,8 @@ try {
                 </nav>
             </div>
         </div>
-                <h1><i class="fas fa-bus"></i> Kaposvár Helyi Járatok</h1>
-                <input type="date" id="datePicker" require /> 
+            <h1><i class="fas fa-bus"></i> Kaposvár Helyi Járatok</h1>
+            <input type="date" id="datePicker" require /> 
         </div>
 <!-- -----------------------------------------------------------------------------------------------------HEADER END-------------------------------------------------------------------------------------------------- -->
 
@@ -340,49 +604,9 @@ try {
 /*--------------------------------------------------------------------------------------------------------JAVASCRIPT - DISPLAY ROUTES------------------------------------------------------------------------------------*/
         let busRoutes = []; // Declare globally to store fetched routes
 
-        function displayRoutes(filter = "all", selectedDate = new Date()) {
-            const routeContainer = document.getElementById('routeContainer');
-            routeContainer.innerHTML = "";
-
-            // Get the day of the week for the selected date
-            const dayOfWeek = new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'long' });
-
-            // Filter routes based on the selected day
-            const filteredRoutes = filter === "all" 
-                ? busRoutes.filter(route => route.dayGoes.includes(dayOfWeek))
-                : busRoutes.filter(route => route.dayGoes.includes(dayOfWeek));
-
-            // Create route cards
-            filteredRoutes.forEach((route, index) => {
-                const routeCard = document.createElement('div');
-                routeCard.className = 'route-card';
-                routeCard.style.animationDelay = `${index * 0.1}s`;
-
-                // Add route details and click event for navigation
-                routeCard.innerHTML = `
-                    <div id="route-details" class="route-number">
-                        ${route.number}
-                    </div>&nbsp;&nbsp;
-                    <div class="route-name">
-                        ${route.name}
-                    </div>
-                `;
-                routeCard.addEventListener('click', () => {
-                    // Redirect to indulasIdo.php with route details in the URL
-                    const url = new URL('indulasIdo.php', window.location.origin);
-                    url.searchParams.append('routeNumber', route.number);
-                    url.searchParams.append('routeName', route.name);
-                    url.searchParams.append('dayGoes', route.dayGoes);
-                    window.location.href = url.toString();
-                });
-
-                routeContainer.appendChild(routeCard);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // Fetch the JSON file and initialize the app
-            fetch('busRoutesForJaratok.json')
+        // Function to fetch bus routes from the API
+        function fetchBusRoutes() {
+            fetch('http://localhost:3000/api/buszjaratok')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Failed to load bus routes data');
@@ -390,19 +614,94 @@ try {
                     return response.json();
                 })
                 .then(data => {
-                    busRoutes = data.busRoutes; // Store the fetched routes
-                    displayRoutes(); // Initial display with today's date
+                    console.log('API Response:', data);
+
+                    busRoutes = [];
+                    let addedNumbers = new Set();
+
+                    // Add unique bus routes
+                    data.forEach(route => {
+                        if (!addedNumbers.has(route.number)) {
+                            busRoutes.push(route);
+                            addedNumbers.add(route.number);
+                        }
+                    });
+
+                    console.log('Unique Bus Routes:', busRoutes);
+                    displayRoutes(); // Display routes after data is fetched
                 })
                 .catch(error => {
-                    console.error('Error fetching the JSON file:', error);
+                    console.error('Error fetching bus routes:', error);
                 });
+        }
+
+        // Function to check if a date is a weekend (Saturday or Sunday)
+        function isWeekend(date) {
+            const day = date.getDay(); // 0 = Sunday, 6 = Saturday
+            return day === 0 || day === 6; // True for weekend (Saturday or Sunday)
+        }
+
+        // Function to display bus routes
+        function displayRoutes(filter = "all", selectedDate = new Date()) {
+            const routeContainer = document.getElementById('routeContainer');
+            routeContainer.innerHTML = "";
+
+            const isWeekendDate = isWeekend(selectedDate);
+
+            // Filter routes based on whether the selected date is a weekend
+            const filteredRoutes = busRoutes.filter(route => {
+                // If it's a weekend, only show routes with a non-NULL value in 'weekend' column
+                if (isWeekendDate) {
+                    return route.weekend !== null; // Only include routes that have a value in 'weekend' column
+                } else {
+                    // If it's a weekday, only show routes with a non-NULL value in 'weekday' column
+                    return route.weekday !== null; // Only include routes that have a value in 'weekday' column
+                }
+            });
+
+            // Create route cards for each filtered route
+            filteredRoutes.forEach((route, index) => {
+                const routeCard = document.createElement('div');
+                routeCard.className = 'route-card';
+                routeCard.style.animationDelay = `${index * 0.1}s`;
+
+                // Add route details and click event for navigation
+                routeCard.innerHTML = `
+                    <div class="route-number" id="routeNumber">
+                        ${route.number}
+                    </div>&nbsp;&nbsp;
+                    <div class="route-name">
+                        ${route.name}
+                    </div>
+                `;
+
+                // Add a data attribute with the route number to the routeCard
+                routeCard.setAttribute('data-route-number', route.number);
+
+                // Add click event listener for navigation
+                routeCard.addEventListener('click', () => {
+                    const selectedRoute = routeCard.getAttribute('data-route-number'); // Retrieve the route number
+                    const url = new URL('kkzrt/indulasIdo.php', window.location.origin);
+                    url.searchParams.set('route', selectedRoute);
+
+                    // Redirect to indulasIdo.php with the route number
+                    window.location.href = url.toString();
+                });
+
+                routeContainer.appendChild(routeCard);
+            });
+        }
+
+        // Call the fetch function when the page is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchBusRoutes();
 
             // Handle changes in the date picker
             const datePicker = document.getElementById('datePicker');
             datePicker.addEventListener('change', (event) => {
-                const selectedDate = event.target.value; // Get the selected date
+                const selectedDate = new Date(event.target.value); // Get the selected date
                 if (selectedDate) {
-                    displayRoutes("all", new Date(selectedDate));
+                    displayRoutes("all", selectedDate); // Pass the selected date to displayRoutes
                 }
             });
         });
