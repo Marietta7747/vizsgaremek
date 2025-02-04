@@ -4,7 +4,7 @@ session_start();
 $db_host = 'localhost';
 $db_user = 'root';
 $db_pass = '';
-$db_name = 'volan_app';
+$db_name = 'kkzrt';
 
 try {
     $conn = new PDO("mysql:host=$db_host;dbname=$db_name;charset=utf8", $db_user, $db_pass);
@@ -20,25 +20,23 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kaposvár Helyi Járatok</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="betolt.js"></script>
 
     <style>
         :root {
             --primary-color:linear-gradient(to right, #211717,#b30000);
-            --accent-color: #FFC107;
+            --accent-color: #7A7474;
             --text-light: #fbfbfb;
-            --shadow: 0 2px 4px rgba(0,0,0,0.1);
             --secondary-color: #3498db;
             --hover-color: #2980b9;
             --background-light: #f8f9fa;
-            --shadow-color: rgba(0, 0, 0, 0.1);
+            --shadow: rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #F5F5F5;
+            background: #e8e8e8;
             color: #333;
             margin: 0;
             padding: 0;
@@ -83,48 +81,44 @@ try {
 /*--------------------------------------------------------------------------------------------------------HEADER END-----------------------------------------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------------------------------------------CSS - OTHER PARTS----------------------------------------------------------------------------------------------*/
-        .route-container {
-            display: inline;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        .time-container {
+            display: grid;
             padding: 2rem;
             max-width: 1000px;
             margin: 0 auto;
         }
 
-        .route-card {
-            background: #fbfbfb;
-            width: 1200px;
+        .time-card {
+            background: #fcfcfc;
+            width: 950px;
             border-radius: 20px;
             box-shadow: var(--shadow);
             padding: 1.5rem;
             transition: var(--transition);
             animation: fadeIn 0.5s ease-out;
-            margin: 0 auto;
+            margin-bottom: 10px;
             font-size: 1.5rem;
             color: #636363;
         }
 
-        .start-time-card {
-            margin: 5px 0;
-        }
-
-        .route-card:hover{
+        .time-card:hover{
             color: 000;
             background: #E9E8E8;
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
-        .routeCon{
-            background: #fbfbfb;
+        .timeCon{
+            background: #fcfcfc;
             width: 97.5%;
+            height: 60%;
             margin-bottom: 5px;
             padding: 20px;
         }
 
-        .route-number {
+        .time-number {
             background: #b30000;
-            display: flex;
+            display: inline-block;
             width: 3%;
             height: 60%;
             font-size: 2.5rem;
@@ -133,44 +127,38 @@ try {
             padding-left: 20px;
             padding-right: 15px;
             color: var(--text-light);
-            margin-left: 16%;
+            margin-left: 17%;
         }
 
-        .route-name{
+        .time-name{
             display: inline-block;
             color: #636363;
             font-size: 1.5rem;
             font-weight: bold;
-            margin-left: 16%;
+            margin-left: 17%;
         }
 
         .switchBtn{
-            display: inline-block;
+            display: inline;
             float: right;
             background: #fbfbfb;
-            margin-right: 19%;
+            margin-right: 16%;
         }
 
-        .route-time{
+        .switchBtn:hover{
+            background: #E9E8E8;
+        }
+
+        .time{
             display: inline-block;
             float: right;
-            margin-right: 19%;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 18%;
+            margin-top: 1%;
         }
 
-        .route-date{
-            display: inline-block;
-            float: center;
-        }
-
-        #datePicker{
-            margin-left: 45%;
-            font-size: 1rem;
-            background-color: #fbfbfb;
-            color: #211717;
-            border: 1px solid #fff;
-        } 
-
-        .route-details {
+        .time-details {
             display: flex;
             flex-direction: column;
             gap: 0.8rem;
@@ -178,51 +166,52 @@ try {
 /*--------------------------------------------------------------------------------------------------------OTHER PARTS END------------------------------------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------------------------------------------CSS - FOOTER---------------------------------------------------------------------------------------------------*/
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            border-radius: 10px;
-            margin-top: 20px;
-            box-shadow: var(--shadow);
-            background: var(--primary-color);
-            color: var(--text-light);
-            padding: 3rem 2rem;
-            margin-top: 4rem;
-        }
+    footer {
+        text-align: center;
+        padding: 10px;
+        background-color: var(--primary-color);
+        color: var(--text-light);
+        border-radius: 10px;
+        margin-top: 20px;
+        box-shadow: var(--shadow);
+        background: var(--primary-color);
+        color: var(--text-light);
+        padding: 3rem 2rem;
+        margin-top: 4rem;
+    }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+    }
 
-        .footer-section h2 {
-            margin-bottom: 1rem;
-            color: var(--text-light);
-        }
+    .footer-section h2 {
+        margin-bottom: 1rem;
+        color: var(--text-color);
+    }
 
-        .footer-links {
-            list-style: none;
-        }
+    .footer-links {
+        list-style: none;
+    }
 
-        .footer-links li {
-            margin-bottom: 0.5rem;
-        }
+    .footer-links li {
+        margin-bottom: 0.5rem;
+    }
 
-        .footer-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            transition: var(--transition);
-        }
+    .footer-links a {
+        color: var(--text-light);
+        text-decoration: none;
+        transition: var(--transition);
+    }
 
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
+    .footer-links a:hover {
+        color: var(--accent-color);
+    }
 /*--------------------------------------------------------------------------------------------------------FOOTER END-----------------------------------------------------------------------------------------------------*/
+
 
 /*--------------------------------------------------------------------------------------------------------CSS - @MEDIA---------------------------------------------------------------------------------------------------*/
 
@@ -256,13 +245,112 @@ try {
                 font-size: 1.5rem;
             }
 
-            .route-container {
+            .time-container {
                 grid-template-columns: 1fr;
                 padding: 1rem;
             }
 
-            .route-card{
-                width: 340px;
+            .time-card{
+                width: 335px;
+            }
+
+            .time-number{
+                margin-left: 0;
+                padding-right: 60px;
+            }
+
+            .time{
+                margin-right: 0%;
+                margin-top: 4%;
+            }
+
+            .time-name{
+                display: inline-block;
+                margin-left: 0;
+                font-size: 1.25rem;
+                max-width: 90%;
+            }
+
+            .timeCon{
+                width: 371px;
+            }
+
+            .switchBtn{
+                margin-right: 0;
+                margin-top: 5%;
+                display: inline-block;
+            }
+
+            .header h1{
+                margin-left: 2%;
+            }
+
+            #datePicker{
+                margin-left: 3%;
+            }
+
+            .backBtn{
+                width: 15%;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .header-content {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .time-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .time-card{
+                width: 295px;
+            }
+
+            .time-number{
+                margin-left: 0;
+                padding-right: 45px;
+                padding-left: 10px;
+            }
+
+            .time{
+                margin-right: 0%;
+                margin-top: 4%;
+            }
+
+            .time-name{
+                display: inline-block;
+                margin-left: 0;
+                font-size: 1.25rem;
+                max-width: 73%;
+            }
+
+            .timeCon{
+                width: 335px;
+            }
+
+            .switchBtn{
+                margin-right: 0;
+                margin-top: 5%;
+                display: inline-block;
+            }
+
+            .header h1{
+                margin-left: 2%;
+            }
+
+            #datePicker{
+                margin-left: 4%;
+                font-size: 1.15rem;
+            }
+
+            .backBtn{
+                width: 15%;
             }
         }
 /*--------------------------------------------------------------------------------------------------------@MEDIA END-----------------------------------------------------------------------------------------------------*/
@@ -271,16 +359,16 @@ try {
 </head>
 <body>
     <div class="header">
-            <button class="backBtn" id=backBtn><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="backBtn" id=bckBtn><i class="fa-solid fa-chevron-left"></i></button>
             <h1><i class="fas fa-bus"></i> Kaposvár Helyi Járatok</h1> 
             
         </div>
 
-        <div id="routeNumCon" class="routeCon"></div>
-        <div id="routeNameCon" class="routeCon"></div>
+        <div id="timeNumCon" class="timeCon"></div>
+        <div id="timeNameCon" class="timeCon"></div>
 
 
-        <div id="routeContainer" class="route-container"></div>
+        <div id="timeContainer" class="time-container"></div>
 
 <!-- -----------------------------------------------------------------------------------------------------HTML - FOOTER------------------------------------------------------------------------------------------------ -->
     <footer>
@@ -312,89 +400,92 @@ try {
 <!-- -----------------------------------------------------------------------------------------------------FOOTER END--------------------------------------------------------------------------------------------------- -->
 
     <script>
-        const today = new Date();
-        document.getElementById("datePicker").value = today.toISOString().split("T")[0];
-        document.getElementById("datePicker").min = today.toISOString().split("T")[0];
+/*---------------------------------------------------------------------------------------------------------JAVASCRIPT - BACK BUTTON--------------------------------------------------------------------------------------*/
+        document.getElementById('bckBtn').addEventListener('click', function() {
+            window.location.href = 'jaratok.php'; // Redirect to jaratok.php
+        });
+/*---------------------------------------------------------------------------------------------------------BACK BUTTON END-----------------------------------------------------------------------------------------------*/
+       
+        // Function to get URL parameters
+        const getQueryParams = () => ({
+            number: new URLSearchParams(window.location.search).get("number"),
+            name: new URLSearchParams(window.location.search).get("name"),
+            stop_time: new URLSearchParams(window.location.search).get("stop_time"),
+            schedule_id: new URLSearchParams(window.location.search).get("schedule_id")
+        });
 
-        const busIdo = [
-            {
-                "start": "5:00",
-                "number": "12",
-                "name": "Helyi autóbusz-állomás - Sopron u. - Laktanya",
-                "stops": ["Helyi autóbusz-állomás","Corso","Zárda u.","Honvéd u.","Arany J. tér","Losonc-köz","Brassó u.","Sopron u.","Búzavirág u.","Laktanya"],
-                "stopsTime": ["05:00","05:01","05:04","05:06","05:08","05:10","05:11","05:12","05:13","05:15"],
-            },
-        ];
+        // Fetch bus route details from API
+        async function fetchBusData() {
+            const { number, name, stop_time, schedule_id } = getQueryParams();
+            if (!number) {
+                console.error("Number is missing");
+                return;
+            }
 
-        // Parse the query string to get the route number and dayGoes
-        const urlParams = new URLSearchParams(window.location.search);
-        const routeNumber = urlParams.get('routeNumber');
-        const routeName = urlParams.get('routeName');
-        const routeTime = urlParams.get('routeTime');
+            try {
+                const response = await fetch("http://localhost:3000/api/buszjaratok"); // Replace with actual API URL
+                const data = await response.json();
 
-        // Find the route by its number
-        const route = busIdo.find(r => r.number === routeNumber);
-
-        // Display route details
-        if (route) {
-            document.getElementById('routeNumCon').innerHTML = `
-                <div class="route-number">${routeNumber}</div>
-                <div class="route-date"><input type="date" id="datePicker" disabled /></div>
-                <div class="route-time">${routeTime}</div>
-            `;
-            document.getElementById('routeNameCon').innerHTML = `
-                <div class="route-name">${routeName}</div>
-                <div class="switchBtn">
-                    <button id="switchBtn" disabled">
-                        <img src="switch.png" alt="Switch" style="width: 40px; height: 25px; max-width: 40px; max-width: 20px;">
-                    </button>
-                </div>
-            `;
-        }
-
-        function displayRoutes(filter = "all") {
-            const routeContainer = document.getElementById('routeContainer');
-            routeContainer.innerHTML = "";
-
-            // Create route cards
-            busRoutes.forEach((route, index) => {
-                const routeCard = document.createElement('div');
-                routeCard.className = 'route-card';
-                routeCard.style.animationDelay = `${index * 0.1}s`;
-
-                routeCard.innerHTML = `
-                    <div class="route-megallo">${route.megallo}</div>
-                    <div class="time-card">${time}</div>
-                `;
-
-                    routeContainer.appendChild(routeCard);
-                });
-        }
-
-        // Mobilbarát menü
-        function setupMobileMenu() {
-            const header = document.querySelector('header');
-            const filterButtons = document.getElementById('filterButtons');
-            
-            let lastScroll = 0;
-            window.addEventListener('scroll', () => {
-                const currentScroll = window.pageYOffset;
-                
-                if (currentScroll > lastScroll && currentScroll > 100) {
-                    header.style.transform = 'translateY(-100%)';
-                } else {
-                    header.style.transform = 'translateY(0)';
+                // Filter data to get only stops for this route
+                const filteredStops = data.filter(stop => stop.number == number && stop.schedule_id == schedule_id);
+                if (filteredStops.length === 0) {
+                    console.error("No stops found for this route.");
+                    return;
                 }
-                lastScroll = currentScroll;
+
+                // Extract stop names and times
+                const stops = filteredStops.map(stop => stop.stop_name);
+                const stopsTime = filteredStops.map(stop => stop.stop_time);
+
+                // Structure data for display
+                const busData = {
+                    number: number,
+                    name: name,
+                    stop: stop_time,
+                    schedule: schedule_id,
+                    stops: stops,
+                    stopsTime: stopsTime
+                };
+
+                // Display the data
+                displayBusData(busData);
+            } catch (error) {
+                console.error("Error fetching bus data:", error);
+            }
+        }
+
+        // Function to display bus data
+        function displayBusData(busData) {
+            const timeContainer = document.getElementById('timeContainer');
+
+            document.getElementById('timeNumCon').innerHTML = `
+                <div class="time-number">${busData.number}</div>
+                <div class="time">${formatTime(busData.stop)}</div>
+            `;
+
+            function formatTime(time) {
+                const [hour, minute] = time.split(":");
+                return `${hour}:${minute}`;
+            }
+            document.getElementById('timeNameCon').innerHTML = `
+                <div class="time-name">${busData.name}</div>
+            `;
+
+            timeContainer.innerHTML = ""; // Clear previous content
+            busData.stops.forEach((stop, index) => {
+                const timeCard = document.createElement('div');
+                timeCard.className = 'time-card';
+                timeCard.innerHTML = `
+                    <div class="time-stop" style="font-weight: bold;">${stop}</div>
+                    <div class="time-time">${formatTime(busData.stopsTime[index])}</div>
+                `;
+                timeContainer.appendChild(timeCard);
             });
         }
 
-        setupMobileMenu();
-
-        document.getElementById('backBtn').addEventListener('click', function() {
-            window.location.href = 'jaratok.php'; // Redirect to jaratok.php
-        });
-
-    </script>
+        // Initialize data fetching
+        fetchBusData();
+  
+</script>
 </body>
 </html>
